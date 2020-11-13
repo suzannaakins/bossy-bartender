@@ -1,0 +1,24 @@
+<header>
+    <h1>
+        <a href="/">Home</a>
+    </h1>
+    <nav>
+        <ul>
+            {{#if loggedIn}}
+            <li>
+                <button id="logout" class="btn-no-style">Logout</button>
+            </li>
+            {{else}}
+            <li>
+                <a href="/login">Login</a>
+            </li>
+            {{/if}}
+        </ul>
+    </nav>
+</header>
+
+<div>
+    <h1 id="page-title">Cocktails</h1>
+</div>
+
+<h3>Peruse our cocktails, vote on them, and comment.</h3>

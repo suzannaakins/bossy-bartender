@@ -1,0 +1,24 @@
+     <header>
+            <h1>
+                <a href="/">Home</a>
+            </h1>
+            <nav>
+                <ul>
+                    {{#if loggedIn}}
+                    <li>
+                        <a href="/cocktails">Cocktails</a>
+                    </li>
+                    <li>
+                        <button id="logout" class="btn-no-style">Logout</button>
+                    </li>
+                    {{else}}
+                    <li>
+                        <a href="/cocktails">Cocktails</a>
+                    </li>
+                    <li>
+                        <a href="/login">Login</a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </nav>
+        </header>
