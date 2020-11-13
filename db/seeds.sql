@@ -19,8 +19,10 @@ VALUES
   ('honey'),
   ('strawberry simple syrup');
 
-  INSERT INTO wine (title)
+  INSERT INTO winebeer (title)
   VALUES
     ('cabernet'),
     ('merlot'),
+    ('lager'),
+    ('ipa'),
     ('chardonnay');
