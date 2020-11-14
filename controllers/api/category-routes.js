@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 //CREATE a neeeew category
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     Category.create({
         name: req.body.name
     })
