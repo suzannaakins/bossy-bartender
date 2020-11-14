@@ -1,3 +1,102 @@
-<div>
-    <h1 id="page-title">Bossy Bartender</h1>
+<header>
+    <h1>
+        <a href="/">Home</a>
+    </h1>
+    <nav>
+        <ul>
+            <li>
+                <a href="/cocktails">Browse Drinks</a>
+            </li>
+            {{#if loggedIn}}
+            <li>
+                <button id="logout" class="btn-no-style">Logout</button>
+            </li>
+            {{else}}
+            <li>
+                <a href="/login">Login/Create Account</a>
+            </li>
+            {{/if}}
+        </ul>
+    </nav>
+</header>
+
+<div class="hero">
+    <h1 id="page-title">Welcome to the Bossy Bartender!</h1>
+    <p>
+        At home and craving a drink, but don't know what you can make with your ingredients?
+        That's where your bossy bartender comes in!
+        Tell us what you got, and we'll tell you what you can make.
+        Teamwork makes the dream work.
+    </p>
 </div>
+
+<h2>In My Bar</h2>
+
+<div class="useringredients">
+    {{!-- this is the section user's ingredients will be added to as they make selections from dropdowns --}}
+</div>
+
+<div class="dropdownwrap">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Spirits
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Tequila</a>
+            <a class="dropdown-item" href="#">Whiskey</a>
+            <a class="dropdown-item" href="#">Vodka</a>
+            <a class="dropdown-item" href="#">Gin</a>
+            <a class="dropdown-item" href="#">Rum</a>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Wine + Beer
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Red Wine</a>
+                <a class="dropdown-item" href="#">White Wine</a>
+                <a class="dropdown-item" href="#">Rose</a>
+                <a class="dropdown-item" href="#">Lager</a>
+                <a class="dropdown-item" href="#">IPA</a>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Liqueurs
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Aperol</a>
+                    <a class="dropdown-item" href="#">Campari</a>
+                    <a class="dropdown-item" href="#">St. Germaine</a>
+                    <a class="dropdown-item" href="#">Ancho Reyes</a>
+                    <a class="dropdown-item" href="#">Tripel Sec/Cointreau</a>
+                </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sweeteners
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Simple Syrup</a>
+                        <a class="dropdown-item" href="#">Agave</a>
+                        <a class="dropdown-item" href="#">Honey</a>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Other
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Bitters</a>
+
+                        </div>
+
+                        <div class="ingredientoptions">
+                            (spirits, wine+beer, liqueurs, bitters, fruits, herbs, sweeteners)
+                        </div>
