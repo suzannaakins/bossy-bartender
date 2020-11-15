@@ -1,8 +1,15 @@
-var accountSid = 'ACe3f0014b3ad7547b2468b276138857c5'; // Your Account SID from www.twilio.com/console
-var authToken = '3aa1f4883617f411dff7adefd338e7db';   // Your Auth Token from www.twilio.com/console
+require("dotenv").config();
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
-var twilio = require('twilio');
-var client = new twilio(accountSid, authToken);
+// client.messages
+//   .create({
+//      body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+//      from: '+15017122661',
+//      to: '+15558675310'
+//    })
+//   .then(message => console.log(message.sid));
 
 
 function sendText() {
@@ -17,3 +24,8 @@ function sendText() {
 
 
 document.querySelector('#smsText').addEventListener('click', sendText);
+
+import { text } from './module';
+
+let val = text(); // val is "Hello";
+alert(val);
