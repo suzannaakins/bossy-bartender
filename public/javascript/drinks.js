@@ -3,7 +3,6 @@ const ingArr1st = [];
 
 // Get Drinks from Cocktails DB by each ingredient
 function getDrinksByIngList(event) {
-    console.log("I'm clicked")
     var ing = ingArr
     fetch(
         ('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin')
@@ -13,32 +12,43 @@ function getDrinksByIngList(event) {
     })
     .then(function(drinkReponse) {
         createDrinksArray(drinkReponse);
-    })
-}
+        console.log(drinkReponse);
+    });
+};
 
-var createDrinksArray = function (drinkResponse) {
+var createDrinksArray = function (response) {
     console.log ("I'm clicked")
+    console.log(response);
     // Loop through the drinks
-    // for (let i =0; i < drinkresponse.drinks.length; i++) {
-    //     var drinkTitle = drinkResponse.drinks[i].strDrink;
-    //     var drinkImage = drinkResponse.drinks[i].strDrinkThumb;
-    //     var drinkId = drinkResponse.drinks[i].idDrink;
+    for (let i =0; i < response.drinks.length; i++) {
+        console.log(response.drinks.length)
         
-    //     if (drinkTitle !== "") {
-    //         var drinkSave =
-    //           ingArr1st;
+        response.forEach((storeIngredient) => {
+            var drinkTitle = response.drinks[i].strDrink;
+            var drinkImage = response.drinks[i].strDrinkThumb;
+            var drinkId = response.drinks[i].idDrink;
+        
+            if (drinkTitle !== "") {
+                var drinkSave = ingArr1st;
 
-    //     var drinkInfo = {
-    //         title: drinkTitle,
-    //         image: drinkImage,
-    //         id: drinkId
-    //     };
-    //     if (drinkSave.indexOf(drinkInfo) == -1){
-    //     //add the value to the array
-    //     drinkSave.push(drinkInfo);
+            var drinkInfo = {
+                title: drinkTitle,
+                image: drinkImage,
+                id: drinkId
+            };
+             if (drinkSave.indexOf(drinkInfo) == -1){
+            // Add the value to the array
+             drinkSave.push(drinkInfo);
+             console.log (ingArr1st);
+            }
+        }
+        
+        
+         })
+    }
 }
     
-        // Example:
+    //Example:
     // Get list of Gin Drinks
     // https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
     // Then get list of Lime Juice
