@@ -8,7 +8,7 @@ const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers.js');
 const hbs = exphbs.create({ helpers });
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 
 // track user sessions 
 const sequelize = require('./config/connection.js');

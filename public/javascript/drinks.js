@@ -4,6 +4,7 @@ var introContainerEl = $("#drink-container");
 
 // Get Drinks from Cocktails DB by each ingredient
 function getDrinksByIngList(event) {
+    // Need Ingredients indicated by user
     var ing = ingArr
     fetch(
         ('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin')
@@ -12,7 +13,7 @@ function getDrinksByIngList(event) {
         return drinkResponse.json();
     })
     .then(function(drinkReponse) {
-        createDrinksArray(drinkReponse);
+        // createDrinksArray(drinkReponse);
         loopDrinkMatches(drinkReponse);
         console.log(drinkReponse);
     });
@@ -64,6 +65,7 @@ var createDrinksArray = function (response) {
     // Print the drink results to the user
     var loopDrinkMatches = function (drinkMatch) {
         // Loop through the drink
+        console.log("I'm Clicked")
         for (let i =0; i < drinkMatch.length; i++) {
       
           // Container for Each Drink
@@ -93,7 +95,7 @@ var createDrinksArray = function (response) {
     // On Search 
     $(document).on('click', '.search-button', function() {
         getDrinksByIngList();
-        printCocktails();
+        // printCocktails();
     })
     
 
