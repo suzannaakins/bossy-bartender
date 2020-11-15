@@ -1,5 +1,6 @@
 const ingArr = [];
 const ingArr1st = [];
+var introContainerEl = $("#drink-container");
 
 // Get Drinks from Cocktails DB by each ingredient
 function getDrinksByIngList(event) {
@@ -12,6 +13,7 @@ function getDrinksByIngList(event) {
     })
     .then(function(drinkReponse) {
         createDrinksArray(drinkReponse);
+        loopDrinkMatches(drinkReponse);
         console.log(drinkReponse);
     });
 };
@@ -55,12 +57,57 @@ var createDrinksArray = function (response) {
     // https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Lime%20Juice
      
     // Create Array 1 of Objects & Array 2 Objects & PossibleDrinks 
+    
     // Possibly loop through Array 1 & loop through Array 2 - compare and push out the ones that are equal
-    
-    // Print the results to the user
-    
-    // Once clicked call the cocktail API by Drink
+    // let possibleDrinks =
 
-    // On Save store the drink recipe in full for recall for the user
+    // Print the drink results to the user
+    var loopDrinkMatches = function (drinkMatch) {
+        // Loop through the drink
+        for (let i =0; i < drinkMatch.length; i++) {
+      
+          // Container for Each Drink
+          var drinkCardContainer = $("<div>").addClass("col-sm");
+          var card = $("<div>").addClass("card");
+          var image = $("<div>").addClass("card-image-top");
+          var title = $("<div>").addClass("card-title");
+      
+      
+          // Display each Drink
+          var drinkImage = $("<img>")
+            .attr("src", response.drinks[i].strDrinkThumb)
+          var drinkTitle = $("<h5>")
+            .text(response.drinks[i].strDrink);
+          var drinkChoose = $("<a>")
+            console.log("I'm choosen")
+      
+          // Append Display to Container
+          card.append(image.append(drinkImage));
+          card.append(body.append(drinkTitle));
+          drinkCardContainer.append(card);
+          drinkContainerEl.append(drinkCardContainer);
+        }
+      };
 
-    document.querySelector('.search-button').addEventListener('click', getDrinksByIngList);
+    
+    // On Search 
+    $(document).on('click', '.search-button', function() {
+        getDrinksByIngList();
+        printCocktails();
+    })
+    
+
+    // Once clicked call the cocktail API by Drink & Display the Recipe
+    function displayChoosenDrink() {
+        // Need to pass in a variable for user's choice
+        fetch(
+            ('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007')
+        )
+        .then(function(drinkResponse) {
+            return drinkResponse.json();
+        })
+        .then(function(drinkReponse) {
+            createDrinksArray(drinkReponse);
+            console.log(drinkReponse);
+        });
+    };
