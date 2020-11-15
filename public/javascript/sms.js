@@ -5,7 +5,7 @@ var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
 
 
-$(document).on("click", "#smsText", function() {
+function sendText() {
     console.log("I'm clicked");
     client.messages.create({
         body: 'Hello - test from Node',
@@ -13,4 +13,7 @@ $(document).on("click", "#smsText", function() {
         from: '+13157549675' // From a valid Twilio number
     })
     .then((message) => console.log(message.sid));
-});
+};
+
+
+document.querySelector('#smsText').addEventListener('click', sendText);
