@@ -15,21 +15,6 @@
     <header>
         {{> nav}}
     </header>
-    <div class="wrapper">
-        <header class="hero">
-            <div>
-                <nav class"nav">
-                    <a class="link" href="/">Home</a>
-                    {{#if loggedIn}}
-                    <a class="link" href="/" id="logout">Logout</a>
-                    {{else}}
-                    <a class="link" href="/login">Login</a>
-                    {{/if}}
-                </nav>
-            </div>
-
-            <h1 class="app-title"><i class="fab "></i>Bossy Bartender</h1>
-        </header>
         <main>
             {{{ body }}}
         </main>
