@@ -1,5 +1,5 @@
 const ingArr = [];
-const drinkSave1 = [];
+const drinkSave = [];
 var introContainerEl = $("#drink-container");
 
 // Get Drinks from Cocktails DB by each ingredient
@@ -36,7 +36,7 @@ var createDrinksArray = function (response) {
                 image: drinkImage,
                 id: drinkId
             };
-             if (.indexOf(drinkInfo) == -1){
+             if (drinkSave.indexOf(drinkInfo) == -1){
             // Add the value to the array
              drinkSave.push(drinkInfo);
             }
