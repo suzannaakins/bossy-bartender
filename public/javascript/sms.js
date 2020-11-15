@@ -24,8 +24,3 @@ function sendText() {
 
 
 document.querySelector('#smsText').addEventListener('click', sendText);
-
-import { text } from './module';
-
-let val = text(); // val is "Hello";
-alert(val);
