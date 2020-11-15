@@ -24,9 +24,9 @@ var printDrinkOptions = function (response) {
     // Loop through the drinks
     for (let i =0; i < response.drinks.length; i++) {
         // Container for Each Drink
-        var drinkCardContainer = $("<div>").addClass("col-sm");
+        var drinkCardContainer = $("<div>").addClass("card-columns");
         var card = $("<div>").addClass("card");
-        var image = $("<div>").addClass("card-image-top");
+        var image = $("<div>").addClass("card-image-cap");
         var drinkId = response.drinks[i].idDrink
         // Display each Drink
         var drinkImage = $("<img>")
@@ -45,8 +45,7 @@ var printDrinkOptions = function (response) {
         });
 
         // Append Display to Container
-        card.append(image.append(drinkImage));
-        card.append(drinkTitle, drinkButton);
+        card.append(drinkImage, drinkTitle, drinkButton);
         drinkCardContainer.append(card);
         drinkContainerEl.append(drinkCardContainer);
     }
