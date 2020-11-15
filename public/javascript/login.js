@@ -22,9 +22,8 @@ async function loginFormHandler(event) {
       }
     }
   }
-
-
-// sign up to create an account 
+  
+  // sign up to create an account 
 async function signupFormHandler(event) {
     event.preventDefault();
   
@@ -50,5 +49,4 @@ async function signupFormHandler(event) {
   }
 }
   document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
-  
   document.querySelector('.login-form').addEventListener('submit', loginFormHandler);

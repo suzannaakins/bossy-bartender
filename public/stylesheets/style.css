@@ -1,3 +1,42 @@
+:root {
+  --primary: #000117;
+  --secondary: #13a8fe;
+  --tertiary: #ff00ff;
+  --light-dark: #cf0060;
+  --light:#ffa300;
+  --border-radius: .3rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--primary);
+  background: radial-gradient(circle, black, white);
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+  color: var(--light);
+  line-height: 1.5;
+  font-size: 24px;
+  background: url(https://unsplash.com/photos/61ibZohzRRo);
+}
+
+main {
+  margin: 20px auto;
+  width: 94%;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
 header {
   display: flex;
   justify-content: space-between;
@@ -20,3 +59,10 @@ nav li {
   float: left;
   list-style: none;
 }
+
+/* login */
+/* login-form{
+
+} */
+
+/* End login */
