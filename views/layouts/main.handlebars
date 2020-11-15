@@ -9,6 +9,16 @@
 </head>
 
 <body>
+
+    <header>
+        <h1>
+            <a href="/">Bossy Bartender</a>
+        </h1>
+        <nav>
+            <a href="/login">login</a>
+        </nav>
+    </header>
+
     <div class="wrapper">
         <main>
             {{{ body }}}
@@ -20,8 +30,9 @@
 
     </div>
     {{#if loggedIn}}
-    {{!-- <script src="/javascript/logout.js"></script> --}}
+    <script src="/javascript/logout.js"></script>
     {{/if}}
+
 </body>
 
 </html>

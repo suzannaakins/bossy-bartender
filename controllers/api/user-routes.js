@@ -4,7 +4,6 @@ const withAuth = require('../../utils/auth');
 
 // GET /api/users
 router.get('/', (req, res) => {
-    // Access our User model and run .findAll() method)
     User.findAll({
         attributes: { exclude: ['password'] }
     })
@@ -27,7 +26,6 @@ router.get('/:id', (req, res) => {
                 model: Post,
                 attributes: ['id', 'title', 'content', 'created_at']
             },
-            // include the Comment model here:
             {
                 model: Comment,
                 attributes: ['id', 'comment_text', 'created_at'],
@@ -53,7 +51,6 @@ router.get('/:id', (req, res) => {
 
 // POST /api/users - ADDS a NEW user
 router.post('/', (req, res) => {
-    // expects {username: "", password: ""}
     User.create({
         username: req.body.username,
         password: req.body.password
@@ -88,7 +85,7 @@ router.post('/login', (req, res) => {
         //verify user
         const validPassword = dbUserData.checkPassword(req.body.password);
         if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password drunkass!' });
+            res.status(400).json({ message: 'Incorrect password, please drink responsibly!' });
             return;
         }
 
