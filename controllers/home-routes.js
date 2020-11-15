@@ -9,6 +9,10 @@ router.get('/cocktails', (req, res) => {
     res.render('cocktails')
 });
 
+router.get('/results', (req, res) => {
+    res.render('results');
+});
+
 // Login Route
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
