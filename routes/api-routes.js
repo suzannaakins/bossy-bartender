@@ -36,7 +36,7 @@ var createDrinksArray = function (drinkResponse) {
         drinkSave.push(drinkInfo);
     
     
-        // Example:
+// Example:
     // Get list of Gin Drinks
     // https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
     // Then get list of Lime Juice
