@@ -1,24 +1,24 @@
-     <header>
-            <h1>
+<div>
+    <h1 id="page-title">Bossy Bartender</h1>
+</div>
+<nav>
+    <ul>
+        <div class="main-nav">
+            <li>
                 <a href="/">Home</a>
-            </h1>
-            <nav>
-                <ul>
-                    {{#if loggedIn}}
-                    <li>
-                        <a href="/cocktails">Cocktails</a>
-                    </li>
-                    <li>
-                        <button id="logout" class="btn-no-style">Logout</button>
-                    </li>
-                    {{else}}
-                    <li>
-                        <a href="/cocktails">Cocktails</a>
-                    </li>
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    {{/if}}
-                </ul>
-            </nav>
-        </header>
+            </li>
+            <li>
+                <a href="/cocktails">Browse Cocktails</a>
+            </li>
+        </div>
+        {{#if loggedIn}}
+        <li class="login">
+            <button id="logout" class="btn btn-link">Logout</button>
+        </li>
+        {{else}}
+        <li class="login">
+            <a href="/login">Login</a>
+        </li>
+        {{/if}}
+    </ul>
+</nav>
