@@ -91,12 +91,26 @@ function printRecipe(response) {
     console.log(drinkMeasurements)
     var drinkMeasurementsPrint = $("<p>")
         .text(drinkMeasurements)
+    
+        var saveButton = $("<button>")
+        .addClass("btn-sm save-button")
+        .attr("id", drinkId)
+        .text("Save");
 
     // Append Display to Container
-    card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint);
+    card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint, saveButton);
     drinkRecipeContainer.append(card);
     homepageContainerEl.append(drinkRecipeContainer);
+
+    $(".save-button").on("click", function(event) {
+        var newDrinkId = event.target.id
+        saveRecipe(newDrinkId)
+    });
 };
+
+function saveRecipe (id) {
+    
+}
 
 // On Search 
 $(document).on('click', '.search-button', function() {
