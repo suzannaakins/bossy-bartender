@@ -10,7 +10,7 @@ router.get('/cocktails', (req, res) => {
 });
 
 router.get('/results', (req, res) => {
-    res.render('results');
+    res.render('search', data)
 });
 
 // Login Route
