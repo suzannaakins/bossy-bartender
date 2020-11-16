@@ -19,13 +19,28 @@ function getDrinksByIngList(event) {
         return drinkResponse.json();
     })
     .then(function(drinkReponse) {
-        printDrinkOptions(drinkReponse);
+        resultsFound(drinkReponse);
     });
 };
 
+// Header Text to Display if Results were found or not
+function resultsFound(response) {
+    destroyElement();
+    if (response.drinks === "None Found") {
+        var message = $("<h2>")
+            .text("Sorry, no results match these ingredients - Please try to search again")   
+    }
+    else {
+        printDrinkOptions(response)
+    }
+    homepageContainerEl.append(message);
+}
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
     destroyElement();
+    var message = $("<h2>")
+            .text("Good News - We found " + response.drinks.length + " drinks that match your search!")   
+    homepageContainerEl.append(message);
     // Loop through the drinks
     for (let i =0; i < response.drinks.length; i++) {
         // Container for Each Drink
@@ -109,6 +124,7 @@ function printRecipe(response) {
     var drinkMeasurementsPrint = $("<p>")
         .text(filteredDrinkMeasurements)
     
+    // Save Button
     var saveButton = $("<button>")
     .addClass("btn-sm save-button")
     .attr("id", drinkId)
@@ -119,14 +135,16 @@ function printRecipe(response) {
     drinkRecipeContainer.append(card);
     homepageContainerEl.append(drinkRecipeContainer);
 
+    // On Click of Save
     $(".save-button").on("click", function(event) {
         var newDrinkId = event.target.id
         saveRecipe(newDrinkId)
     });
 };
 
+// Save Recipes
 function saveRecipe (id) {
-    
+    console.log ("Saved was clicked")
 }
 
 // On Search 
