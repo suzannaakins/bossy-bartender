@@ -51,7 +51,6 @@ var printDrinkOptions = function (response) {
     }
     $(".drink-button").on("click", function(event) {
         var newDrinkId = event.target.id
-        console.log(newDrinkId)
         getRecipe(newDrinkId)
     });
 };  
@@ -67,7 +66,6 @@ function getRecipe(id) {
         return recipeResponse.json();
     })
     .then(function(recipeResponse) {
-        console.log(recipeResponse)
         printRecipe(recipeResponse);
     });
 };
@@ -84,7 +82,6 @@ function printRecipe(response) {
     
     var drinkIngredients = [];
     drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15)
-    console.log(drinkIngredients)
 
     var drinkIngredientsPrint = $("<p>")
         .text(drinkIngredients)
@@ -105,22 +102,4 @@ function printRecipe(response) {
 $(document).on('click', '.search-button', function() {
     getDrinksByIngList();
 });
-    // var saveArray = funciton() {
-        //  var drinkTitle = response.drinks[i].strDrink;
-        //  var drinkImage = response.drinks[i].strDrinkThumb;
-        //  var drinkId = response.drinks[i].idDrink;
-        
-        //  if (drinkTitle !== "") {
 
-        //  var drinkInfo = {
-        //      title: drinkTitle,
-        //      image: drinkImage,
-        //      id: drinkId
-        //  };
-        //   if (drinkSave.indexOf(drinkInfo) == -1){
-        //  Add the value to the array
-        //   drinkSave.push(drinkInfo);
-        //  }
-        //  console.log (drinkSave);
-        // }
-// }
