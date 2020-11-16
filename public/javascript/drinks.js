@@ -71,6 +71,8 @@ function getRecipe(id) {
 };
 
 function printRecipe(response) {
+    var drinkId = response.drinks[0].idDrink
+
     // Drink Container
     var drinkRecipeContainer = $("<div>").addClass("card-columns");
     var card = $("<div>").addClass("card");
@@ -106,13 +108,13 @@ function printRecipe(response) {
     var drinkMeasurementsPrint = $("<p>")
         .text(filteredDrinkMeasurements)
     
-        // var saveButton = $("<button>")
-        // .addClass("btn-sm save-button")
-        // .attr("id", drinkId)
-        // .text("Save");
+    var saveButton = $("<button>")
+    .addClass("btn-sm save-button")
+    .attr("id", drinkId)
+    .text("Save");
 
     // Append Display to Container
-    card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint);
+    card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint, saveButton);
     drinkRecipeContainer.append(card);
     homepageContainerEl.append(drinkRecipeContainer);
 
