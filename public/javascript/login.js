@@ -42,7 +42,7 @@ async function signupFormHandler(event) {
         headers: { 'Content-Type': 'application/json' }
       });
       if (response.ok) {
-        console.log('success');
+        document.location.replace('/homepage/');
       } else {
         alert(response.statusText);
     }
