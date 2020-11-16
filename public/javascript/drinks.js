@@ -20,14 +20,12 @@ function getDrinksByIngList(event) {
     })
     .then(function(drinkReponse) {
         printDrinkOptions(drinkReponse);
-        console.log(drinkReponse);
     });
 };
 
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
     destroyElement();
-    console.log(response.drinks.length)
     // Loop through the drinks
     for (let i =0; i < response.drinks.length; i++) {
         // Container for Each Drink
@@ -42,31 +40,25 @@ var printDrinkOptions = function (response) {
             .addClass("card-title")
             .text(response.drinks[i].strDrink);
         var drinkButton = $("<button>")
-            .addClass("btn-sm")
-            .attr("id", "drink-click-" + [i])
+            .addClass("btn-sm drink-button")
+            .attr("id", drinkId)
             .text("View Recipe");
-
-        $(document).on("click", "#drink-click-" + [i], function() {
-            console.log(drinkId)
-            getRecipe(drinkId)
-        });
 
         // Append Display to Container
         card.append(drinkImage, drinkTitle, drinkButton);
         drinkCardContainer.append(card);
         homepageContainerEl.append(drinkCardContainer);
     }
-};
-
-// On Search 
-$(document).on('click', '.search-button', function() {
-    getDrinksByIngList();
-});
-    
+    $(".drink-button").on("click", function(event) {
+        var newDrinkId = event.target.id
+        console.log(newDrinkId)
+        getRecipe(newDrinkId)
+    });
+};  
 
 // Once clicked call the cocktail API by Drink & Display the Recipe
 function getRecipe(id) {
-    console.log("I'm clicked")
+    console.log(id)
     // Need to pass in a variable for user's choice
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i='+ id)
@@ -75,8 +67,8 @@ function getRecipe(id) {
         return recipeResponse.json();
     })
     .then(function(recipeResponse) {
-        printRecipe(recipeResponse)
-        console.log(recipeResponse);
+        console.log(recipeResponse)
+        printRecipe(recipeResponse);
     });
 };
 
@@ -107,8 +99,12 @@ function printRecipe(response) {
     card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint);
     drinkRecipeContainer.append(card);
     homepageContainerEl.append(drinkRecipeContainer);
-}
+};
 
+// On Search 
+$(document).on('click', '.search-button', function() {
+    getDrinksByIngList();
+});
     // var saveArray = funciton() {
         //  var drinkTitle = response.drinks[i].strDrink;
         //  var drinkImage = response.drinks[i].strDrinkThumb;
