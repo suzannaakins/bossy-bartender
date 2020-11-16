@@ -71,6 +71,7 @@ function getRecipe(id) {
 };
 
 function printRecipe(response) {
+    // Drink Container
     var drinkRecipeContainer = $("<div>").addClass("card-columns");
     var card = $("<div>").addClass("card");
     
@@ -80,25 +81,38 @@ function printRecipe(response) {
     var drinkDirections = $("<p>")
         .text(response.drinks[0].strInstructions)
     
+    // Drink Ingredients
     var drinkIngredients = [];
-    drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15)
+    drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15) 
+    
+    // Remove Nulls
+    var filteredDrinkIngredients = drinkIngredients.filter(function (el) {
+        return el != null;
+    });
 
+    // Print Ingredients
     var drinkIngredientsPrint = $("<p>")
-        .text(drinkIngredients)
+        .text(filteredDrinkIngredients)
 
+    // Drink Measurements
     var drinkMeasurements = [];
     drinkMeasurements.push(response.drinks[0].strMeasure1,response.drinks[0].strMeasure2, response.drinks[0].strMeasure3,response.drinks[0].strMeasure4,response.drinks[0].strMeasure5,response.drinks[0].strMeasure6,response.drinks[0].strMeasure7,response.drinks[0].strMeasure8,response.drinks[0].strMeasure9,response.drinks[0].strMeasure10,response.drinks[0].strMeasure11,response.drinks[0].strMeasure12,response.drinks[0].strMeasure13,response.drinks[0].strMeasure14,response.drinks[0].strMeasure15)
-    console.log(drinkMeasurements)
-    var drinkMeasurementsPrint = $("<p>")
-        .text(drinkMeasurements)
     
-        var saveButton = $("<button>")
-        .addClass("btn-sm save-button")
-        .attr("id", drinkId)
-        .text("Save");
+    // Remove Nulls
+    var filteredDrinkMeasurements = drinkMeasurements.filter(function (el) {
+        return el != null;
+    });
+    // Print Measurements
+    var drinkMeasurementsPrint = $("<p>")
+        .text(filteredDrinkMeasurements)
+    
+        // var saveButton = $("<button>")
+        // .addClass("btn-sm save-button")
+        // .attr("id", drinkId)
+        // .text("Save");
 
     // Append Display to Container
-    card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint, saveButton);
+    card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint);
     drinkRecipeContainer.append(card);
     homepageContainerEl.append(drinkRecipeContainer);
 
