@@ -1,22 +1,130 @@
+
+/* Global Styles Start */
+:root {
+  --primary-color: #FF206E;
+  --secondary-color: #CBFF8C;
+  --tertiary-color: #231651;
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #39393A;
+  --black-rgb: 0, 0, 0;
+  --white-rgb: 255, 255, 255;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--secondary-color);
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+/* Global Styles End */
+
+/* Header Styles Start */
 header {
+  background: var(--primary-color);
+  position: sticky;
+  position: -webkit-sticky; /* For Safari Browsers */
+  z-index: 9999;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 0px 10px;
-  width: 100%;
+  flex-wrap: nowrap;
+  padding: 10px;
+  top: 0;
+}
+
+header h1 a {
+  font-size: 25px;
 }
 
 header a {
-  padding-top: 10px;
+  color: var(--primary-text-color);
+  text-decoration: none;
+  text-shadow: 0 2px 10px rgba(var(--black-rgb), 0.5);
 }
 
 header nav {
-  padding-top: 10px;
-  display: inline;
-  text-align: right;
+  margin: 10px 0 10px -50px;
 }
 
-nav li {
-  float: left;
+header nav ul {
+  display: flex;
+  justify-content: space-between;
   list-style: none;
+}
+
+header nav ul li {
+  padding: 5px 20px;
+}
+
+header nav ul li:hover {
+  background-color: var(--secondary-color);
+  border-radius: 25%;
+}
+
+header nav ul li a:hover {
+  text-decoration: none;
+  color: var(--secondary-text-color);
+}
+
+.main-nav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  list-style: none;
+}
+
+.login {
+  display: flex;
+  justify-content: right;
+}
+
+.login:hover {
+  background-color: var(--secondary-color);
+  border-radius: 25%;
+}
+/* Header Styles End */
+
+/* Footer Styles Start */
+footer {
+  background: var(--primary-color);
+  display: flex;
+  background-size: cover;
+  padding: 20px 15px;
+  margin-top: 20px;
+  text-align: right;
+  color: var(--primary-text-color);
+  display: block;
+  font-weight: lighter;
+}
+/* Footer Styles End */
+
+/* Media Queries */
+/* MQ for screens smaller that 980px */
+@media screen and (max-width: 980px) {
+  header {
+      position: unset;
+      padding: 0 0 10px 0;
+      justify-content: center;
+      text-align: center;
+  }
+
+  header h1 {
+      width: 100%;
+      padding: 5px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      font-size: 5vw;
+  }
+
+  header nav {
+      justify-content: center;
+      margin: 0;
+  }
+  
+  header nav ul {
+      padding: 0px 0px;
+  }
 }

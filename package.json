@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js", 
-    "watch": "nodemon server.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "seeds": "node seeds/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,13 +20,17 @@
   },
   "homepage": "https://github.com/suzannaakins/bossy-bartender#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@popperjs/core": "^2.5.4",
     "bcrypt": "^5.0.0",
     "bcrypt-cli": "^1.1.0",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^8.2.0",
+    "espress": "0.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.6",
     "sequelize": "^6.3.5"
