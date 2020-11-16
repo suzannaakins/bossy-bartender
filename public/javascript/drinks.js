@@ -1,8 +1,14 @@
 // const ingArr = [];
 // const drinkSave = [];
 var drinkContainerEl = $("#drink-container");
+var homepageContainerEl = $("#homepage-container");
 
-// Get Drinks from Cocktails DB by each ingredient
+// Destroy Search Options
+var destroyElement = function () {
+    homepageContainerEl.html(null);
+  };
+
+// Get Drinks from Cocktails DB by each Ingredient
 function getDrinksByIngList(event) {
     // Need Ingredients indicated by user
     // var ing = ingArr
@@ -20,6 +26,7 @@ function getDrinksByIngList(event) {
 
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
+    destroyElement();
     console.log(response.drinks.length)
     // Loop through the drinks
     for (let i =0; i < response.drinks.length; i++) {
@@ -47,7 +54,7 @@ var printDrinkOptions = function (response) {
         // Append Display to Container
         card.append(drinkImage, drinkTitle, drinkButton);
         drinkCardContainer.append(card);
-        drinkContainerEl.append(drinkCardContainer);
+        homepageContainerEl.append(drinkCardContainer);
     }
 };
 
@@ -75,6 +82,17 @@ function getRecipe(id) {
 
 function printRecipe(response) {
     console.log("Recipe");
+    var drinkGlass = response.drinks[0].strGlass
+    
+    var drinkIngredients = [];
+    drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15)
+    console.log(drinkIngredients)
+
+    var drinkMeasurements = [];
+    drinkMeasurements.push(response.drinks[0].strMeasure1,response.drinks[0].strMeasure2, response.drinks[0].strMeasure3,response.drinks[0].strMeasure4,response.drinks[0].strMeasure5,response.drinks[0].strMeasure6,response.drinks[0].strMeasure7,response.drinks[0].strMeasure8,response.drinks[0].strMeasure9,response.drinks[0].strMeasure10,response.drinks[0].strMeasure11,response.drinks[0].strMeasure12,response.drinks[0].strMeasure13,response.drinks[0].strMeasure14,response.drinks[0].strMeasure15)
+    console.log(drinkMeasurements)
+
+    
 }
 
     // var saveArray = funciton() {
