@@ -36,6 +36,7 @@ var printDrinkOptions = function (response) {
         // Display each Drink
         var drinkImage = $("<img>")
             .attr("src", response.drinks[i].strDrinkThumb)
+            .attr("height", "200px")
         var drinkTitle = $("<h5>")
             .addClass("card-title")
             .text(response.drinks[i].strDrink);
