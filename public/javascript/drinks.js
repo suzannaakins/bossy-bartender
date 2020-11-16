@@ -13,7 +13,7 @@ function getDrinksByIngList(event) {
     // Need Ingredients indicated by user
     // var ing = ingArr
     fetch(
-        ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=Gin,Sugar,Lime_Juice')
+        ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=Gin,Lime_Juice')
     )
     .then(function(drinkResponse) {
         return drinkResponse.json();
@@ -107,7 +107,6 @@ function printRecipe(response) {
     card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint);
     drinkRecipeContainer.append(card);
     homepageContainerEl.append(drinkRecipeContainer);
-    
 }
 
     // var saveArray = funciton() {
