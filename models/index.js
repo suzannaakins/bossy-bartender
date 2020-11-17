@@ -5,6 +5,7 @@ const User = require('./User');
 const Comment = require('./Comment');
 const Category = require('./Category');
 const Ingredient = require('./Ingredient');
+const Drink = require('./Drinks');
 
 //one to many relationship between category and ingredients
 Category.hasMany(Ingredient, {
@@ -41,4 +42,4 @@ User.hasMany(Comment, {
 //     foreignKey: 'post_id'
 // });
 
-module.exports = { User, Comment };
+module.exports = { User, Comment, Category, Drink, Ingredient };
