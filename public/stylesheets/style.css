@@ -21,6 +21,11 @@ body {
   padding: 0;
   line-height: 1.5;
 }
+
+button {
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
+}
 /* Global Styles End */
 
 /* Header Styles Start */
