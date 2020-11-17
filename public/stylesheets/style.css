@@ -1,3 +1,4 @@
+
 /* Global Styles Start */
 :root {
   --primary-color: #FF206E;
@@ -19,6 +20,11 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
+}
+
+button {
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
 }
 /* Global Styles End */
 

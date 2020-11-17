@@ -4,7 +4,6 @@ const withAuth = require('../../utils/auth');
 
 // GET /api/users
 router.get('/', (req, res) => {
-    // Access our User model and run .findAll() method)
     User.findAll({
         attributes: { exclude: ['password'] }
     })
@@ -23,18 +22,18 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         include: [
-            {
-                model: Post,
-                attributes: ['id', 'title', 'content', 'created_at']
-            },
+            // {
+            //     model: Vote,
+            //     attributes: ['id', 'title', 'content', 'created_at']
+            // },
             // include the Comment model here:
             {
                 model: Comment,
                 attributes: ['id', 'comment_text', 'created_at'],
-                include: {
-                    model: Post,
-                    attributes: ['title']
-                }
+                // include: {
+                //     model: Post,
+                //     attributes: ['title']
+                // }
             }
         ]
     })
@@ -53,9 +52,9 @@ router.get('/:id', (req, res) => {
 
 // POST /api/users - ADDS a NEW user
 router.post('/', (req, res) => {
-    // expects {username: "", password: ""}
     User.create({
         username: req.body.username,
+        email: req.body.email,
         password: req.body.password
     })
         .then(dbUserData => {
@@ -73,7 +72,7 @@ router.post('/', (req, res) => {
         });
 });
 
-// route for users to LOGIN at (localhost:3001/api/users/login)
+// route for users to LOGIN at (localhost:3003/api/users/login)
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
@@ -87,8 +86,9 @@ router.post('/login', (req, res) => {
 
         //verify user
         const validPassword = dbUserData.checkPassword(req.body.password);
+        
         if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password drunkass!' });
+            res.status(400).json({ message: 'Incorrect password, please drink responsibly!' });
             return;
         }
 

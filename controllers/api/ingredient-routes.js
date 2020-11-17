@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Category,
-                attributes: ['name']
+                attributes: ['title']
             },
         ]
     })
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Category,
-                attributes: ['name']
+                attributes: ['title']
             },
         ]
     })
@@ -50,7 +50,7 @@ router.get('/:id', (req, res) => {
 //CREATE a neeeew ingredient
 router.post('/', (req, res) => {
     Ingredient.create({
-        name: req.body.name, 
+        name: req.body.name,
         category_id: req.body.category_id
     })
         .then(dbIngredientData => res.json(dbIngredientData))
@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
 });
 
 //UPDATE ingredient name
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
     Ingredient.update(
         {
             name: req.body.name,

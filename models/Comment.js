@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Category extends Model { }
+class Comment extends Model { }
 
-Category.init(
+Comment.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,11 +11,19 @@ Category.init(
             primaryKey: true,
             autoIncrement: true
         },
-        title: {
+        comment_text: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [1]
+            }
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user',
+                key: 'id'
             }
         },
     },
@@ -23,8 +31,8 @@ Category.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'category'
+        modelName: 'comment'
     }
 );
 
-module.exports = Category;
+module.exports = Comment;
