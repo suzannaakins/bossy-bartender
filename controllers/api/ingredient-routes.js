@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Ingredient, User, Category } = require('../../models');
+const { Ingredient, Category } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 //view ALL ingredients
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
 });
 
 //CREATE a neeeew ingredient
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     Ingredient.create({
         name: req.body.name,
         category_id: req.body.category_id
@@ -62,10 +62,11 @@ router.post('/', withAuth, (req, res) => {
 });
 
 //UPDATE ingredient name
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
     Ingredient.update(
         {
-            name: req.body.name
+            name: req.body.name,
+            category_id: req.body.category_id
         },
         {
             where: {
