@@ -87,7 +87,7 @@ router.put('/:id', (req, res) => {
 });
 
 //DELETE an ingredient
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     Ingredient.destroy({
         where: {
             id: req.params.id
