@@ -24,8 +24,7 @@ router.get('/', (req, res) => {
             const filteredJuices = juices.map(filteredJuice => filteredJuice.get({ plain: true }));
             const others = data.filter(other => other.category_id === 7);
             const filteredOthers = juices.map(filteredOther => filteredOther.get({ plain: true }));
-
-            console.log(spirits[0].name);
+            
             // pass a single post object into the homepage template
             res.render('homepage', {
                 spirits,
