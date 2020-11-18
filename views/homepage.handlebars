@@ -23,7 +23,7 @@
                 Spirits
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {{#each spirits as |spirit|}}
+                {{#each filteredSpirits as |spirit|}}
                 <a class="dropdown-item" href="#">{{name}}</a>
                 {{/each}}
             </div>
@@ -35,9 +35,9 @@
                 Wines/Beer
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Ale</a>
-                <a class="dropdown-item" href="#">Champagne</a>
-                <a class="dropdown-item" href="#">Cider</a>
+                {{#each filteredWines as |wine|}}
+                <a class="dropdown-item" href="#">{{name}}</a>
+                {{/each}}
             </div>
         </div>
 
@@ -47,9 +47,9 @@
                 Liqueurs
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Amaretto</a>
-                <a class="dropdown-item" href="#">Ancho Reyes</a>
-                <a class="dropdown-item" href="#">Aperol</a>
+                {{#each filteredLiqueurs as |liqueur|}}
+                <a class="dropdown-item" href="#">{{name}}</a>
+                {{/each}}
             </div>
         </div>
 
@@ -59,10 +59,9 @@
                 Syrups
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Agave</a>
-                <a class="dropdown-item" href="#">Chocolate Syrup</a>
-                <a class="dropdown-item" href="#">Grenadine</a>
-                <a class="dropdown-item" href="#">Honey</a>
+                {{#each filteredSyrups as |syrup|}}
+                <a class="dropdown-item" href="#">{{name}}</a>
+                {{/each}}
             </div>
         </div>
 
@@ -72,10 +71,9 @@
                 Food/Fruits
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Angelica Root</a>
-                <a class="dropdown-item" href="#">Berries</a>
-                <a class="dropdown-item" href="#">Cantaloupe</a>
-                <a class="dropdown-item" href="#">Chocolate</a>
+                {{#each filteredFoods as |food|}}
+                <a class="dropdown-item" href="#">{{name}}</a>
+                {{/each}}
             </div>
         </div>
 
@@ -85,10 +83,9 @@
                 Juices/Sodas
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">7-Up</a>
-                <a class="dropdown-item">Apple Cider</a>
-                <a class="dropdown-item" href="#">Apple Juice</a>
-                <a class="dropdown-item" href="#">Carbonated Water</a>
+                {{#each filteredJuices as |juice|}}
+                <a class="dropdown-item" href="#">{{name}}</a>
+                {{/each}}
             </div>
         </div>
 
@@ -98,10 +95,9 @@
                 Other
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Bitters</a>
-                <a class="dropdown-item" href="#">Coffee</a>
-                <a class="dropdown-item" href="#">Espresso</a>
-                <a class="dropdown-item" href="#">Heavy Cream</a>
+                  {{#each filteredOthers as |other|}}
+                <a class="dropdown-item" href="#">{{name}}</a>
+                {{/each}}
             </div>
         </div>
         <div>
