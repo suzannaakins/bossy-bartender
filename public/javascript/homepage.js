@@ -1,9 +1,10 @@
-// async function inMyBar(event) {
-//     event.preventDefault();
-//     //code to capture value of .dropdown-item
-// }
+const userIngredients = [];
+document.getElementById("bar").innerHTML = ''
 
-// document.querySelector('.dropdown-item').addEventListener('click', inMyBar);
+$(".dropdown-menu").on('click', '.dropdown-item', function () {
+    const ingredient = $(this).text();
+    userIngredients.push(ingredient);
+    document.getElementById("bar").innerHTML += userIngredients[userIngredients.length - 1];
 
-const ingredient = $('.dropdown-item').val($(this).html());
-console.log(ingredient);
+    console.log(userIngredients);
+});

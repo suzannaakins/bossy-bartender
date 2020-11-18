@@ -11,8 +11,8 @@
 
     <h2>In My Bar</h2>
 
-    <div class="useringredients">
-        {{!-- this is the section user's ingredients will be added to as they make selections from dropdowns --}}
+    <div id="bar">
+        
     </div>
 
     <div class="btn-group">
@@ -95,7 +95,7 @@
                 Other
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  {{#each filteredOthers as |other|}}
+                {{#each filteredOthers as |other|}}
                 <a class="dropdown-item" href="#">{{name}}</a>
                 {{/each}}
             </div>
@@ -111,4 +111,5 @@
         </div>
     </div>
 </div>
-<script src="homepage.js"></script>
+
+<script src="javascript/homepage.js"></script>
