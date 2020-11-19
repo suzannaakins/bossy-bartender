@@ -54,7 +54,7 @@ router.get('/cocktails', (req, res) => {
 });
 
 router.get('/results', (req, res) => {
-    res.render('search')
+    res.render('results')
 });
 
 // Login Route

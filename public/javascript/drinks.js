@@ -1,19 +1,19 @@
-// const ingArr = [];
+// Global Variables
 // const drinkSave = [];
+var ingredients = JSON.parse(window.localStorage.getItem("ingredients")) || [];
 var drinkContainerEl = $("#drink-container");
 var homepageContainerEl = $("#homepage-container");
 
-// Destroy Search Options
-var destroyElement = function () {
-    homepageContainerEl.html(null);
-  };
+var ingArr = function(){
+    const filteredIngredients = ingredients[0].ingredients
+    const filtered2Ingredients = filteredIngredients.toString()
+    getDrinksByIngList(filtered2Ingredients)
+}
 
 // Get Drinks from Cocktails DB by each Ingredient
-function getDrinksByIngList(event) {
-    // Need Ingredients indicated by user
-    // var ing = ingArr
+async function getDrinksByIngList(ingredients) {
     fetch(
-        ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=Gin,Lime_Juice')
+        ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=' + ingredients)
     )
     .then(function(drinkResponse) {
         return drinkResponse.json();
@@ -25,7 +25,6 @@ function getDrinksByIngList(event) {
 
 // Header Text to Display if Results were found or not
 function resultsFound(response) {
-    destroyElement();
     if (response.drinks === "None Found") {
         var message = $("<h2>")
             .text("Sorry, no results match these ingredients - Please try to search again")   
@@ -37,7 +36,6 @@ function resultsFound(response) {
 }
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
-    destroyElement();
     var message = $("<h2>")
             .text("Good News - We found " + response.drinks.length + " drinks that match your search!")   
     homepageContainerEl.append(message);
@@ -147,8 +145,5 @@ function saveRecipe (id) {
     console.log ("Saved was clicked")
 }
 
-// On Search 
-$(document).on('click', '.search-button', function() {
-    getDrinksByIngList();
-});
+ingArr();
 

@@ -1,23 +1,23 @@
 const seedUsers = require('./user-seeds');
-// const seedPosts = require('./post-seeds');
-// const seedComments = require('./comment-seeds');
-// const seedVotes = require('./vote-seeds');
+const seedCategories = require('./category-seeds');
+// const seedIngredients = require('./ingredient-seeds');
 
 const sequelize = require('../config/connection');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
   console.log('--------------');
+  
+  // Seed Users
   await seedUsers();
   console.log('--------------');
 
-  // await seedPosts();
+  // // Seed Ingredients
+  // await seedIngredients();
   // console.log('--------------');
 
-  // await seedComments();
-  // console.log('--------------');
-
-  // await seedVotes();
+  // // Seed Categories
+  // await seedCategories();
   // console.log('--------------');
 
   process.exit(0);
