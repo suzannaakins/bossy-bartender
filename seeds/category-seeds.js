@@ -23,7 +23,7 @@ const catdata = [
     id: 5
   },
   {
-    title: 'Juices/Sodas', 
+    title: 'Juices/Sodas',
     id: 6
   },
   {
@@ -32,6 +32,6 @@ const catdata = [
   }
 ];
 
-const seedCategories = () => Category.bulkCreate(catdata, {individualHooks: true});
+const seedCategories = () => Category.bulkCreate(catdata, { individualHooks: true });
 
 module.exports = seedCategories;
