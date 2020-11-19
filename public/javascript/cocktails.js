@@ -1,9 +1,9 @@
 var cocktailCategoryEl = $("#category-container");
 var cocktailsContainerEl = $("#cocktails-container");
 
-function byButtonClick (){
-    var byButtonClick = onclick.
-}
+// function byButtonClick (){
+//     var byButtonClick = onclick.
+// }
 
 // Get drinks by Category
 function getDrinksByCategory(event) {

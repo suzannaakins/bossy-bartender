@@ -90,6 +90,16 @@ header nav ul li a:hover {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
+
+.logout {
+  display: flex;
+  justify-content: right;
+}
+
+.logout:hover {
+  background-color: var(--secondary-color);
+  border-radius: 25%;
+}
 /* Header Styles End */
 
 /* Footer Styles Start */
