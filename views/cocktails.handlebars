@@ -4,10 +4,19 @@
 
 <h3>Peruse our cocktails, vote on them, and comment.</h3>
 
+<div>
+<button id="cocktails">Cocktails</button>
+<button id="shots">Shots</button>
+<button id="homemade-liqueur">Homemade Liqueur</button>
+<button id="party-drinks">Punch / Party Drinks</button>
+<button id="random-drink">Tell Me What to DrinK!</button>
+</div>
 
-{{!-- sweet CMS Library for Webflow --}}
+<div id="category-container">
+    <div id="cocktails-container">
+    </div>
+</div>
 
-<script src="https://cdn.finsweet.com/files/cmslibrary-v1.7.js"></script>
 {{!-- Testing SMS --}}
 <h1>Testing SMS - Input your phone number to get a text!</h1>
     <div>
@@ -18,5 +27,5 @@
                 Send SMS
         </button>
     </div>
-
+<script src="javascript/cocktails.js"></script>
 <script src="javascript/sms.js"></script>

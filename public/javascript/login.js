@@ -16,7 +16,7 @@ async function loginFormHandler(event) {
       });
   
       if (response.ok) {
-        document.location.replace('/homepage/');
+        document.location.replace('/cocktails/');
       } else {
         alert(response.statusText);
       }
