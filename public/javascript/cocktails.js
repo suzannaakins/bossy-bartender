@@ -6,15 +6,17 @@ var cocktailsContainerEl = $("#cocktails-container");
 // }
 
 // Get drinks by Category
-function getDrinksByCategory(event) {
+function getDrinksByCategory(category) {
     fetch(
-        ('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c= + cocktail + ')
+        ('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=' + category)
     )
     .then(function(drinkResponse) {
         return drinkResponse.json();
     })
     .then(function(drinkReponse) {
-        printDrinkByCategory(drinkReponse);
+        resultsFound(drinkReponse);
+        // printDrinkByCategory(drinkReponse);
+        console.log(drinkReponse);
     });
 };
 
@@ -136,7 +138,8 @@ function saveRecipe (id) {
 }
 
 // On Search 
-$(document).on('click', '#cocktails', '#shots', '#homemade-liqueur', '#party-drinks', function() {
-    getDrinksByCategory();
+$(".category-button").on('click', function(event) {
+    var categoryId = event.target.id;
+    getDrinksByCategory(categoryId);
 });
 
