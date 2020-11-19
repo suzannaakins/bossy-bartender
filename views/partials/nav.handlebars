@@ -12,13 +12,11 @@
             </li>
         </div>
         {{#if loggedIn}}
-        <li class="login">
-            <button id="logout" class="btn btn-link">Logout</button>
-        </li>
+        <a href="/">Home</a>
+        <button id="logout" class="btn">logout</button>
         {{else}}
-        <li class="login">
-            <a href="/login">Login</a>
-        </li>
+        <a href="/login">login</a>
         {{/if}}
     </ul>
+    
 </nav>

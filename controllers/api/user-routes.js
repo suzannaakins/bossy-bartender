@@ -22,18 +22,18 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         include: [
-            // {
-            //     model: Vote,
-            //     attributes: ['id', 'title', 'content', 'created_at']
-            // },
+            {
+                model: Vote,
+                attributes: ['id', 'title', 'content', 'created_at']
+            },
             // include the Comment model here:
             {
                 model: Comment,
                 attributes: ['id', 'comment_text', 'created_at'],
-                // include: {
-                //     model: Post,
-                //     attributes: ['title']
-                // }
+                include: {
+                    model: Post,
+                    attributes: ['title']
+                }
             }
         ]
     })
@@ -76,7 +76,7 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
-            username: req.body.username
+            email: req.body.email
         }
     }).then(dbUserData => {
         if (!dbUserData) {
@@ -86,7 +86,7 @@ router.post('/login', (req, res) => {
 
         //verify user
         const validPassword = dbUserData.checkPassword(req.body.password);
-        
+
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password, please drink responsibly!' });
             return;
@@ -99,6 +99,9 @@ router.post('/login', (req, res) => {
 
             res.json({ user: dbUserData, message: 'You are now logged in. Make those drinks' });
         });
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
     });
 });
 
