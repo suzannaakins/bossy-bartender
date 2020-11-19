@@ -53,10 +53,11 @@ var printDrinkOptions = function (response) {
         var drinkTitle = $("<h5>")
             .addClass("card-title")
             .text(response.drinks[i].strDrink);
-        var drinkButton = $("<button>")
-            .addClass("btn-sm drink-button")
-            .attr("id", drinkId)
-            .text("View Recipe");
+        var drinkButton = $("<div>")
+            .addClass("drink-button")
+            .html(`<button id=${drinkId} class="btn-small" data-toggle="modal" data-target="#exampleModalCenter">
+            View Recipe
+          </button>`)
 
         // Append Display to Container
         card.append(drinkImage, drinkTitle, drinkButton);
@@ -71,7 +72,6 @@ var printDrinkOptions = function (response) {
 
 // Once clicked call the cocktail API by Drink & Display the Recipe
 function getRecipe(id) {
-    console.log(id)
     // Need to pass in a variable for user's choice
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i='+ id)
@@ -80,23 +80,74 @@ function getRecipe(id) {
         return recipeResponse.json();
     })
     .then(function(recipeResponse) {
-        printRecipe(recipeResponse);
+        printRecipe2(recipeResponse);
     });
 };
 
-function printRecipe(response) {
-    var drinkId = response.drinks[0].idDrink
+// function printRecipe(response) {
+//     var drinkId = response.drinks[0].idDrink
 
-    // Drink Container
-    var drinkRecipeContainer = $("<div>").addClass("card-columns");
-    var card = $("<div>").addClass("card");
+//     // Drink Container
+//     var drinkRecipeContainer = $("<div>").addClass("card-columns");
+//     var card = $("<div>").addClass("card");
     
+//     // Sinlge values for the recipe
+//     var drinkGlass = $("<p>")
+//         .text(response.drinks[0].strGlass)
+//     var drinkDirections = $("<p>")
+//         .text(response.drinks[0].strInstructions)
+    
+//     // Drink Ingredients
+//     var drinkIngredients = [];
+//     drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15) 
+    
+//     // Remove Nulls
+//     var filteredDrinkIngredients = drinkIngredients.filter(function (el) {
+//         return el != null;
+//     });
+
+//     // Print Ingredients
+//     var drinkIngredientsPrint = $("<p>")
+//         .text(filteredDrinkIngredients)
+
+//     // Drink Measurements
+//     var drinkMeasurements = [];
+//     drinkMeasurements.push(response.drinks[0].strMeasure1,response.drinks[0].strMeasure2, response.drinks[0].strMeasure3,response.drinks[0].strMeasure4,response.drinks[0].strMeasure5,response.drinks[0].strMeasure6,response.drinks[0].strMeasure7,response.drinks[0].strMeasure8,response.drinks[0].strMeasure9,response.drinks[0].strMeasure10,response.drinks[0].strMeasure11,response.drinks[0].strMeasure12,response.drinks[0].strMeasure13,response.drinks[0].strMeasure14,response.drinks[0].strMeasure15)
+    
+//     // Remove Nulls
+//     var filteredDrinkMeasurements = drinkMeasurements.filter(function (el) {
+//         return el != null;
+//     });
+//     // Print Measurements
+//     var drinkMeasurementsPrint = $("<p>")
+//         .text(filteredDrinkMeasurements)
+    
+//     // Save Button
+//     var saveButton = $("<button>")
+//     .addClass("btn-sm save-button")
+//     .attr("id", drinkId)
+//     .text("Save");
+
+//     // Append Display to Container
+//     card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint, saveButton);
+//     drinkRecipeContainer.append(card);
+//     homepageContainerEl.append(drinkRecipeContainer);
+
+//     // On Click of Save
+//     $(".save-button").on("click", function(event) {
+//         var newDrinkId = event.target.id
+//         saveRecipe(newDrinkId)
+//     });
+// };
+
+
+function printRecipe2(response) {
     // Sinlge values for the recipe
-    var drinkGlass = $("<p>")
-        .text(response.drinks[0].strGlass)
-    var drinkDirections = $("<p>")
-        .text(response.drinks[0].strInstructions)
-    
+    var drinkId = response.drinks[0].idDrink
+    var drinkGlass = response.drinks[0].strGlass
+    var drinkDirections = response.drinks[0].strInstructions
+    var drinkTitle = response.drinks[0].strDrink
+
     // Drink Ingredients
     var drinkIngredients = [];
     drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15) 
@@ -107,8 +158,7 @@ function printRecipe(response) {
     });
 
     // Print Ingredients
-    var drinkIngredientsPrint = $("<p>")
-        .text(filteredDrinkIngredients)
+    var drinkIngredientsPrint = filteredDrinkIngredients
 
     // Drink Measurements
     var drinkMeasurements = [];
@@ -118,9 +168,51 @@ function printRecipe(response) {
     var filteredDrinkMeasurements = drinkMeasurements.filter(function (el) {
         return el != null;
     });
+
     // Print Measurements
-    var drinkMeasurementsPrint = $("<p>")
-        .text(filteredDrinkMeasurements)
+    var drinkMeasurementsPrint = filteredDrinkMeasurements
+
+    console.log(drinkTitle, drinkId, drinkGlass, drinkDirections, filteredDrinkIngredients, filteredDrinkMeasurements);
+    var recipeModalEl = $("<div>").html(
+        `<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+              ${drinkTitle}
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ${drinkGlass}
+              ${drinkDirections}
+              ${filteredDrinkMeasurements}
+              ${filteredDrinkIngredients}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save Recipe</button>
+            </div>
+          </div>
+        </div>
+      </div>`
+    )
+    
+    // Displays Modal
+    homepageContainerEl.append(recipeModalEl)
+    
+    // Reset Contents of the Modal
+    $('#exampleModalCenter').on('hide.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+        console.log("reset")
+    })
+    
+    
+    // Drink Container
+    var drinkRecipeContainer = $("<div>").addClass("card-columns");
+    var card = $("<div>").addClass("card");
     
     // Save Button
     var saveButton = $("<button>")
@@ -138,7 +230,8 @@ function printRecipe(response) {
         var newDrinkId = event.target.id
         saveRecipe(newDrinkId)
     });
-};
+}
+
 
 // Save Recipes
 function saveRecipe (id) {
