@@ -1,46 +1,29 @@
-// const ingArr = [];
-// const drinkSave = [];
-var drinkContainerEl = $("#drink-container");
-var homepageContainerEl = $("#homepage-container");
+var cocktailCategoryEl = $("#category-container");
+var cocktailsContainerEl = $("#cocktails-container");
 
-// Destroy Search Options
-var destroyElement = function () {
-    homepageContainerEl.html(null);
-  };
+// function byButtonClick (){
+//     var byButtonClick = onclick.
+// }
 
-// Get Drinks from Cocktails DB by each Ingredient
-async function getDrinksByIngList(event) {
-    // Need Ingredients indicated by user
-    // var ing = ingArr
+// Get drinks by Category
+function getDrinksByCategory(event) {
     fetch(
-        ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=Gin,Lime_Juice')
+        ('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c= + cocktail + ')
     )
     .then(function(drinkResponse) {
         return drinkResponse.json();
     })
     .then(function(drinkReponse) {
-        resultsFound(drinkReponse);
+        printDrinkByCategory(drinkReponse);
     });
 };
 
-// Header Text to Display if Results were found or not
-function resultsFound(response) {
-    destroyElement();
-    if (response.drinks === "None Found") {
-        var message = $("<h2>")
-            .text("Sorry, no results match these ingredients - Please try to search again")   
-    }
-    else {
-        printDrinkOptions(response)
-    }
-    homepageContainerEl.append(message);
-}
 // Print the drink results to the user
-var printDrinkOptions = function (response) {
-    destroyElement();
+var printDrinkByCategory = function (response) {
+    // destroyElement();
     var message = $("<h2>")
             .text("Good News - We found " + response.drinks.length + " drinks that match your search!")   
-    homepageContainerEl.append(message);
+    cocktailsContainerEl.append(message);
     // Loop through the drinks
     for (let i =0; i < response.drinks.length; i++) {
         // Container for Each Drink
@@ -63,12 +46,12 @@ var printDrinkOptions = function (response) {
         // Append Display to Container
         card.append(drinkImage, drinkTitle, drinkButton);
         drinkCardContainer.append(card);
-        homepageContainerEl.append(drinkCardContainer);
+        cocktailsContainerEl.append(drinkCardContainer);
     }
-    $(".drink-button").on("click", function(event) {
-        var newDrinkId = event.target.id
-        getRecipe(newDrinkId)
-    });
+    // $(".drink-button").on("click", function(event) {
+    //     var newDrinkId = event.target.id
+    //     getRecipe(newDrinkId)
+    // });
 };  
 
 // Once clicked call the cocktail API by Drink & Display the Recipe
@@ -101,7 +84,12 @@ function printRecipe(response) {
     
     // Drink Ingredients
     var drinkIngredients = [];
-    drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15) 
+    drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, 
+        response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,
+        response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,
+        response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,
+        response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,
+        response.drinks[0].strIngredient15) 
     
     // Remove Nulls
     var filteredDrinkIngredients = drinkIngredients.filter(function (el) {
@@ -148,7 +136,7 @@ function saveRecipe (id) {
 }
 
 // On Search 
-$(document).on('click', '.search-button', function() {
-    getDrinksByIngList();
+$(document).on('click', '#cocktails', '#shots', '#homemade-liqueur', '#party-drinks', function() {
+    getDrinksByCategory();
 });
 

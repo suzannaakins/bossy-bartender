@@ -1,134 +1,111 @@
-<div id="homepage-container">
-    <div class="hero">
-        <h1 id="page-title">Welcome to the Bossy Bartender!</h1>
-        <p>
-            At home and craving a drink, but don't know what you can make with your ingredients?
-            That's where your bossy bartender comes in!
-            Tell us what you got, and we'll tell you what you can make.
-            Teamwork makes the dream work.
-        </p>
-    </div>
-
-    <h2>In My Bar</h2>
-
-    <div class="useringredients">
-        {{!-- this is the section user's ingredients will be added to as they make selections from dropdowns --}}
-    </div>
-
-    <div class="dropdownswrap">
-
-        {{!-- SPIRITS DROPDOWN --}}
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Spirits
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Tequila</a>
-                <a class="dropdown-item" href="#">Absolut Citron</a>
-                <a class="dropdown-item" href="#">Añejo rum</a>
-                <a class="dropdown-item" href="#">Apple brandy</a>
-                <a class="dropdown-item" href="#">Applejack</a>
-                <a class="dropdown-item" href="#">Apricot Brandy</a>
-                <a class="dropdown-item" href="#">Blackberry Brandy</a>
-                <a class="dropdown-item" href="#">Blended Whiskey</a>
-                <a class="dropdown-item" href="#">Bourbon</a>
-                <a class="dropdown-item" href="#">Brandy</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Wines/Beer
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Ale</a>
-                <a class="dropdown-item" href="#">Champagne</a>
-                <a class="dropdown-item" href="#">Cider</a>
-                <a class="dropdown-item" href="#">Lager</a>
-                <a class="dropdown-item" href="#">Port</a>
-                <a class="dropdown-item" href="#">Red Wine</a>
-                <a class="dropdown-item" href="#">Sherry</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Liqueurs
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Amaretto</a>
-                <a class="dropdown-item" href="#">Ancho Reyes</a>
-                <a class="dropdown-item" href="#">Aperol</a>
-                <a class="dropdown-item" href="#">Campari</a>
-                <a class="dropdown-item" href="#">Chocolate Liqueur</a>
-                <a class="dropdown-item" href="#">St. Germaine</a>
-                <a class="dropdown-item" href="#">Triple Sec</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Syrups
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Agave</a>
-                <a class="dropdown-item" href="#">Chocolate Syrup</a>
-                <a class="dropdown-item" href="#">Grenadine</a>
-                <a class="dropdown-item" href="#">Honey</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Food/Fruits
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Angelica Root</a>
-                <a class="dropdown-item" href="#">Berries</a>
-                <a class="dropdown-item" href="#">Cantaloupe</a>
-                <a class="dropdown-item" href="#">Chocolate</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Juices/Sodas
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">7-Up</a>
-                <a class="dropdown-item">Apple Cider</a>
-                <a class="dropdown-item" href="#">Apple Juice</a>
-                <a class="dropdown-item" href="#">Carbonated Water</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Other
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Bitters</a>
-                <a class="dropdown-item" href="#">Coffee</a>
-                <a class="dropdown-item" href="#">Espresso</a>
-                <a class="dropdown-item" href="#">Heavy Cream</a>
-            </div>
-        </div>
-        <div>
-            <button class="btn btn-warning btn-block search-button" type="button">
-                {{!-- Add Link to Results --}}
-                <a href="/results">Search</a>
-                {{!-- Search --}}
-            </button>
-        </div>
-        <div id="drink-container">
-        </div>
-    </div>
+<div class="hero">
+    <h1 id="page-title">Welcome to the Bossy Bartender!</h1>
+    <p>
+        At home and craving a drink, but don't know what you can make with your ingredients?
+        That's where your bossy bartender comes in!
+        Tell us what you got, and we'll tell you what you can make.
+        Teamwork makes the dream work.
+    </p>
 </div>
-<script src="javascript/drinks.js"></script>
+
+<h2>In My Bar</h2>
+
+<div id="bar">
+    
+</div>
+
+<div class="btn-group">
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Spirits
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each filteredSpirits as |spirit|}}
+            <a class="dropdown-item" href="#">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Wines/Beer
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each filteredWines as |wine|}}
+            <a class="dropdown-item" href="#">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Liqueurs
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each filteredLiqueurs as |liqueur|}}
+            <a class="dropdown-item" href="#">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Syrups
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each filteredSyrups as |syrup|}}
+            <a class="dropdown-item" href="#">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Food/Fruits
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each filteredFoods as |food|}}
+            <a class="dropdown-item" href="#">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Juices/Sodas
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each filteredJuices as |juice|}}
+            <a class="dropdown-item" href="#">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Other
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each filteredOthers as |other|}}
+            <a class="dropdown-item" href="#">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-warning btn-block search-button" type="button">
+            {{!-- Add Link to Results --}}
+            <a href="/results">Search</a>
+            {{!-- Search --}}
+        </button>
+</div>
+
+<script src="/javascript/drinks.js"></script>
+<script src="javascript/homepage.js"></script>

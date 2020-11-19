@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { Drinks, User } = require('../../models');
+const { Drink, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Get all Drinks in DB
 router.get('/', (req, res) => {
-    Drinks.findAll()
+    Drink.findAll()
         .then(dbDrinksData => res.json(dbDrinksData))
         .catch(err => {
             console.log(err);

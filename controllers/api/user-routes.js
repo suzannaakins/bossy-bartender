@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
         },
         include: [
             // {
-            //     model: Post,
+            //     model: Vote,
             //     attributes: ['id', 'title', 'content', 'created_at']
             // },
             // include the Comment model here:
@@ -54,6 +54,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
+        email: req.body.email,
         password: req.body.password
     })
         .then(dbUserData => {
@@ -71,7 +72,7 @@ router.post('/', (req, res) => {
         });
 });
 
-// route for users to LOGIN at (localhost:3001/api/users/login)
+// route for users to LOGIN at (localhost:3003/api/users/login)
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
@@ -85,6 +86,7 @@ router.post('/login', (req, res) => {
 
         //verify user
         const validPassword = dbUserData.checkPassword(req.body.password);
+        
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password, please drink responsibly!' });
             return;
