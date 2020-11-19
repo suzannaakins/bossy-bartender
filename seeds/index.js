@@ -11,8 +11,6 @@ const seedAll = async () => {
   await sequelize.sync({ force: true });
   console.log('--------------');
 
-  // Seed Users
-
   await seedIngredients();
   console.log('--------------');
 
