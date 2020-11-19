@@ -90,7 +90,7 @@ header nav ul li a:hover {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
-
+ 
 .logout {
   display: flex;
   justify-content: right;

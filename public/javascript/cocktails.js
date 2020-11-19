@@ -13,10 +13,10 @@ function getDrinksByCategory(category) {
     .then(function(drinkResponse) {
         return drinkResponse.json();
     })
-    .then(function(drinkReponse) {
-        resultsFound(drinkReponse);
+    .then(function(drinkResponse) {
+        resultsFound(drinkResponse);
         // printDrinkByCategory(drinkReponse);
-        console.log(drinkReponse);
+        console.log(drinkResponse);
     });
 };
 
