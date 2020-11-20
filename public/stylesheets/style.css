@@ -90,6 +90,10 @@ header nav ul li a:hover {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
+
+/* .user-ingredients {
+  list-style: none;
+} */
  
 .logout {
   display: flex;

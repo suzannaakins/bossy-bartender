@@ -10,9 +10,11 @@
 
 <h2>In My Bar</h2>
 
-<div id="bar">
-
-</div>
+<ul class="user-ingredients" id="bar">
+    {{#each userIngredients}}
+    <li>{{userIngredients}}</li>
+    {{/each}}
+</ul>
 
 <div class="btn-group">
 
