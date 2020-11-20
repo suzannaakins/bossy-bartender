@@ -5,10 +5,12 @@ var drinkContainerEl = $("#drink-container");
 var homepageContainerEl = $("#homepage-container");
 var recipeContainerEl = $("#recipeModalInner")
 
+// Destroy the Recipe Modal Contents
 var destroyElement = function () {
     recipeContainerEl.html(null);
   };
 
+// Get Ingredients from Local Storage
 var ingArr = function(){
     const filteredIngredients = ingredients[0].ingredients
     const filtered2Ingredients = filteredIngredients.toString()
@@ -39,6 +41,7 @@ function resultsFound(response) {
     }
     homepageContainerEl.append(message);
 }
+
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
     var message = $("<h2>")
@@ -68,6 +71,8 @@ var printDrinkOptions = function (response) {
         drinkCardContainer.append(card);
         homepageContainerEl.append(drinkCardContainer);
     }
+    
+    // Open the Recipe Modal on Click
     $(".drink-button").on("click", function(event) {
         var newDrinkId = event.target.id
         getRecipe(newDrinkId)
@@ -76,7 +81,7 @@ var printDrinkOptions = function (response) {
 
 // Once clicked call the cocktail API by Drink & Display the Recipe
 function getRecipe(id) {
-    // Need to pass in a variable for user's choice
+    // Passing the variable for user's choice to the cocktail API
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i='+ id)
     )
@@ -84,69 +89,15 @@ function getRecipe(id) {
         return recipeResponse.json();
     })
     .then(function(recipeResponse) {
-        printRecipe2(recipeResponse);
+        printRecipe(recipeResponse);
     });
 };
 
-// function printRecipe(response) {
-//     var drinkId = response.drinks[0].idDrink
-
-//     // Drink Container
-//     var drinkRecipeContainer = $("<div>").addClass("card-columns");
-//     var card = $("<div>").addClass("card");
-    
-//     // Sinlge values for the recipe
-//     var drinkGlass = $("<p>")
-//         .text(response.drinks[0].strGlass)
-//     var drinkDirections = $("<p>")
-//         .text(response.drinks[0].strInstructions)
-    
-//     // Drink Ingredients
-//     var drinkIngredients = [];
-//     drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15) 
-    
-//     // Remove Nulls
-//     var filteredDrinkIngredients = drinkIngredients.filter(function (el) {
-//         return el != null;
-//     });
-
-//     // Print Ingredients
-//     var drinkIngredientsPrint = $("<p>")
-//         .text(filteredDrinkIngredients)
-
-//     // Drink Measurements
-//     var drinkMeasurements = [];
-//     drinkMeasurements.push(response.drinks[0].strMeasure1,response.drinks[0].strMeasure2, response.drinks[0].strMeasure3,response.drinks[0].strMeasure4,response.drinks[0].strMeasure5,response.drinks[0].strMeasure6,response.drinks[0].strMeasure7,response.drinks[0].strMeasure8,response.drinks[0].strMeasure9,response.drinks[0].strMeasure10,response.drinks[0].strMeasure11,response.drinks[0].strMeasure12,response.drinks[0].strMeasure13,response.drinks[0].strMeasure14,response.drinks[0].strMeasure15)
-    
-//     // Remove Nulls
-//     var filteredDrinkMeasurements = drinkMeasurements.filter(function (el) {
-//         return el != null;
-//     });
-//     // Print Measurements
-//     var drinkMeasurementsPrint = $("<p>")
-//         .text(filteredDrinkMeasurements)
-    
-//     // Save Button
-//     var saveButton = $("<button>")
-//     .addClass("btn-sm save-button")
-//     .attr("id", drinkId)
-//     .text("Save");
-
-//     // Append Display to Container
-//     card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint, saveButton);
-//     drinkRecipeContainer.append(card);
-//     homepageContainerEl.append(drinkRecipeContainer);
-
-//     // On Click of Save
-//     $(".save-button").on("click", function(event) {
-//         var newDrinkId = event.target.id
-//         saveRecipe(newDrinkId)
-//     });
-// };
-
-
-function printRecipe2(response) {
+// Print the Recipe in the modal
+function printRecipe(response) {
+    // Destroy previous modal contents
     destroyElement();
+
     // Sinlge values for the recipe
     var drinkId = response.drinks[0].idDrink
     var drinkGlass = response.drinks[0].strGlass
@@ -162,9 +113,6 @@ function printRecipe2(response) {
         return el != null;
     });
 
-    // Print Ingredients
-    var drinkIngredientsPrint = filteredDrinkIngredients
-
     // Drink Measurements
     var drinkMeasurements = [];
     drinkMeasurements.push(response.drinks[0].strMeasure1,response.drinks[0].strMeasure2, response.drinks[0].strMeasure3,response.drinks[0].strMeasure4,response.drinks[0].strMeasure5,response.drinks[0].strMeasure6,response.drinks[0].strMeasure7,response.drinks[0].strMeasure8,response.drinks[0].strMeasure9,response.drinks[0].strMeasure10,response.drinks[0].strMeasure11,response.drinks[0].strMeasure12,response.drinks[0].strMeasure13,response.drinks[0].strMeasure14,response.drinks[0].strMeasure15)
@@ -174,9 +122,6 @@ function printRecipe2(response) {
         return el != null;
     });
 
-    // Print Measurements
-    var drinkMeasurementsPrint = filteredDrinkMeasurements
-    console.log(drinkTitle, drinkId, drinkGlass, drinkDirections, filteredDrinkIngredients, filteredDrinkMeasurements);
     var recipeModalEl = $("<div>")
           .addClass("modal-content")
           .html(`
@@ -201,25 +146,10 @@ function printRecipe2(response) {
           </div>`
     )
     
-    // Displays Modal
+    // Append Data into the Modal
     recipeContainerEl.append(recipeModalEl)
-    
-    // // Reset Contents of the Modal
-    // $('#recipeModal').on('hide.bs.modal', function () {
-    //     $(this).find('form').trigger('reset');
-    //     console.log(this)
-    // })
-    
-    // $(".modal-body input").val("")
-    
-    
-    // Save Button
-    var saveButton = $("<button>")
-    .addClass("btn-sm save-button")
-    .attr("id", drinkId)
-    .text("Save");
 
-    // On Click of Save
+    // Send to Save function on click
     $(".save-button").on("click", function(event) {
         var newDrinkId = event.target.id
         saveRecipe(newDrinkId)
@@ -231,5 +161,6 @@ function saveRecipe (id) {
     console.log (id + "Save button was clicked")
 }
 
+// Get Ingredients from Local Storage on Page load
 ingArr();
 
