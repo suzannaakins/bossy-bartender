@@ -40,7 +40,8 @@ router.get('/', (req, res) => {
                 juices,
                 filteredJuices,
                 others,
-                filteredOthers
+                filteredOthers,
+                loggedIn: req.session.loggedIn
             });
         })
         .catch(err => {
@@ -59,11 +60,11 @@ router.get('/results', (req, res) => {
 
 // Login Route
 router.get('/login', (req, res) => {
-    // if (req.session.loggedIn) {
-    //     console.log('hello');
-    //   res.redirect('/');
-    //   return;
-    // }
+    if (req.session.loggedIn) {
+        // console.log('hello');
+      res.redirect('/');
+      return;
+    }
     res.render('login');
 });
 
