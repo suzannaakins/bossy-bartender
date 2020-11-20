@@ -91,9 +91,9 @@ header nav ul li a:hover {
   border-radius: 25%;
 }
 
-/* .user-ingredients {
+li {
   list-style: none;
-} */
+}
  
 .logout {
   display: flex;
