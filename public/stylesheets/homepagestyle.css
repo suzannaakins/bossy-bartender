@@ -7,7 +7,9 @@ h1, h4 {
 .hero p {
     background-image: url(../assets/images/hero.png);
     background-repeat: repeat-x;
-    height: 500px;
+    background-size: 25% auto;
+    background-attachment: cover;
+    height: 25vw;
     display: flex;
 }
 
