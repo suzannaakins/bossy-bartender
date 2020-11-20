@@ -1,4 +1,5 @@
-const userIngredients = ['water'];
+const userIngredients = [];
+//const userIngredients = ['water'];  USE THIS if we get fancier api search working
 document.getElementById("bar").innerHTML = ''
 
 $(".dropdown-menu").on('click', '.dropdown-item', function () {
