@@ -49,7 +49,8 @@ router.post('/', withAuth, (req, res) => {
         glass: req.body.glass,
         ingredients: req.body.ingredients,
         measurements: req.body.measurements,
-        instructions: req.body.instructions
+        instructions: req.body.instructions,
+        user_id: req.body.user_id
     })
         .then(dbDrinksData => res.json(dbDrinksData))
         .catch(err => {
@@ -62,8 +63,8 @@ router.post('/', withAuth, (req, res) => {
 router.put('/:id', withAuth, (req, res) => {
     Drink.update(
         {
-            // ADD USER ID
-            // name: req.body.name
+            user_id: req.body.user_id,
+            name: req.body.name
         },
         {
             where: {

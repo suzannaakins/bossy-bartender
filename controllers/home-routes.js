@@ -23,8 +23,8 @@ router.get('/', (req, res) => {
             const juices = data.filter(juice => juice.category_id === 6);
             const filteredJuices = juices.map(filteredJuice => filteredJuice.get({ plain: true }));
             const others = data.filter(other => other.category_id === 7);
-            const filteredOthers = juices.map(filteredOther => filteredOther.get({ plain: true }));
-            
+            const filteredOthers = others.map(filteredOther => filteredOther.get({ plain: true }));
+
             // pass a single post object into the homepage template
             res.render('homepage', {
                 spirits,
@@ -55,7 +55,7 @@ router.get('/cocktails', (req, res) => {
 });
 
 router.get('/results', (req, res) => {
-    res.render('search')
+    res.render('results')
 });
 
 // Login Route
