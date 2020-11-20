@@ -1,7 +1,6 @@
 //this file collects and exports the data from the different models
 
 const User = require('./User');
-//const Post = require('./Post');
 const Comment = require('./Comment');
 const Category = require('./Category');
 const Ingredient = require('./Ingredient');
@@ -16,12 +15,15 @@ Ingredient.belongsTo(Category, {
     foreignKey: 'category_id'
 });
 
-// association between comments and its post, and comments and its user
 Comment.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
 User.hasMany(Comment, {
+    foreignKey: 'user_id'
+});
+
+User.hasMany(Drink, {
     foreignKey: 'user_id'
 });
 

@@ -122,6 +122,7 @@ function printRecipe(response) {
         return el != null;
     });
 
+    // Create the recipe
     var recipeModalEl = $("<div>")
           .addClass("modal-content")
           .html(`
@@ -157,8 +158,9 @@ function printRecipe(response) {
 }
 
 // Save Recipes
-function saveRecipe (id) {
+async function saveRecipe (id) {
     console.log (id + "Save button was clicked")
+    
 }
 
 // Get Ingredients from Local Storage on Page load

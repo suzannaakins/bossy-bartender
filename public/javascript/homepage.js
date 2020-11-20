@@ -1,4 +1,4 @@
-const userIngredients = ['water'];
+const userIngredients = [];
 document.getElementById("bar").innerHTML = ''
 
 $(".dropdown-menu").on('click', '.dropdown-item', function () {
