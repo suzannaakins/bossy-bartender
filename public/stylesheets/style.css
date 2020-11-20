@@ -12,14 +12,17 @@
 
 * {
   box-sizing: border-box;
+  text-align: center;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 body {
   background-color: var(--secondary-color);
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.5;
+  text-align: center;
 }
 
 button {
@@ -44,9 +47,12 @@ header h1 a {
   font-size: 25px;
 }
 
+a {
+  text-decoration: none;
+}
+
 header a {
   color: var(--primary-text-color);
-  text-decoration: none;
   text-shadow: 0 2px 10px rgba(var(--black-rgb), 0.5);
 }
 
@@ -117,6 +123,14 @@ footer {
   color: var(--primary-text-color);
   display: block;
   font-weight: lighter;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 1%;
+  font-size: 110%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;  
 }
 /* Footer Styles End */
 

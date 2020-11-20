@@ -1,0 +1,16 @@
+h1, h4 {
+    color: white;
+    background-color: #FF206E;
+    padding: 20px 0;
+}
+
+.hero p {
+    background-image: url(../assets/images/hero.png);
+    background-repeat: repeat-x;
+    height: 500px;
+    display: flex;
+}
+
+p {
+    font-size: larger;
+}
