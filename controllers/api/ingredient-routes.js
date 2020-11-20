@@ -1,17 +1,17 @@
 const router = require('express').Router();
 const { Ingredient, Category } = require('../../models');
 
-// //post all
-// router.post('/all', (req, res) => {
-//     Ingredient.bulkCreate(
-//         req.body
-//     )
-//         .then(dbIngredientData => res.json(dbIngredientData))
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-// })
+//post all
+router.post('/all', (req, res) => {
+    Ingredient.bulkCreate(
+        req.body
+    )
+        .then(dbIngredientData => res.json(dbIngredientData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+})
 
 //view ALL ingredients
 router.get('/', (req, res) => {
