@@ -3,6 +3,11 @@
 var ingredients = JSON.parse(window.localStorage.getItem("ingredients")) || [];
 var drinkContainerEl = $("#drink-container");
 var homepageContainerEl = $("#homepage-container");
+var recipeContainerEl = $("#recipeModalInner")
+
+var destroyElement = function () {
+    recipeContainerEl.html(null);
+  };
 
 var ingArr = function(){
     const filteredIngredients = ingredients[0].ingredients
@@ -42,20 +47,19 @@ var printDrinkOptions = function (response) {
     // Loop through the drinks
     for (let i =0; i < response.drinks.length; i++) {
         // Container for Each Drink
-        var drinkCardContainer = $("<div>").addClass("card-columns");
+        var drinkCardContainer = $("<div>").addClass("card-group");
         var card = $("<div>").addClass("card");
-        var image = $("<div>").addClass("card-image-cap");
+        var image = $("<div>").addClass("card-image-top");
         var drinkId = response.drinks[i].idDrink
         // Display each Drink
         var drinkImage = $("<img>")
             .attr("src", response.drinks[i].strDrinkThumb)
-            .attr("height", "200px")
+            .attr("width", "200px")
         var drinkTitle = $("<h5>")
             .addClass("card-title")
             .text(response.drinks[i].strDrink);
         var drinkButton = $("<div>")
-            .addClass("drink-button")
-            .html(`<button id=${drinkId} class="btn-small" data-toggle="modal" data-target="#exampleModalCenter">
+            .html(`<button id=${drinkId} class="btn-small drink-button" data-toggle="modal" data-target="#recipeModal">
             View Recipe
           </button>`)
 
@@ -142,6 +146,7 @@ function getRecipe(id) {
 
 
 function printRecipe2(response) {
+    destroyElement();
     // Sinlge values for the recipe
     var drinkId = response.drinks[0].idDrink
     var drinkGlass = response.drinks[0].strGlass
@@ -171,12 +176,10 @@ function printRecipe2(response) {
 
     // Print Measurements
     var drinkMeasurementsPrint = filteredDrinkMeasurements
-
     console.log(drinkTitle, drinkId, drinkGlass, drinkDirections, filteredDrinkIngredients, filteredDrinkMeasurements);
-    var recipeModalEl = $("<div>").html(
-        `<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
+    var recipeModalEl = $("<div>")
+          .addClass("modal-content")
+          .html(`
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">
               ${drinkTitle}
@@ -193,37 +196,28 @@ function printRecipe2(response) {
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save Recipe</button>
+              <button type="button" id=${drinkId} class="btn btn-primary save-button">Save Recipe</button>
             </div>
-          </div>
-        </div>
-      </div>`
+          </div>`
     )
     
     // Displays Modal
-    homepageContainerEl.append(recipeModalEl)
+    recipeContainerEl.append(recipeModalEl)
     
-    // Reset Contents of the Modal
-    $('#exampleModalCenter').on('hide.bs.modal', function () {
-        $(this).find('form').trigger('reset');
-        console.log("reset")
-    })
+    // // Reset Contents of the Modal
+    // $('#recipeModal').on('hide.bs.modal', function () {
+    //     $(this).find('form').trigger('reset');
+    //     console.log(this)
+    // })
     
+    // $(".modal-body input").val("")
     
-    // Drink Container
-    var drinkRecipeContainer = $("<div>").addClass("card-columns");
-    var card = $("<div>").addClass("card");
     
     // Save Button
     var saveButton = $("<button>")
     .addClass("btn-sm save-button")
     .attr("id", drinkId)
     .text("Save");
-
-    // Append Display to Container
-    card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint, saveButton);
-    drinkRecipeContainer.append(card);
-    homepageContainerEl.append(drinkRecipeContainer);
 
     // On Click of Save
     $(".save-button").on("click", function(event) {
@@ -232,10 +226,9 @@ function printRecipe2(response) {
     });
 }
 
-
 // Save Recipes
 function saveRecipe (id) {
-    console.log ("Saved was clicked")
+    console.log (id + "Save button was clicked")
 }
 
 ingArr();
