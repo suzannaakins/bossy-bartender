@@ -51,11 +51,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cocktails', (req, res) => {
-    res.render('cocktails')
+    res.render('cocktails', {loggedIn: req.session.loggedIn})
 });
 
 router.get('/results', (req, res) => {
-    res.render('results')
+    res.render('results', {loggedIn: req.session.loggedIn})
 });
 
 // Login Route
