@@ -4,10 +4,11 @@ document.getElementById("bar").innerHTML = ''
 
 $(".dropdown-menu").on('click', '.dropdown-item', function () {
     const ingredient = $(this).text();
-    userIngredients.push(ingredient);
+    userIngredients.indexOf(ingredient) === -1 ? userIngredients.push(ingredient) : console.log('this item already exists');
+    console.log(userIngredients);
     const bar = document.getElementById("bar")
-    const li = document.createElement("li")
-    li.textContent = userIngredients[userIngredients.length - 1] + " ";
+    const li = document.createElement("li") 
+    li.textContent = ingredient;
     bar.append(li);
     console.log(userIngredients);
     // On Search 
