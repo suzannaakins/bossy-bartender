@@ -1,8 +1,8 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+// const { Model, DataTypes } = require('sequelize');
+// const sequelize = require('../config/connection');
 
-// create our Drink model
-class Drink extends Model { }
+// // create our Drink model
+// class Drink extends Model { }
 
 // Drink.init(
 //     {
@@ -53,4 +53,4 @@ class Drink extends Model { }
 //     }
 // );
 
-module.exports = Drink;
+// module.exports = Drink;
