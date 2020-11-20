@@ -20,6 +20,10 @@ const seedAll = async () => {
   await seedUsers();
   console.log('--------------');
 
+  // // Seed Drinks
+  // await seedDrinks();
+  // console.log('--------------');
+
   process.exit(0);
 };
 
