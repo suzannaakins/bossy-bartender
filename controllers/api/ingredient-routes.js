@@ -1,6 +1,17 @@
 const router = require('express').Router();
-const { Ingredient, User, Category } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { Ingredient, Category } = require('../../models');
+
+// //post all
+// router.post('/all', (req, res) => {
+//     Ingredient.bulkCreate(
+//         req.body
+//     )
+//         .then(dbIngredientData => res.json(dbIngredientData))
+//         .catch(err => {
+//             console.log(err);
+//             res.status(500).json(err);
+//         });
+// })
 
 //view ALL ingredients
 router.get('/', (req, res) => {
@@ -9,7 +20,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Category,
-                attributes: ['name']
+                attributes: ['title']
             },
         ]
     })
@@ -31,7 +42,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Category,
-                attributes: ['name']
+                attributes: ['title']
             },
         ]
     })
@@ -49,9 +60,10 @@ router.get('/:id', (req, res) => {
 });
 
 //CREATE a neeeew ingredient
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     Ingredient.create({
-        name: req.body.name
+        name: req.body.name,
+        category_id: req.body.category_id
     })
         .then(dbIngredientData => res.json(dbIngredientData))
         .catch(err => {
@@ -61,10 +73,11 @@ router.post('/', withAuth, (req, res) => {
 });
 
 //UPDATE ingredient name
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
     Ingredient.update(
         {
-            name: req.body.name
+            name: req.body.name,
+            category_id: req.body.category_id
         },
         {
             where: {
@@ -86,7 +99,7 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 //DELETE an ingredient
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     Ingredient.destroy({
         where: {
             id: req.params.id

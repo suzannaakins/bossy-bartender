@@ -21,6 +21,11 @@ body {
   padding: 0;
   line-height: 1.5;
 }
+
+button {
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
+}
 /* Global Styles End */
 
 /* Header Styles Start */
@@ -82,6 +87,16 @@ header nav ul li a:hover {
 }
 
 .login:hover {
+  background-color: var(--secondary-color);
+  border-radius: 25%;
+}
+ 
+.logout {
+  display: flex;
+  justify-content: right;
+}
+
+.logout:hover {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }

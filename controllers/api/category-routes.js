@@ -5,14 +5,16 @@ const withAuth = require('../../utils/auth');
 //view ALL Categories
 router.get('/', (req, res) => {
     Category.findAll({
-        attributes: ['id', 'name']
+        attributes: [
+            'id',
+            'title'
+        ],
     })
         .then(dbCategoryData => res.json(dbCategoryData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
-
 });
 
 //view ONE category
@@ -21,7 +23,7 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'name']
+        attributes: ['id', 'title']
     })
         .then(dbCategoryData => {
             if (!dbCategoryData) {
@@ -39,7 +41,7 @@ router.get('/:id', (req, res) => {
 //CREATE a neeeew category
 router.post('/', (req, res) => {
     Category.create({
-        name: req.body.name
+        title: req.body.title
     })
         .then(dbCategoryData => res.json(dbCategoryData))
         .catch(err => {
@@ -48,11 +50,11 @@ router.post('/', (req, res) => {
         });
 });
 
-//UPDATE category name
+//UPDATE category title
 router.put('/:id', withAuth, (req, res) => {
     Category.update(
         {
-            name: req.body.name
+            title: req.body.title
         },
         {
             where: {
