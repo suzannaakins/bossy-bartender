@@ -159,11 +159,53 @@ function printRecipe(response) {
     });
 }
 
-// Save Recipes
+// Get Recipe to Save
 async function saveRecipe (id) {
     console.log (id + "Save button was clicked")
-    
+    fetch(
+        ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=' + id)
+    )
+        .then(function (recipeResponse) {
+            return recipeResponse.json();
+        })
+        .then(function (recipeResponse) {
+            saveRecipeInDB(recipeResponse)
+        });
+
 }
+
+// Save Recipe
+async function saveRecipeInDB (response) {
+    var name = response.drinks[0].strDrink
+    var externalId = response.drinks[0].idDrink
+    var image = response.drinks[0].strDrinkThumb
+    var glass = response.drinks[0].strGlass
+    var instructions = response.drinks[0].strInstructions
+    // Need Measurements & Ingredients
+    var user_id = 1
+
+    if (externalId) {
+        const response = await fetch('/api/drink', {
+            method: 'POST',
+            body: ({
+                name,
+                externalId,
+                image,
+                glass,
+                instructions,
+                user_id
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            console.log("maybe saved")
+        } else {
+            alert(response.statusText);
+        }
+    }
+};
 
 // Get Ingredients from Local Storage on Page load
 ingArr();
