@@ -6,6 +6,16 @@
     color: white;
 }
 
+#barequip {
+    display: flex;
+    margin: auto;
+}
+
+p {
+    margin: 5px 150px;
+    text-align: left;
+}
+
 /* Media Queries */
 /* MQ for screens smaller than 1024px */
 @media screen and (max-width: 1024px) {

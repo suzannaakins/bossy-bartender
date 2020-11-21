@@ -110,7 +110,7 @@ li {
 /* Header Styles End */
 
 /* Hero Styles Start */
-.hero p {
+.hero {
   background-image: url(../assets/images/hero.png);
   background-repeat: repeat-x;
   background-size: 25% auto;

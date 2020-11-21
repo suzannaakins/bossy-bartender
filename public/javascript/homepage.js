@@ -11,7 +11,7 @@ $(".dropdown-menu").on('click', '.dropdown-item', function () {
     bar.textContent = ""
     for (i = 0; i < userIngredients.length; i++) {
         const li = document.createElement("li")
-        li.textContent = userIngredients[i]
+        li.textContent = userIngredients[i] ;
         ul.append(li)
     }
     bar.append(ul);
