@@ -36,24 +36,29 @@ function resultsFound(response) {
     if (response.drinks === "None Found") {
         var message = $("<h2>")
             .text("Sorry, no results match these ingredients - Please try to search again")
+        var browseDrinks = $("<div>")
+            .html(`<button id="browse-button" class="btn"><a href="/cocktails">Browse Drinks</a></button>`)
     }
     else {
         printDrinkOptions(response)
     }
-    homepageContainerEl.append(message);
+    homepageContainerEl.append(message, browseDrinks);
 }
 
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
     var message = $("<h2>")
         .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
-    homepageContainerEl.append(message);
+    
+        homepageContainerEl.append(message);
+    
+    var drinkCardContainer = $("<div>").addClass("row");
+
     // Loop through the drinks
     for (let i = 0; i < response.drinks.length; i++) {
         // Container for Each Drink
-        var drinkCardContainer = $("<div>").addClass("card-group");
-        var card = $("<div>").addClass("card");
-        var image = $("<div>").addClass("card-image-top");
+        var card = $("<div>").addClass("card col-3");
+        var image = $("<div>").addClass("card-image");
         var drinkId = response.drinks[i].idDrink
         // Display each Drink
         var drinkImage = $("<img>")
@@ -100,9 +105,10 @@ function printRecipe(response) {
     destroyElement();
 
     // Sinlge values for the recipe
-    var drinkId = response.drinks[0].idDrink
-    var drinkDirections = response.drinks[0].strInstructions
-    var drinkTitle = response.drinks[0].strDrink
+    var drinkId = response.drinks[0].idDrink;
+    var drinkDirections = response.drinks[0].strInstructions;
+    var drinkTitle = response.drinks[0].strDrink;
+    var drinkGlassName = response.drinks[0].strGlass;
 
     // Glass Icons
     var drinkGlass = response.drinks[0].strGlass
@@ -157,13 +163,16 @@ function printRecipe(response) {
             </div>
             <div class="modal-body">
             <div class="row modal-rows">
-                <div class="col-9"><img src=${drinkGlass} height="50px"></div>
+                <div class="col-10"><img src=${drinkGlass} height="50px">  Use a ${drinkGlassName}</div>
+                <div class="col-10"><p></ br></p><p></ br></p></div>
                 <div class="col-4">${convertedDrinkMeasurements}</div>
                 <div class="col-6">${convertedDrinkIngredients}</div>
-                <div class="col-9">${drinkDirections}</div>    
+                <div class="col-10"><p></ br></p><p></ br></p></div>
+                <div class="col-10">${drinkDirections}</div>    
                 </div>
             </div>
             <div class="modal-footer">
+            <button class="btn" type="button" id="smsText">Send to a Friend</button>
               <button type="button" id=${drinkId} class="btn save-button">Save Recipe</button>
             </div>
           </div>`
@@ -176,6 +185,11 @@ function printRecipe(response) {
         var newDrinkId = event.target.id
         saveRecipe(newDrinkId)
     });
+
+    // Send Text Form
+    // <form>
+    //             <input type="tel" class="phone" />
+    // </form>
 }
 
 // Get Recipe to Save
@@ -227,11 +241,3 @@ async function saveRecipeInDB (response) {
 // Get Ingredients from Local Storage on Page load
 ingArr();
 
-// Am I logged in?
-// function getCookie(key) {
-//     var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)'); 
-//     return keyValue ? keyValue[2] : null; 
-// } 
-// var cookieValue = getCookie('SF-TokenId'); 
-// //Debug
-// console.log("Cookie: " + cookieValue);

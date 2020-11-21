@@ -136,12 +136,22 @@ p {
 }
 /* Body Styles End */
 
+/* Results Page Styles */
+.card {
+  margin: 5px;
+}
+
+
 /* Modal Styles Start */
 .modal-header {
   background-color: var(--primary-color);
 }
-.col-4, .col-6 {
+.col-6, .col-10 {
   text-align: left;
+}
+
+.col-4 {
+  text-align: right;
 }
 
 .save-button {
