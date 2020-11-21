@@ -45,10 +45,10 @@ var printDrinkByCategory = function (response) {
         drinkCardContainer.append(card);
         cocktailsContainerEl.append(drinkCardContainer);
     }
-    $(".drink-button").on("click", function (event) {
-        var newDrinkId = event.target.id
-        getRecipe(newDrinkId)
-    });
+    // $(".drink-button").on("click", function (event) {
+    //     var newDrinkId = event.target.id
+    //     getRecipe(newDrinkId)
+    // });
 };
 
 
@@ -128,18 +128,87 @@ function printRecipe(response) {
 };
 
 
-// On Search 
-$(".category-button").on('click', function (event) {
+// On category button click
+$("#cocktail").on('click', function (event) {
+    $("#category-container").empty();
     var categoryId = event.target.id;
     getDrinksByCategory(categoryId);
 });
 
-// Clear category container
-// var cocktailCategoryEl = $("#category-container");
-// var destroyElement = function () {
-//     cocktailCategoryEl.container.html(null);
-// };
+// Clear category Container
+var cocktailCategoryEl = $("#category-container");
+var destroyElement = function () {
+    cocktailCategoryEl.textContent = ""
+    // cocktailCategoryEl.container.html(null);
+};
 
-$("category-button").click(function(event){
-    $("category-container").empty();
-  });
+$("category-button").click(function (event) {
+    $("#category-container").empty();
+});
+
+//   Random cocktail drink
+// document.addEventListener('prechange', function (event) {
+//     document.querySelector('#random-drink')
+// })
+
+function getRandomCocktail() {
+
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+
+        .then(function (drinkResponse) {
+            return drinkResponse.json();
+        })
+        .then(function (drinkResponse) {
+            printDrinkByCategory(drinkResponse);
+            // console.log(drinkResponse);
+        });
+    // .then(
+    //     function (response) {
+    //         if (response.status !== 200) {
+    //             console.log('Looks like there was a problem. Status Code: ' +
+    //                 response.status);
+    //             return;
+    //         }
+    //         response.json().then(function (data) {
+    //             // console.log(data);
+    //             displayRandomCocktail(data);
+    //         });
+    //     }
+    // .catch(function (err) {
+    //     console.log('Fetch Error :-S', err);
+    // });
+}
+
+function displayRandomCocktail(cocktail) {
+    // var message = $("<h2>")
+    //     .text("Good News - Here is your random drink!")
+    // cocktailsContainerEl.append(message);
+
+    // console.log(cocktail.drinks[0]);
+
+    // Container for Each Drink
+    var drinkCardContainer = $("<div>").addClass("card-columns");
+    var card = $("<div>").addClass("card");
+    var image = $("<div>").addClass("card-image-cap");
+    var drinkId = response.drinks[i].idDrink
+    // Display each Drink
+    var drinkImage = $("<img>")
+        .attr("src", response.drinks[i].strDrinkThumb)
+        .attr("height", "200px")
+    var drinkTitle = $("<h5>")
+        .addClass("card-title")
+        .text(response.drinks[i].strDrink);
+    var drinkButton = $("<button>")
+        .addClass("btn-sm drink-button")
+        .attr("id", drinkId)
+        .text("View Recipe");
+
+    // Append Display to Container
+    card.append(drinkImage, drinkTitle, drinkButton);
+    drinkCardContainer.append(card);
+    cocktailsContainerEl.append(drinkCardContainer);
+}
+$("#random_drink").on("click", function (event) {
+    getRandomCocktail();
+    // displayRandomCocktail();
+});
