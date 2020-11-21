@@ -53,6 +53,8 @@ router.get('/:id', (req, res) => {
 
 // Create a new Drink
 router.post('/', withAuth, (req, res) => {
+    console.log("this is an id" + req.session.user_id);
+    if (req.session) {
     Drink.create({
         name: req.body.name,
         externalId: req.body.externalId,
@@ -61,13 +63,14 @@ router.post('/', withAuth, (req, res) => {
         ingredients: req.body.ingredients,
         measurements: req.body.measurements,
         instructions: req.body.instructions,
-        user_id: req.body.user_id
+        user_id: req.session.user_id
     })
         .then(dbDrinksData => res.json(dbDrinksData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
+    }
 });
 
 // Update a drink

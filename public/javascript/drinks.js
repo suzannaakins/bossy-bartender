@@ -1,5 +1,4 @@
 // Global Variables
-// const drinkSave = [];
 var ingredients = JSON.parse(window.localStorage.getItem("ingredients")) || [];
 var drinkContainerEl = $("#drink-container");
 var homepageContainerEl = $("#homepage-container");
@@ -182,7 +181,6 @@ async function saveRecipeInDB (response) {
     var glass = response.drinks[0].strGlass
     var instructions = response.drinks[0].strInstructions
     // Need Measurements & Ingredients
-    var user_id = 1
 
     if (externalId) {
         const response = await fetch('/api/drink', {
@@ -192,8 +190,7 @@ async function saveRecipeInDB (response) {
                 externalId,
                 image,
                 glass,
-                instructions,
-                user_id
+                instructions
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -210,3 +207,11 @@ async function saveRecipeInDB (response) {
 // Get Ingredients from Local Storage on Page load
 ingArr();
 
+// Am I logged in?
+// function getCookie(key) {
+//     var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)'); 
+//     return keyValue ? keyValue[2] : null; 
+// } 
+// var cookieValue = getCookie('SF-TokenId'); 
+// //Debug
+// console.log("Cookie: " + cookieValue);
