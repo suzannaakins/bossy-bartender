@@ -7,7 +7,7 @@ $(".dropdown-menu").on('click', '.dropdown-item', function () {
     userIngredients.indexOf(ingredient) === -1 ? userIngredients.push(ingredient) : console.log('this item already exists');
     console.log(userIngredients);
     const bar = document.getElementById("bar")
-    const li = document.createElement("li") 
+    const li = document.createElement("li")
     li.textContent = ingredient;
     bar.append(li);
     console.log(userIngredients);
@@ -15,7 +15,6 @@ $(".dropdown-menu").on('click', '.dropdown-item', function () {
     $(document).on('click', '.search-button', function () {
         sendIngredients(userIngredients);
     });
-
 });
 
 function sendIngredients() {
