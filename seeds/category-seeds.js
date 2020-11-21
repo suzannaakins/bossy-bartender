@@ -3,25 +3,25 @@ const { Category } = require('../models');
 
 const catdata = [
   {
-    title: 'Spirits',
+    "title": 'Spirits',
   },
   {
-    title: 'Wines/Beer',
+    "title": 'Wines/Beer',
   },
   {
-    title: 'Liqueurs',
+    "title": 'Liqueurs',
   },
   {
-    title: 'Syrups',
+    "title": 'Syrups',
   },
   {
-    title: 'Food/Fruits',
+    "title": 'Food/Fruits',
   },
   {
-    title: 'Juices/Sodas',
+    "title": 'Juices/Sodas',
   },
   {
-    title: 'Other',
+    "title": 'Other',
   }
 ];
 

@@ -8,13 +8,15 @@ var recipeContainerEl = $("#recipeModalInner")
 // Destroy the Recipe Modal Contents
 var destroyElement = function () {
     recipeContainerEl.html(null);
-  };
+};
 
 // Get Ingredients from Local Storage
-var ingArr = function(){
-    const filteredIngredients = ingredients[0].ingredients
-    const filtered2Ingredients = filteredIngredients.toString()
-    getDrinksByIngList(filtered2Ingredients)
+var ingArr = function () {
+    const filteredIngredients1 = ingredients[0].ingredients;
+    const filteredIngredients2 = filteredIngredients1.map(f => f.replaceAll(" ", "_"))
+    const filteredIngredients3 = filteredIngredients2.toString();
+    getDrinksByIngList(filteredIngredients3);
+    console.log(filteredIngredients3);
 }
 
 // Get Drinks from Cocktails DB by each Ingredient
@@ -22,19 +24,19 @@ async function getDrinksByIngList(ingredients) {
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=' + ingredients)
     )
-    .then(function(drinkResponse) {
-        return drinkResponse.json();
-    })
-    .then(function(drinkReponse) {
-        resultsFound(drinkReponse);
-    });
+        .then(function (drinkResponse) {
+            return drinkResponse.json();
+        })
+        .then(function (drinkReponse) {
+            resultsFound(drinkReponse);
+        });
 };
 
 // Header Text to Display if Results were found or not
 function resultsFound(response) {
     if (response.drinks === "None Found") {
         var message = $("<h2>")
-            .text("Sorry, no results match these ingredients - Please try to search again")   
+            .text("Sorry, no results match these ingredients - Please try to search again")
     }
     else {
         printDrinkOptions(response)
@@ -45,10 +47,10 @@ function resultsFound(response) {
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
     var message = $("<h2>")
-            .text("Good News - We found " + response.drinks.length + " drinks that match your search!")   
+        .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
     homepageContainerEl.append(message);
     // Loop through the drinks
-    for (let i =0; i < response.drinks.length; i++) {
+    for (let i = 0; i < response.drinks.length; i++) {
         // Container for Each Drink
         var drinkCardContainer = $("<div>").addClass("card-group");
         var card = $("<div>").addClass("card");
@@ -71,26 +73,26 @@ var printDrinkOptions = function (response) {
         drinkCardContainer.append(card);
         homepageContainerEl.append(drinkCardContainer);
     }
-    
+
     // Open the Recipe Modal on Click
-    $(".drink-button").on("click", function(event) {
+    $(".drink-button").on("click", function (event) {
         var newDrinkId = event.target.id
         getRecipe(newDrinkId)
     });
-};  
+};
 
 // Once clicked call the cocktail API by Drink & Display the Recipe
 function getRecipe(id) {
     // Passing the variable for user's choice to the cocktail API
     fetch(
-        ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i='+ id)
+        ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=' + id)
     )
-    .then(function(recipeResponse) {
-        return recipeResponse.json();
-    })
-    .then(function(recipeResponse) {
-        printRecipe(recipeResponse);
-    });
+        .then(function (recipeResponse) {
+            return recipeResponse.json();
+        })
+        .then(function (recipeResponse) {
+            printRecipe(recipeResponse);
+        });
 };
 
 // Print the Recipe in the modal
@@ -106,8 +108,8 @@ function printRecipe(response) {
 
     // Drink Ingredients
     var drinkIngredients = [];
-    drinkIngredients.push(response.drinks[0].strIngredient1,response.drinks[0].strIngredient2, response.drinks[0].strIngredient3,response.drinks[0].strIngredient4,response.drinks[0].strIngredient5,response.drinks[0].strIngredient6,response.drinks[0].strIngredient7,response.drinks[0].strIngredient8,response.drinks[0].strIngredient9,response.drinks[0].strIngredient10,response.drinks[0].strIngredient11,response.drinks[0].strIngredient12,response.drinks[0].strIngredient13,response.drinks[0].strIngredient14,response.drinks[0].strIngredient15) 
-    
+    drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
+
     // Remove Nulls
     var filteredDrinkIngredients = drinkIngredients.filter(function (el) {
         return el != null;
@@ -115,16 +117,16 @@ function printRecipe(response) {
 
     // Drink Measurements
     var drinkMeasurements = [];
-    drinkMeasurements.push(response.drinks[0].strMeasure1,response.drinks[0].strMeasure2, response.drinks[0].strMeasure3,response.drinks[0].strMeasure4,response.drinks[0].strMeasure5,response.drinks[0].strMeasure6,response.drinks[0].strMeasure7,response.drinks[0].strMeasure8,response.drinks[0].strMeasure9,response.drinks[0].strMeasure10,response.drinks[0].strMeasure11,response.drinks[0].strMeasure12,response.drinks[0].strMeasure13,response.drinks[0].strMeasure14,response.drinks[0].strMeasure15)
-    
+    drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
+
     // Remove Nulls
     var filteredDrinkMeasurements = drinkMeasurements.filter(function (el) {
         return el != null;
     });
 
     var recipeModalEl = $("<div>")
-          .addClass("modal-content")
-          .html(`
+        .addClass("modal-content")
+        .html(`
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">
               ${drinkTitle}
@@ -144,21 +146,21 @@ function printRecipe(response) {
               <button type="button" id=${drinkId} class="btn btn-primary save-button">Save Recipe</button>
             </div>
           </div>`
-    )
-    
+        )
+
     // Append Data into the Modal
     recipeContainerEl.append(recipeModalEl)
 
     // Send to Save function on click
-    $(".save-button").on("click", function(event) {
+    $(".save-button").on("click", function (event) {
         var newDrinkId = event.target.id
         saveRecipe(newDrinkId)
     });
 }
 
 // Save Recipes
-function saveRecipe (id) {
-    console.log (id + "Save button was clicked")
+function saveRecipe(id) {
+    console.log(id + "Save button was clicked")
 }
 
 // Get Ingredients from Local Storage on Page load
