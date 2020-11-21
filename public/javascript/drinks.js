@@ -187,7 +187,7 @@ async function saveRecipeInDB (response) {
     if (externalId) {
         const response = await fetch('/api/drink', {
             method: 'POST',
-            body: ({
+            body: JSON.stringify({
                 name,
                 externalId,
                 image,
