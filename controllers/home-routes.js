@@ -40,7 +40,8 @@ router.get('/', (req, res) => {
                 juices,
                 filteredJuices,
                 others,
-                filteredOthers
+                filteredOthers,
+                loggedIn: req.session.loggedIn
             });
         })
         .catch(err => {
@@ -50,20 +51,20 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cocktails', (req, res) => {
-    res.render('cocktails')
+    res.render('cocktails', {loggedIn: req.session.loggedIn})
 });
 
 router.get('/results', (req, res) => {
-    res.render('results')
+    res.render('results', {loggedIn: req.session.loggedIn})
 });
 
 // Login Route
 router.get('/login', (req, res) => {
-    // if (req.session.loggedIn) {
-    //     console.log('hello');
-    //   res.redirect('/');
-    //   return;
-    // }
+    if (req.session.loggedIn) {
+        // console.log('hello');
+      res.redirect('/');
+      return;
+    }
     res.render('login');
 });
 
