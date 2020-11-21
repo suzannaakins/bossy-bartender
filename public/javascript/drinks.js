@@ -101,10 +101,20 @@ function printRecipe(response) {
 
     // Sinlge values for the recipe
     var drinkId = response.drinks[0].idDrink
-    var drinkGlass = response.drinks[0].strGlass
     var drinkDirections = response.drinks[0].strInstructions
     var drinkTitle = response.drinks[0].strDrink
 
+    // Glass Icons
+    var drinkGlass = response.drinks[0].strGlass
+    // Switch cases to render glasses
+    if (drinkGlass = 'Cocktail glass') {
+            var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg";
+     } else if (drinkGlass = 'Highball glass'){
+            var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg";
+     } else {
+         var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg"
+     }
+     
     // Drink Ingredients
     var drinkIngredients = [];
     drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
@@ -114,6 +124,9 @@ function printRecipe(response) {
         return el != null;
     });
 
+    // Convert Ingredients
+    let convertedDrinkIngredients = replaceCommaLine(filteredDrinkIngredients);
+
     // Drink Measurements
     var drinkMeasurements = [];
     drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
@@ -122,7 +135,14 @@ function printRecipe(response) {
     var filteredDrinkMeasurements = drinkMeasurements.filter(function (el) {
         return el != null;
     });
-
+    
+    // Convert Measurements
+    let convertedDrinkMeasurements = replaceCommaLine(filteredDrinkMeasurements);
+    function replaceCommaLine(data) { 
+        var drinkToArray = data.toString().split(',').map(item => item.trim());
+        return drinkToArray.join("<br />");
+    }
+        
     // Create the recipe
     var recipeModalEl = $("<div>")
         .addClass("modal-content")
@@ -136,18 +156,18 @@ function printRecipe(response) {
               </button>
             </div>
             <div class="modal-body">
-              ${drinkGlass}
-              ${drinkDirections}
-              ${filteredDrinkMeasurements}
-              ${filteredDrinkIngredients}
+            <div class="row modal-rows">
+                <div class="col-9"><img src=${drinkGlass} height="50px"></div>
+                <div class="col-4">${convertedDrinkMeasurements}</div>
+                <div class="col-6">${convertedDrinkIngredients}</div>
+                <div class="col-9">${drinkDirections}</div>    
+                </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" id=${drinkId} class="btn btn-primary save-button">Save Recipe</button>
+              <button type="button" id=${drinkId} class="btn save-button">Save Recipe</button>
             </div>
           </div>`
         )
-
     // Append Data into the Modal
     recipeContainerEl.append(recipeModalEl)
 
