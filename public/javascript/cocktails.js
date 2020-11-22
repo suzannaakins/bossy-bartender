@@ -10,18 +10,17 @@ async function getDrinksByCategory(category) {
             return drinkResponse.json();
         })
         .then(function (drinkResponse) {
-            
+
             printDrinkByCategory(drinkResponse);
-           
+
         });
 };
 
 // Print the drink results to the user
 var printDrinkByCategory = function (response) {
-    console.log(response.drinks);
-    // destroyElement();
+
     var message = $("<h2>")
-        .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
+        .text("Good News - We found " + response.drinks.category + " drinks that match your search!")
     cocktailsContainerEl.append(message);
     // Loop through the drinks
     for (let i = 0; i < response.drinks.length; i++) {
@@ -50,7 +49,7 @@ var printDrinkByCategory = function (response) {
     }
     $(".drink-button").on("click", function (event) {
         $("#category-container").empty();
-        var newDrinkId =  $(this).attr("id")
+        var newDrinkId = $(this).attr("id")
         getRecipe(newDrinkId)
     });
 };
@@ -58,7 +57,7 @@ var printDrinkByCategory = function (response) {
 
 // Once clicked call the cocktail API by Drink & Display the Recipe
 function getRecipe(id) {
-    // Need to pass in a variable for user's choice
+
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=' + id)
     )
@@ -131,30 +130,26 @@ function printRecipe(response) {
     });
 };
 
-
-// // On category button click
-// $("#cocktail").on('click', function (event) {
-//     $("#category-container").empty();
-//     var categoryId = event.target.id;
-//     getDrinksByCategory(categoryId);
-// });
-
 // Clear category Container
 var cocktailCategoryEl = $("#category-container");
 var destroyElement = function () {
     cocktailCategoryEl.textContent = ""
-    // cocktailCategoryEl.container.html(null);
 };
 
+// Clear category-button on click
 $(".category-button").on("click", function (event) {
     $("#category-container").empty();
 
     var category = $(this).attr("data-category")
-    if (category === "random"){
-    getRandomCocktail() 
-   }
-   else{
-    getDrinksByCategory(category)}
+    if (category === "random") {
+        var message = $("<h2>")
+            .text("Good News - Here is your random drink!")
+        cocktailsContainerEl.append(message);
+        getRandomCocktail()
+    }
+    else {
+        getDrinksByCategory(category)
+    }
 });
 
 function getRandomCocktail() {
@@ -171,11 +166,6 @@ function getRandomCocktail() {
 }
 
 function displayRandomCocktail(cocktail) {
-    // var message = $("<h2>")
-    //     .text("Good News - Here is your random drink!")
-    // cocktailsContainerEl.append(message);
-
-    // console.log(cocktail.drinks[0]);
 
     // Container for Each Drink
     var drinkCardContainer = $("<div>").addClass("card-columns");
@@ -199,7 +189,11 @@ function displayRandomCocktail(cocktail) {
     drinkCardContainer.append(card);
     cocktailsContainerEl.append(drinkCardContainer);
 }
+<<<<<<< HEAD
+
+=======
 // $("#random_drink").on("click", function (event) {
 //     getRandomCocktail();
 //     // displayRandomCocktail();
 // });
+>>>>>>> 219975030f2fc663cdd5986b9a0bc2e9bb963c65

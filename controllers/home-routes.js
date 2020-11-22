@@ -69,10 +69,12 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+// signup Route
 router.get('/signup', (req, res) => {
     res.render('signup', {loggedIn: req.session.loggedIn})
 });
 
+// Userpage Route
 router.get('/userpage', (req, res) => {
     res.render('userpage', {loggedIn: req.session.loggedIn})
 });

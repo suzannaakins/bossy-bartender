@@ -108,6 +108,15 @@ li {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
+.myaccount {
+  display: flex;
+  justify-content: right;
+}
+
+.myaccount:hover {
+  background-color: var(--secondary-color);
+  border-radius: 25%;
+}
 /* Header Styles End */
 
 /* Hero Styles Start */
