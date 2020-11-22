@@ -242,53 +242,75 @@ async function saveRecipeInDB (response) {
 
 
     if (externalId) {
-        const response = await fetch('/api/drink', {
+        const drinkResponse = await fetch('/api/drink', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
+        })
+        .then(function (drinkResponse) {
+            return drinkResponse.json();
+        })
+        .then(function (drinkResponse) {
+            checkExternalId(drinkResponse)
         });
-        if (response.ok) {
-            console.log(response)
-            if(response.getAttribute("externalId") != externalId) {
-                const response = await fetch('/api/drink', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        name,
-                        externalId,
-                        image,
-                        glass,
-                        instructions,
-                        measurements,
-                        ingredients
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (response.ok) {
-                    $("#recipeModal").modal('hide')
-                    alert(name + " was saved to your account!")
-                } else {
-                    alert(response.statusText);
-                }
-            } else {
-                const response = await fetch('/api/drink/:id', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (response.ok) {
-                    $("#recipeModal").modal('hide')
-                    alert(name + " was saved to your account!")
-                } else {
-                    alert(response.statusText);
-                }
-            }
-        } 
     }
+    async function checkExternalId(drinkResponse) {
+        console.log(drinkResponse)
+        for (let i = 0; i < drinkResponse.length; i++) {
+            if(drinkResponse[i].externalId != externalId) {
+                console.log(drinkResponse[i].externalId)
+                postDrink(externalId);
+            }
+    async function postDrink(externalId) {
+        console.log(externalId)
+        const externalResponse = await fetch('/api/drink', {
+            method: 'POST',
+            body: JSON.stringify({
+                name,
+                externalId,
+                image,
+                glass,
+                instructions,
+                measurements,
+                ingredients
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function (externalResponse) {
+            return JSON.parse();
+        })
+        .then(function (externalResponse) {
+            console.log("saved")
+        })
+    }
+    }
+}
+    
+                // if (response.ok) {
+                //     $("#recipeModal").modal('hide')
+                //     alert(name + " was saved to your account!")
+                // } else {
+                //     alert(response.statusText);
+                // }
+        // } else {
+        //     const response = await fetch('/api/drink/:id', {
+        //         method: 'PUT',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     });
+        //     if (response.ok) {
+        //         $("#recipeModal").modal('hide')
+        //         alert(name + " was saved to your account!")
+        //     } else {
+        //         alert(response.statusText);
+        //     }
+        // }
 };
+
 
 // Get Ingredients from Local Storage on Page load
 ingArr();
