@@ -52,12 +52,12 @@ var printDrinkOptions = function (response) {
     
         homepageContainerEl.append(message);
     
-    var drinkCardContainer = $("<div>").addClass("row");
+    var drinkCardContainer = $("<div>").addClass("row justify-content-center");
 
     // Loop through the drinks
     for (let i = 0; i < response.drinks.length; i++) {
         // Container for Each Drink
-        var card = $("<div>").addClass("card col-3");
+        var card = $("<div>").addClass("card col-3 align-items-center");
         var image = $("<div>").addClass("card-image");
         var drinkId = response.drinks[i].idDrink
         // Display each Drink

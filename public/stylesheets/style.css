@@ -138,9 +138,11 @@ p {
 
 /* Results Page Styles */
 .card {
-  margin: 5px;
+  margin: 10px;
+  padding: 5px;
+  border-color: var(--primary-text-color);
+  border-width: 2px;
 }
-
 
 /* Modal Styles Start */
 .modal-header {
