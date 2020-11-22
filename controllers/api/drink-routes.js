@@ -144,7 +144,6 @@ router.put('/:id', withAuth, (req, res) => {
     Drink.update(
         {
             user_id: req.body.user_id,
-            name: req.body.name
         },
         {
             where: {
