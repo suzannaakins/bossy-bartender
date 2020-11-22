@@ -15,7 +15,6 @@ var ingArr = function () {
     const filteredIngredients2 = filteredIngredients1.map(f => f.replaceAll(" ", "_"))
     const filteredIngredients3 = filteredIngredients2.toString();
     getDrinksByIngList(filteredIngredients3);
-    console.log(filteredIngredients3);
 }
 
 // Get Drinks from Cocktails DB by each Ingredient
