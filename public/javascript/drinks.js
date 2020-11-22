@@ -259,7 +259,7 @@ async function saveRecipeInDB (response) {
         });
         if (response.ok) {
             $("#recipeModal").modal('hide')
-            alert(name = "was saved to your account!")
+            alert(name + " was saved to your account!")
         } else {
             alert(response.statusText);
         }
