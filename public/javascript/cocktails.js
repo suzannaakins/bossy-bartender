@@ -156,6 +156,9 @@ function getRandomCocktail() {
 }
 
 function displayRandomCocktail(cocktail) {
+    var message = $("<h2>")
+        .text("Good News - Here is your random drink!")
+    cocktailsContainerEl.append(message);
     // console.log(cocktail.drinks[0]);
 
     // Container for Each Drink
@@ -182,7 +185,4 @@ function displayRandomCocktail(cocktail) {
 }
 $("#random_drink").on("click", function (event) {
     getRandomCocktail();
-    var message = $("<h2>")
-        .text("Good News - Here is your random drink!")
-    cocktailsContainerEl.append(message);
 });
