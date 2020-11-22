@@ -238,7 +238,7 @@ function printRecipe(response) {
 }
 
 // Get Recipe to Save
-async function saveRecipe (id) {
+function saveRecipe (id) {
 
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=' + id)
