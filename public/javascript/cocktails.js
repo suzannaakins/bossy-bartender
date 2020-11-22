@@ -17,10 +17,10 @@ async function getDrinksByCategory(category) {
 
 // Print the drink results to the user
 var printDrinkByCategory = function (response) {
-    // destroyElement();
     var message = $("<h2>")
         .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
     cocktailsContainerEl.append(message);
+
     // Loop through the drinks
     for (let i = 0; i < response.drinks.length; i++) {
         // Container for Each Drink
@@ -129,8 +129,8 @@ function printRecipe(response) {
 
 
 // On category button click
-$("#cocktail").on('click', function (event) {
-    $("#category-container").empty();
+$(".category-button").click(function (event) {
+    $("#cocktails-container").empty();
     var categoryId = event.target.id;
     getDrinksByCategory(categoryId);
 });
@@ -141,15 +141,6 @@ var destroyElement = function () {
     cocktailCategoryEl.textContent = ""
     // cocktailCategoryEl.container.html(null);
 };
-
-$("category-button").click(function (event) {
-    $("#category-container").empty();
-});
-
-//   Random cocktail drink
-// document.addEventListener('prechange', function (event) {
-//     document.querySelector('#random-drink')
-// })
 
 function getRandomCocktail() {
 
@@ -162,28 +153,9 @@ function getRandomCocktail() {
             printDrinkByCategory(drinkResponse);
             // console.log(drinkResponse);
         });
-    // .then(
-    //     function (response) {
-    //         if (response.status !== 200) {
-    //             console.log('Looks like there was a problem. Status Code: ' +
-    //                 response.status);
-    //             return;
-    //         }
-    //         response.json().then(function (data) {
-    //             // console.log(data);
-    //             displayRandomCocktail(data);
-    //         });
-    //     }
-    // .catch(function (err) {
-    //     console.log('Fetch Error :-S', err);
-    // });
 }
 
 function displayRandomCocktail(cocktail) {
-    // var message = $("<h2>")
-    //     .text("Good News - Here is your random drink!")
-    // cocktailsContainerEl.append(message);
-
     // console.log(cocktail.drinks[0]);
 
     // Container for Each Drink
@@ -210,5 +182,7 @@ function displayRandomCocktail(cocktail) {
 }
 $("#random_drink").on("click", function (event) {
     getRandomCocktail();
-    // displayRandomCocktail();
+    var message = $("<h2>")
+        .text("Good News - Here is your random drink!")
+    cocktailsContainerEl.append(message);
 });
