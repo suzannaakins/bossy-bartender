@@ -8,23 +8,16 @@
                 <a href="/cocktails">Browse Cocktails</a>
             </li>
         </div>
+        
         {{#if loggedIn}}
-        <button id="logout" class="btn">logout</button>
-          <script src="/javascript/logout.js"></script>
-        {{else}}
-        <button id="logout" class="btn"><a href="/login">login</a></button>
-      
+        <div>
+            <button id="myaccount" class="btn">My Account</button>
+            <button id="logout" class="btn">logout</button>
+            <script src="/javascript/logout.js"></script>
+            {{else}}
+            <button id="logout" class="btn"><a href="/login">login</a></button>
+        </div>
         {{/if}}
-
-        {{!-- {{#if loggedIn}}
-        <button id="myaccount" class="btn">My Account</button>
-        {{else}}
-        <a href="/userpage">My account</a>
-        {{/if}} --}}
-
     </ul>
-    
-</nav>
 
- 
- 
+</nav>
