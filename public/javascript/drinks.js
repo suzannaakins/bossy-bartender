@@ -249,6 +249,7 @@ async function saveRecipeInDB (response) {
             }
         });
         if (response.ok) {
+            console.log(response)
             if(response.getAttribute("externalId") != externalId) {
                 const response = await fetch('/api/drink', {
                     method: 'POST',
