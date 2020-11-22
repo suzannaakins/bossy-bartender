@@ -35,7 +35,7 @@ async function getDrinksByIngList(ingredients) {
 function resultsFound(response) {
     if (response.drinks === "None Found") {
         var message = $("<h2>")
-            .text("Sorry, no results match these ingredients - Please try to search again")
+            .text("Sorry, no results match these ingredients. We are building out our drink library, but you can still browse all the drinks we do have!")
         var browseDrinks = $("<div>")
             .html(`<button id="browse-button" class="btn"><a href="/cocktails">Browse Drinks</a></button>`)
     }
@@ -216,6 +216,31 @@ async function saveRecipeInDB (response) {
     var instructions = response.drinks[0].strInstructions
     // Need Measurements & Ingredients
 
+    // Drink Ingredients
+    var drinkIngredients = [];
+    drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
+
+    // Remove Nulls
+    var ingredientsArray = drinkIngredients.filter(function (el) {
+        return el != null;
+    });
+
+    // Convert to String
+    var ingredients = ingredientsArray.toString();
+
+    // Drink Measurements
+    var drinkMeasurements = [];
+    drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
+
+    // Remove Nulls
+    var measurementsArray = drinkMeasurements.filter(function (el) {
+        return el != null;
+    });
+
+    // Convert to String
+    var measurements = measurementsArray.toString();
+
+
     if (externalId) {
         const response = await fetch('/api/drink', {
             method: 'POST',
@@ -224,7 +249,9 @@ async function saveRecipeInDB (response) {
                 externalId,
                 image,
                 glass,
-                instructions
+                instructions,
+                measurements,
+                ingredients
             }),
             headers: {
                 'Content-Type': 'application/json'
