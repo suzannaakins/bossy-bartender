@@ -91,7 +91,7 @@ router.post('/login', (req, res) => {
         }
     }).then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that username. Oopsies.' });
+            res.status(400).json({ message: 'No user with that email. Oopsies.' });
             return;
         }
 
@@ -108,7 +108,7 @@ router.post('/login', (req, res) => {
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
 
-            res.json({ user: dbUserData, message: 'You are now logged in. Make those drinks' });
+            res.json({ user: dbUserData, message: 'You are now logged in. Make those drinks', loggedIn: true });
         });
     }).catch(err => {
         console.log(err);

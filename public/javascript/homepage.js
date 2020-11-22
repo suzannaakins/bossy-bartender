@@ -7,15 +7,19 @@ $(".dropdown-menu").on('click', '.dropdown-item', function () {
     userIngredients.indexOf(ingredient) === -1 ? userIngredients.push(ingredient) : console.log('this item already exists');
     console.log(userIngredients);
     const bar = document.getElementById("bar")
-    const li = document.createElement("li") 
-    li.textContent = ingredient;
-    bar.append(li);
+    const ul = document.createElement("ul")
+    bar.textContent = ""
+    for (i = 0; i < userIngredients.length; i++) {
+        const li = document.createElement("li")
+        li.textContent = userIngredients[i]
+        ul.append(li)
+    }
+    bar.append(ul);
     console.log(userIngredients);
     // On Search 
     $(document).on('click', '.search-button', function () {
         sendIngredients(userIngredients);
     });
-
 });
 
 function sendIngredients() {

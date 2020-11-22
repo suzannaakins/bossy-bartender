@@ -1,0 +1,20 @@
+#bar {
+    display: block;
+}
+
+#page-title, h4 {
+    color: white;
+}
+
+/* Media Queries */
+/* MQ for screens smaller than 1024px */
+@media screen and (max-width: 1024px) {
+.btn-group {
+    display: block
+  }
+
+  #dropdownMenuButton, #searchButton {
+    margin-top: 10px;
+}
+
+}

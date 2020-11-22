@@ -181,7 +181,7 @@ footer {
 /* Footer Styles End */
 
 /* Media Queries */
-/* MQ for screens smaller that 980px */
+/* MQ for screens smaller than 1024px */
 @media screen and (max-width: 980px) {
   header {
       position: unset;
@@ -206,4 +206,6 @@ footer {
   header nav ul {
       padding: 0px 0px;
   }
+  
 }
+
