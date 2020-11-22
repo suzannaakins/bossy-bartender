@@ -154,7 +154,7 @@ function printRecipe(response) {
         .addClass("modal-content")
         .html(`
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
+              <h5 class="modal-title">
               ${drinkTitle}
               </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -194,7 +194,7 @@ function printRecipe(response) {
 
 // Get Recipe to Save
 async function saveRecipe (id) {
-    console.log (id + "Save button was clicked")
+
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=' + id)
     )
@@ -258,7 +258,8 @@ async function saveRecipeInDB (response) {
             }
         });
         if (response.ok) {
-            console.log("maybe saved")
+            $("#recipeModal").modal('hide')
+            alert(name = "was saved to your account!")
         } else {
             alert(response.statusText);
         }
