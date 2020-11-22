@@ -13,12 +13,12 @@
 * {
   box-sizing: border-box;
   text-align: center;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Comic Sans MS", sans-serif, 'Times New Roman', Times, serif;
 }
 
 body {
   background-color: var(--secondary-color);
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Comic Sans MS", sans-serif, 'Times New Roman', Times, serif;
   margin: 0;
   padding: 0;
   line-height: 1.5;
@@ -208,5 +208,22 @@ footer {
       padding: 0px 0px;
   }
   
+
+  footer {
+    background: var(--primary-color);
+    display: flex;
+    padding-right: 10px;
+    margin-top: 20px;
+    text-align: right;
+    color: var(--primary-text-color);
+    display: block;
+    font-weight: lighter;
+    font-size: 110%;
+    width: 100%;
+    height: 2.5rem;  
+    padding-bottom: 60px;
+  }
+
+
 }
 

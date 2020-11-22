@@ -32,4 +32,8 @@ p {
     margin-top: 10px;
 }
 
+p {
+    margin: 10px 15px;
+    text-align: left;
+}
 }
