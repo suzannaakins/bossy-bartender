@@ -23,6 +23,7 @@ body {
   padding: 0;
   line-height: 1.5;
   text-align: center;
+  height: 2.5rem; 
 }
 
 button {
@@ -110,7 +111,7 @@ li {
 /* Header Styles End */
 
 /* Hero Styles Start */
-.hero p {
+.hero {
   background-image: url(../assets/images/hero.png);
   background-repeat: repeat-x;
   background-size: 25% auto;
@@ -134,29 +135,53 @@ h1, h4 {
 p {
   font-size: larger;
 }
+/* Body Styles End */
+
+/* Results Page Styles */
+.card {
+  margin: 10px;
+  padding: 5px;
+  border-color: var(--primary-text-color);
+  border-width: 2px;
+}
+
+/* Modal Styles Start */
+.modal-header {
+  background-color: var(--primary-color);
+}
+.col-6, .col-10 {
+  text-align: left;
+}
+
+.col-4 {
+  text-align: right;
+}
+
+.save-button {
+  background-color: var(--tertiary-color);
+  color: var(--primary-text-color);
+}
+/* Modal Styles End */
 
 /* Footer Styles Start */
 footer {
   background: var(--primary-color);
   display: flex;
-  background-size: cover;
-  padding: 1%;
-  margin-top: 20px;
+  padding-right: 10px;
   text-align: right;
   color: var(--primary-text-color);
   display: block;
   font-weight: lighter;
-  justify-content: center;
-  align-items: flex-end;
   font-size: 110%;
   bottom: 0;
+  position: fixed;
   width: 100%;
   height: 2.5rem;  
 }
 /* Footer Styles End */
 
 /* Media Queries */
-/* MQ for screens smaller that 980px */
+/* MQ for screens smaller than 1024px */
 @media screen and (max-width: 980px) {
   header {
       position: unset;
@@ -181,4 +206,6 @@ footer {
   header nav ul {
       padding: 0px 0px;
   }
+  
 }
+
