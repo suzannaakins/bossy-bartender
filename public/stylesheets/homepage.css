@@ -16,6 +16,11 @@ p {
     text-align: left;
 }
 
+#bar {
+    border-color: black;
+    border-width: 5px;
+}
+
 /* Media Queries */
 /* MQ for screens smaller than 1024px */
 @media screen and (max-width: 1024px) {
