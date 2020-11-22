@@ -108,17 +108,6 @@ function printRecipe(response) {
     var drinkDirections = response.drinks[0].strInstructions;
     var drinkTitle = response.drinks[0].strDrink;
     var drinkGlassName = response.drinks[0].strGlass;
-
-    // Glass Icons
-    var drinkGlass = response.drinks[0].strGlass
-    // Switch cases to render glasses
-    if (drinkGlass = 'Cocktail glass') {
-            var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg";
-     } else if (drinkGlass = 'Highball glass'){
-            var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg";
-     } else {
-         var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg"
-     }
      
     // Drink Ingredients
     var drinkIngredients = [];
@@ -147,6 +136,63 @@ function printRecipe(response) {
         var drinkToArray = data.toString().split(',').map(item => item.trim());
         return drinkToArray.join("<br />");
     }
+
+    // Glass Icons
+    var drinkGlass = response.drinks[0].strGlass
+    console.log(drinkGlass);
+    // Switch cases to render glasses
+        if (drinkGlass == 'Balloon Glass') {
+            drinkGlass = "./assets/images/balloon-glass.png";
+        } else if (drinkGlass == 'Beer Glass'){
+            drinkGlass = "./assets/images/beer-glass.png";
+        } else if (drinkGlass == 'Beer mug'){
+            drinkGlass = "./assets/images/beer-mug.png";
+        } else if (drinkGlass == 'Beer pilsner'){
+            drinkGlass = "./assets/images/beer-pilsner.png";
+        } else if (drinkGlass == 'Brandy snifter'){
+            drinkGlass = "./assets/images/brandy-snifter.png";
+        } else if (drinkGlass == 'Champagne flute'){
+            drinkGlass = "./assets/images/champagne-flute.png";
+        } else if (drinkGlass == 'Cocktail glass' || drinkGlass == 'Martini Glass'){
+            drinkGlass = "./assets/images/cocktail-glass.png";
+        } else if (drinkGlass == 'Coffee mug'){
+            drinkGlass = "./assets/images/coffee-mug.png";
+        } else if (drinkGlass == 'Collins glass'){
+            drinkGlass = "./assets/images/collins-glass.png";
+        } else if (drinkGlass == 'Copper Mug'){
+            drinkGlass = "./assets/images/copper-mug.png";
+        } else if (drinkGlass == 'Cordial glass' || drinkGlass == 'Pousse cafe glass'){
+            drinkGlass = "./assets/images/cordial-glass.png";
+        } else if (drinkGlass == 'Coupe Glass'){
+            drinkGlass = "./assets/images/coupe-glass.png";
+        } else if (drinkGlass == 'Highball glass'){
+            drinkGlass = "./assets/images/highball-glass.png";
+        } else if (drinkGlass == 'Hurricane glass' || drinkGlass == 'Parfait Glass'){
+            drinkGlass = "./assets/images/hurricane-glass.png";
+        } else if (drinkGlass == 'Irish coffee cup'){
+            drinkGlass = "./assets/images/irish-coffee-cup.png";
+        } else if (drinkGlass == 'Jar' || drinkGlass == 'Mason Jar'){
+            drinkGlass = "./assets/images/mason-jar.png";
+        } else if (drinkGlass == 'Margarita glass' || drinkGlass == 'Margarita/Coupette glass'){
+            drinkGlass = "./assets/images/margarita-glass.png";
+        } else if (drinkGlass == 'Nick and Nora Glass'){
+            drinkGlass = "./assets/images/nick-nora.png";
+        } else if (drinkGlass == 'Old-fashioned glass'){
+            drinkGlass = "./assets/images/old-fashioned.png";
+        } else if (drinkGlass == 'Pint glass'){
+            drinkGlass = "./assets/images/pint-glass.png";
+        } else if (drinkGlass == 'Pitcher'){
+            drinkGlass = "./assets/images/pitcher.png";
+        } else if (drinkGlass == 'Punch bowl'){
+             drinkGlass = "./assets/images/punch-bowl.png";
+        } else if (drinkGlass == 'Shot glass'){
+            drinkGlass = "./assets/images/shot-glass.png";
+        } else if (drinkGlass == 'Whiskey sour glass'){
+            drinkGlass = "./assets/images/whiskey-glass";
+        } else {
+            drinkGlass = "./assets/images/wine-glass.png"
+        }
+        console.log(drinkGlass);
         
     // Create the recipe
     var recipeModalEl = $("<div>")
@@ -264,6 +310,112 @@ async function saveRecipeInDB (response) {
         }
     }
 };
+
+
+// Save Recipe - Working on de-duplication
+// async function saveRecipeInDB (response) {
+//     var name = response.drinks[0].strDrink
+//     var externalId = response.drinks[0].idDrink
+//     var image = response.drinks[0].strDrinkThumb
+//     var glass = response.drinks[0].strGlass
+//     var instructions = response.drinks[0].strInstructions
+//     // Need Measurements & Ingredients
+
+//     // Drink Ingredients
+//     var drinkIngredients = [];
+//     drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
+
+//     // Remove Nulls
+//     var ingredientsArray = drinkIngredients.filter(function (el) {
+//         return el != null;
+//     });
+
+//     // Convert to String
+//     var ingredients = ingredientsArray.toString();
+
+//     // Drink Measurements
+//     var drinkMeasurements = [];
+//     drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
+
+//     // Remove Nulls
+//     var measurementsArray = drinkMeasurements.filter(function (el) {
+//         return el != null;
+//     });
+
+//     // Convert to String
+//     var measurements = measurementsArray.toString();
+
+
+//     if (externalId) {
+//         const drinkResponse = await fetch('/api/drink', {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then(function (drinkResponse) {
+//             return drinkResponse.json();
+//         })
+//         .then(function (drinkResponse) {
+//             checkExternalId(drinkResponse)
+//         });
+//     }
+//     async function checkExternalId(drinkResponse) {
+//         console.log(drinkResponse)
+//         for (let i = 0; i < drinkResponse.length; i++) {
+//             if(drinkResponse[i].externalId != externalId) {
+//                 console.log(drinkResponse[i].externalId)
+//                 postDrink(externalId);
+//             }
+//     async function postDrink(externalId) {
+//         console.log(externalId)
+//         const externalResponse = await fetch('/api/drink', {
+//             method: 'POST',
+//             body: JSON.stringify({
+//                 name,
+//                 externalId,
+//                 image,
+//                 glass,
+//                 instructions,
+//                 measurements,
+//                 ingredients
+//             }),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then(function (externalResponse) {
+//             return JSON.parse();
+//         })
+//         .then(function (externalResponse) {
+//             console.log("saved")
+//         })
+//     }
+//     }
+// }
+    
+//                 // if (response.ok) {
+//                 //     $("#recipeModal").modal('hide')
+//                 //     alert(name + " was saved to your account!")
+//                 // } else {
+//                 //     alert(response.statusText);
+//                 // }
+//         // } else {
+//         //     const response = await fetch('/api/drink/:id', {
+//         //         method: 'PUT',
+//         //         headers: {
+//         //             'Content-Type': 'application/json'
+//         //         }
+//         //     });
+//         //     if (response.ok) {
+//         //         $("#recipeModal").modal('hide')
+//         //         alert(name + " was saved to your account!")
+//         //     } else {
+//         //         alert(response.statusText);
+//         //     }
+//         // }
+// };
+
 
 // Get Ingredients from Local Storage on Page load
 ingArr();
