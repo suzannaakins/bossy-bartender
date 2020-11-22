@@ -249,7 +249,7 @@ async function saveRecipeInDB (response) {
             }
         });
         if (response.ok) {
-            if(object.getAttribute("externalId") != externalId) {
+            if(response.getAttribute("externalId") != externalId) {
                 const response = await fetch('/api/drink', {
                     method: 'POST',
                     body: JSON.stringify({
@@ -271,33 +271,21 @@ async function saveRecipeInDB (response) {
                 } else {
                     alert(response.statusText);
                 }
-            }
-        } else {
-            const response = await fetch('/api/drink/:id', {
-                method: 'PUT',
-                body: JSON.stringify({
-                    name,
-                    externalId,
-                    image,
-                    glass,
-                    instructions,
-                    measurements,
-                    ingredients
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (response.ok) {
-                $("#recipeModal").modal('hide')
-                alert(name + " was saved to your account!")
             } else {
-                alert(response.statusText);
+                const response = await fetch('/api/drink/:id', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    $("#recipeModal").modal('hide')
+                    alert(name + " was saved to your account!")
+                } else {
+                    alert(response.statusText);
+                }
             }
-        }
-        }
-
-        
+        } 
     }
 };
 
