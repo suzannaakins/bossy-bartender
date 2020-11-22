@@ -14,9 +14,29 @@
 
 </form>
 
-<div>
-<p>Create an account <a href="/signup">here</a> to save your favorite cocktails!</p>
-</div>
+{{!-- sign up form --}}
+<form class="signup-form">
+  <div>
+    <label for="username-signup">username:</label>
+    <input type="text" id="username-signup" />
+  </div>
+  <div>
+    <label for="email-signup">email:</label>
+    <input type="text" id="email-signup" />
+  </div>
+  <div>
+    <label for="password-signup">password:</label>
+    <input type="password" id="password-signup" />
+  </div>
+  <div>
+    <button type="submit">Sign Up</button>
+  </div>
+  {{!-- {{#if signedup}}
+  <div class="alert alert-success">
+  <strong>Success!</strong> Your account has been created. Go save your favorite drinks
+  {{/if}}
+</div> --}}
+</form>
 
 {{!-- script front-end javascript --}}
 <script src="javascript/login.js"></script>

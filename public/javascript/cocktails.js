@@ -10,15 +10,13 @@ async function getDrinksByCategory(category) {
             return drinkResponse.json();
         })
         .then(function (drinkResponse) {
-            
             printDrinkByCategory(drinkResponse);
-           
+            // console.log(drinkResponse);
         });
 };
 
 // Print the drink results to the user
 var printDrinkByCategory = function (response) {
-    console.log(response.drinks);
     // destroyElement();
     var message = $("<h2>")
         .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
@@ -45,14 +43,12 @@ var printDrinkByCategory = function (response) {
         // Append Display to Container
         card.append(drinkImage, drinkTitle, drinkButton);
         drinkCardContainer.append(card);
-        cocktailCategoryEl.append(drinkCardContainer);
-        console.log(drinkCardContainer)
+        cocktailsContainerEl.append(drinkCardContainer);
     }
-    $(".drink-button").on("click", function (event) {
-        $("#category-container").empty();
-        var newDrinkId =  $(this).attr("id")
-        getRecipe(newDrinkId)
-    });
+    // $(".drink-button").on("click", function (event) {
+    //     var newDrinkId = event.target.id
+    //     getRecipe(newDrinkId)
+    // });
 };
 
 
@@ -122,7 +118,7 @@ function printRecipe(response) {
     // Append Display to Container
     card.append(drinkGlass, drinkDirections, drinkIngredientsPrint, drinkMeasurementsPrint, saveButton);
     drinkRecipeContainer.append(card);
-    cocktailCategoryEl.append(drinkRecipeContainer);
+    cocktailContainerEl.append(drinkRecipeContainer);
 
     // On Click of Save
     $(".save-button").on("click", function (event) {
@@ -132,12 +128,12 @@ function printRecipe(response) {
 };
 
 
-// // On category button click
-// $("#cocktail").on('click', function (event) {
-//     $("#category-container").empty();
-//     var categoryId = event.target.id;
-//     getDrinksByCategory(categoryId);
-// });
+// On category button click
+$("#cocktail").on('click', function (event) {
+    $("#category-container").empty();
+    var categoryId = event.target.id;
+    getDrinksByCategory(categoryId);
+});
 
 // Clear category Container
 var cocktailCategoryEl = $("#category-container");
@@ -146,16 +142,14 @@ var destroyElement = function () {
     // cocktailCategoryEl.container.html(null);
 };
 
-$(".category-button").on("click", function (event) {
+$("category-button").click(function (event) {
     $("#category-container").empty();
-
-    var category = $(this).attr("data-category")
-    if (category === "random"){
-    getRandomCocktail() 
-   }
-   else{
-    getDrinksByCategory(category)}
 });
+
+//   Random cocktail drink
+// document.addEventListener('prechange', function (event) {
+//     document.querySelector('#random-drink')
+// })
 
 function getRandomCocktail() {
 
@@ -168,6 +162,21 @@ function getRandomCocktail() {
             printDrinkByCategory(drinkResponse);
             // console.log(drinkResponse);
         });
+    // .then(
+    //     function (response) {
+    //         if (response.status !== 200) {
+    //             console.log('Looks like there was a problem. Status Code: ' +
+    //                 response.status);
+    //             return;
+    //         }
+    //         response.json().then(function (data) {
+    //             // console.log(data);
+    //             displayRandomCocktail(data);
+    //         });
+    //     }
+    // .catch(function (err) {
+    //     console.log('Fetch Error :-S', err);
+    // });
 }
 
 function displayRandomCocktail(cocktail) {
@@ -199,7 +208,7 @@ function displayRandomCocktail(cocktail) {
     drinkCardContainer.append(card);
     cocktailsContainerEl.append(drinkCardContainer);
 }
-// $("#random_drink").on("click", function (event) {
-//     getRandomCocktail();
-//     // displayRandomCocktail();
-// });
+$("#random_drink").on("click", function (event) {
+    getRandomCocktail();
+    // displayRandomCocktail();
+});

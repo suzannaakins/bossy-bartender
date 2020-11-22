@@ -41,8 +41,7 @@ router.get('/', (req, res) => {
                 filteredJuices,
                 others,
                 filteredOthers,
-                loggedIn: req.session.loggedIn,
-                signedUp: req.session.signedUp
+                loggedIn: req.session.loggedIn
             });
         })
         .catch(err => {
@@ -67,14 +66,6 @@ router.get('/login', (req, res) => {
       return;
     }
     res.render('login');
-});
-
-router.get('/signup', (req, res) => {
-    res.render('signup', {loggedIn: req.session.loggedIn})
-});
-
-router.get('/userpage', (req, res) => {
-    res.render('userpage', {loggedIn: req.session.loggedIn})
 });
 
 module.exports = router;
