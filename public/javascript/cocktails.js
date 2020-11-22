@@ -1,5 +1,6 @@
 var cocktailCategoryEl = $("#category-container");
 var cocktailsContainerEl = $("#cocktails-container");
+var recipeContainerEl = $("#recipeModalInner")
 
 // Get drinks by Category
 async function getDrinksByCategory(category) {
@@ -45,10 +46,10 @@ var printDrinkByCategory = function (response) {
         drinkCardContainer.append(card);
         cocktailsContainerEl.append(drinkCardContainer);
     }
-    // $(".drink-button").on("click", function (event) {
-    //     var newDrinkId = event.target.id
-    //     getRecipe(newDrinkId)
-    // });
+    $(".drink-button").on("click", function (event) {
+        var newDrinkId = event.target.id
+        getRecipe(newDrinkId)
+    });
 };
 
 
@@ -142,6 +143,8 @@ var destroyElement = function () {
     // cocktailCategoryEl.container.html(null);
 };
 
+
+// Random cocktail
 function getRandomCocktail() {
 
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
