@@ -85,7 +85,6 @@ router.post('/', (req, res) => {
 
 // route for users to LOGIN at (localhost:3003/api/users/login)
 router.post('/login', (req, res) => {
-    
     User.findOne({
         where: {
             email: req.body.email
@@ -116,7 +115,6 @@ router.post('/login', (req, res) => {
         res.status(500).json(err);
     });
 });
-
 
 //LOGOUT users
 router.post('/logout', (req, res) => {

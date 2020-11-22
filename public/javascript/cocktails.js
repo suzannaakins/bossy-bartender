@@ -189,4 +189,11 @@ function displayRandomCocktail(cocktail) {
     drinkCardContainer.append(card);
     cocktailsContainerEl.append(drinkCardContainer);
 }
+<<<<<<< HEAD
 
+=======
+// $("#random_drink").on("click", function (event) {
+//     getRandomCocktail();
+//     // displayRandomCocktail();
+// });
+>>>>>>> 219975030f2fc663cdd5986b9a0bc2e9bb963c65
