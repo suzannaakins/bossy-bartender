@@ -66,7 +66,7 @@ router.get('/byUser/:user_id', withAuth, (req, res) => {
         where: {
             user_id: req.session.user_id
         },
-        attributes: ['id', 'name', 'externalId'],
+        attributes: ['id', 'name', 'image', 'glass', 'ingredients', 'measurements', 'instructions'],
         include: [
             {
                 model: User,
