@@ -56,7 +56,7 @@ var printDrinkOptions = function (response) {
     // Loop through the drinks
     for (let i = 0; i < response.drinks.length; i++) {
         // Container for Each Drink
-        var card = $("<div>").addClass("card col-3 align-items-center");
+        var card = $("<div>").addClass("card col-3-md align-items-center");
         var image = $("<div>").addClass("card-image");
         var drinkId = response.drinks[i].idDrink
         // Display each Drink
@@ -217,8 +217,8 @@ function printRecipe(response) {
                 </div>
             </div>
             <div class="modal-footer">
-            <button class="btn" type="button" id="smsText">Send to a Friend</button>
-              <button type="button" id=${drinkId} class="btn save-button">Save Recipe</button>
+                <button class="btn" type="button" id="smsText">Send to a Friend</button>
+                <button type="button" id=${drinkId} class="btn save-button">Save Recipe</button>
             </div>
           </div>`
         )
@@ -227,8 +227,8 @@ function printRecipe(response) {
 
     // Send to Save function on click
     $(".save-button").on("click", function (event) {
-        var newDrinkId = event.target.id
-        saveRecipe(newDrinkId)
+            var newDrinkId = event.target.id
+            saveRecipe(newDrinkId)
     });
 
     // Send Text Form
