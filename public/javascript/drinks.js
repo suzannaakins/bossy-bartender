@@ -239,7 +239,6 @@ function printRecipe(response) {
 
 // Get Recipe to Save
 function saveRecipe (id) {
-
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=' + id)
     )
@@ -247,72 +246,33 @@ function saveRecipe (id) {
             return recipeResponse.json();
         })
         .then(function (recipeResponse) {
-            saveRecipeInDB(recipeResponse)
+            checkId(recipeResponse)
         });
-
 }
 
-// Save Recipe
-async function saveRecipeInDB (response) {
-    var name = response.drinks[0].strDrink
-    var externalId = response.drinks[0].idDrink
-    var image = response.drinks[0].strDrinkThumb
-    var glass = response.drinks[0].strGlass
-    var instructions = response.drinks[0].strInstructions
-    // Need Measurements & Ingredients
-
-    // Drink Ingredients
-    var drinkIngredients = [];
-    drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
-
-    // Remove Nulls
-    var ingredientsArray = drinkIngredients.filter(function (el) {
-        return el != null;
-    });
-
-    // Convert to String
-    var ingredients = ingredientsArray.toString();
-
-    // Drink Measurements
-    var drinkMeasurements = [];
-    drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
-
-    // Remove Nulls
-    var measurementsArray = drinkMeasurements.filter(function (el) {
-        return el != null;
-    });
-
-    // Convert to String
-    var measurements = measurementsArray.toString();
-
-
-    if (externalId) {
-        const response = await fetch('/api/drink', {
-            method: 'POST',
-            body: JSON.stringify({
-                name,
-                externalId,
-                image,
-                glass,
-                instructions,
-                measurements,
-                ingredients
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (response.ok) {
-            $("#recipeModal").modal('hide')
-            alert(name + " was saved to your account!")
-        } else {
-            alert(response.statusText);
+function checkId(recipeResponse) {
+    console.log(recipeResponse)
+    var externalId = recipeResponse.drinks[0].idDrink
+    drinkResponse = fetch('/api/drink/byExternalId/' + externalId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
         }
-    }
-};
+    })
+    .then(function (drinkResponse) {
+        return drinkResponse.json();
+    })
+    .then(function (drinkResponse) {
+        console.log(drinkResponse)
+        if(drinkResponse.length >= 1) {
+            console.log("Alredy in DB")
+        } else {
+            saveRecipeInDB(recipeResponse)
+        }
+    });
+}
 
-
-// Save Recipe - Working on de-duplication
+// // Save Recipe
 // async function saveRecipeInDB (response) {
 //     var name = response.drinks[0].strDrink
 //     var externalId = response.drinks[0].idDrink
@@ -347,29 +307,7 @@ async function saveRecipeInDB (response) {
 
 
 //     if (externalId) {
-//         const drinkResponse = await fetch('/api/drink', {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//         .then(function (drinkResponse) {
-//             return drinkResponse.json();
-//         })
-//         .then(function (drinkResponse) {
-//             checkExternalId(drinkResponse)
-//         });
-//     }
-//     async function checkExternalId(drinkResponse) {
-//         console.log(drinkResponse)
-//         for (let i = 0; i < drinkResponse.length; i++) {
-//             if(drinkResponse[i].externalId != externalId) {
-//                 console.log(drinkResponse[i].externalId)
-//                 postDrink(externalId);
-//             }
-//     async function postDrink(externalId) {
-//         console.log(externalId)
-//         const externalResponse = await fetch('/api/drink', {
+//         const response = await fetch('/api/drink', {
 //             method: 'POST',
 //             body: JSON.stringify({
 //                 name,
@@ -383,38 +321,75 @@ async function saveRecipeInDB (response) {
 //             headers: {
 //                 'Content-Type': 'application/json'
 //             }
-//         })
-//         .then(function (externalResponse) {
-//             return JSON.parse();
-//         })
-//         .then(function (externalResponse) {
-//             console.log("saved")
-//         })
+//         });
+//         if (response.ok) {
+//             $("#recipeModal").modal('hide')
+//             alert(name + " was saved to your account!")
+//         } else {
+//             alert(response.statusText);
+//         }
 //     }
-//     }
-// }
-    
-//                 // if (response.ok) {
-//                 //     $("#recipeModal").modal('hide')
-//                 //     alert(name + " was saved to your account!")
-//                 // } else {
-//                 //     alert(response.statusText);
-//                 // }
-//         // } else {
-//         //     const response = await fetch('/api/drink/:id', {
-//         //         method: 'PUT',
-//         //         headers: {
-//         //             'Content-Type': 'application/json'
-//         //         }
-//         //     });
-//         //     if (response.ok) {
-//         //         $("#recipeModal").modal('hide')
-//         //         alert(name + " was saved to your account!")
-//         //     } else {
-//         //         alert(response.statusText);
-//         //     }
-//         // }
 // };
+
+
+// Save Recipe - Working on de-duplication
+function saveRecipeInDB (response) {
+    var name = response.drinks[0].strDrink
+    var externalId = response.drinks[0].idDrink
+    var image = response.drinks[0].strDrinkThumb
+    var glass = response.drinks[0].strGlass
+    var instructions = response.drinks[0].strInstructions
+    // Need Measurements & Ingredients
+
+    // Drink Ingredients
+    var drinkIngredients = [];
+    drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
+    // Remove Nulls
+    var ingredientsArray = drinkIngredients.filter(function (el) {
+        return el != null;
+    });
+
+    // Convert to String
+    var ingredients = ingredientsArray.toString();
+
+    // Drink Measurements
+    var drinkMeasurements = [];
+    drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
+
+    // Remove Nulls
+    var measurementsArray = drinkMeasurements.filter(function (el) {
+        return el != null;
+    });
+
+    // Convert to String
+    var measurements = measurementsArray.toString();
+    postDrink();
+
+    function postDrink() {
+        console.log(externalId)
+        externalResponse = fetch('/api/drink', {
+            method: 'POST',
+            body: JSON.stringify({
+                name,
+                externalId,
+                image,
+                glass,
+                instructions,
+                measurements,
+                ingredients
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function (externalResponse) {
+            return externalResponse.json();
+        })
+        .then(function (externalResponse) {
+            console.log("saved")
+        })
+    }
+}
 
 
 // Get Ingredients from Local Storage on Page load
