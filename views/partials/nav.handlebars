@@ -10,9 +10,17 @@
         </div>
         {{#if loggedIn}}
         <button id="logout" class="btn">logout</button>
+          <script src="/javascript/logout.js"></script>
         {{else}}
         <a href="/login">login</a>
         {{/if}}
+
+        {{!-- {{#if loggedIn}}
+        <button id="myaccount" class="btn">My Account</button>
+        {{else}}
+        <a href="/userpage">My account</a>
+        {{/if}} --}}
+
     </ul>
     
 </nav>
