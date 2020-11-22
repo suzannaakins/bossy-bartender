@@ -23,6 +23,7 @@ body {
   padding: 0;
   line-height: 1.5;
   text-align: center;
+  height: 2.5rem; 
 }
 
 button {
@@ -166,7 +167,6 @@ p {
 footer {
   background: var(--primary-color);
   display: flex;
-  background-size: cover;
   padding-right: 10px;
   text-align: right;
   color: var(--primary-text-color);
