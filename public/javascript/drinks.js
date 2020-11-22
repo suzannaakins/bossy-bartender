@@ -112,13 +112,57 @@ function printRecipe(response) {
     // Glass Icons
     var drinkGlass = response.drinks[0].strGlass
     // Switch cases to render glasses
-    if (drinkGlass = 'Cocktail glass') {
-            var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg";
-     } else if (drinkGlass = 'Highball glass'){
-            var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg";
-     } else {
-         var drinkGlass = "https://www.thecocktaildb.com/images/media/drink/qzs5d11504365962.jpg"
-     }
+    if (drinkGlass = 'Balloon Glass') {
+            var drinkGlass = "./assets/images/balloon-glass.png";
+    } else if (drinkGlass = 'Beer Glass'){
+            var drinkGlass = "./assets/images/beer-glass.png";
+    } else if (drinkGlass = 'Beer mug'){
+        var drinkGlass = "./assets/images/beer-mug.png";
+    } else if (drinkGlass = 'Beer pilsner'){
+        var drinkGlass = "./assets/images/beer-pilsner.png";
+    } else if (drinkGlass = 'Brandy snifter'){
+        var drinkGlass = "./assets/images/brandy-snifter.png";
+    } else if (drinkGlass = 'Champagne flute'){
+        var drinkGlass = "./assets/images/champagne-flute.png";
+    } else if (drinkGlass = 'Cocktail glass' || 'Martini Glass'){
+        var drinkGlass = "./assets/images/cocktail-glass.png";
+    } else if (drinkGlass = 'Coffee mug'){
+        var drinkGlass = "./assets/images/coffee-mug.png";
+    } else if (drinkGlass = 'Collins glass'){
+        var drinkGlass = "./assets/images/collins-glass.png";
+    } else if (drinkGlass = 'Copper Mug'){
+        var drinkGlass = "./assets/images/copper-mug.png";
+    } else if (drinkGlass = 'Cordial glass' || 'Pousse cafe glass'){
+        var drinkGlass = "./assets/images/cordial-glass.png";
+    } else if (drinkGlass = 'Coupe Glass'){
+        var drinkGlass = "./assets/images/coupe-glass.png";
+    } else if (drinkGlass = 'Highball glass'){
+        var drinkGlass = "./assets/images/highball-glass.png";
+    } else if (drinkGlass = 'Hurricane glass' || 'Parfait Glass'){
+        var drinkGlass = "./assets/images/hurricane-glass.png";
+    } else if (drinkGlass = 'Irish coffee cup'){
+        var drinkGlass = "./assets/images/irish-coffee-cup.png";
+    } else if (drinkGlass = 'Jar' || 'Mason Jar'){
+        var drinkGlass = "./assets/images/jar.png";
+    } else if (drinkGlass = 'Margarita glass' || 'Margarita/Coupette glass'){
+        var drinkGlass = "./assets/images/margarita-glass.png";
+    } else if (drinkGlass = 'Nick and Nora Glass'){
+        var drinkGlass = "./assets/images/nick-nora.png";
+    } else if (drinkGlass = 'Old-fashioned glass'){
+        var drinkGlass = "./assets/images/old-fashioned.png";
+    } else if (drinkGlass = 'Pint glass'){
+        var drinkGlass = "./assets/images/pint-glass.png";
+    } else if (drinkGlass = 'Pitcher'){
+        var drinkGlass = "./assets/images/pitcher.png";
+    } else if (drinkGlass = 'Punch Bowl'){
+        var drinkGlass = "./assets/images/punch-bowl.png";
+    } else if (drinkGlass = 'Shot Glass'){
+        var drinkGlass = "./assets/images/shot-glass.png";
+    } else if (drinkGlass = 'Whiskey sour glass'){
+            var drinkGlass = "./assets/images/whiskey-glass";
+    } else {
+         var drinkGlass = "./assets/images/wine-glass.png"
+    }
      
     // Drink Ingredients
     var drinkIngredients = [];
