@@ -1,41 +1,20 @@
-// const sequelize = require('../config/connection');
-// const { Drink } = require('../models');
+const sequelize = require('../config/connection');
+const { Drink } = require('../models');
 
-// const drinkdata = [
-//   {
-//     name: 'Vodka',
-//     category_id: '1'
-//   },
-//   {
-//     name: 'Gin',
-//     category_id: '1'
-//   },
-//   {
-//     name: 'Red Wine',
-//     category_id: '2'
-//   },
-//   {
-//     name: 'Triple Sec',
-//     category_id: '3'
-//   },
-//   {
-//     name: 'Simple Syrup',
-//     category_id: '4'
-//   },
-//   {
-//     name: 'Cherry',
-//     category_id: '5'
-//   },
-//   {
-//     name: 'Lime Juice',
-//     category_id: '6'
-//   },
-//   {
-//     name: 'Sugar',
-//     category_id: '7'
-//   }
-// ];
+const drinkdata = [
+  {
+    name: 'Margarita',
+    externalId: '11007',
+    image: '',
+    glass: 'Cocktail glass',
+    ingredients: 'Tequila,Triple Sec,Lime Juice,Salt',
+    measurments: '1/2 cup,1/2 tbs, 1/2 tsp',
+    instructions: 'Make it',
+    user_id: 1
 
-// const seedDrinks = () => seedDrinks.bulkCreate(drink, {individualHooks: true});
+  }
+];
 
-// module.exports = seedDrinks;
+const seedDrinks = () => seedDrinks.bulkCreate(drink, {individualHooks: true});
+
+module.exports = seedDrinks;

@@ -2,6 +2,17 @@ const router = require('express').Router();
 const { Drink, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.post('/all', (req, res) => {
+    Drink.bulkCreate(
+        req.body
+    )
+        .then(dbDrinksData => res.json(dbDrinksData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+})
+
 // Get all Drinks in DB
 router.get('/', (req, res) => {
     Drink.findAll()
@@ -42,6 +53,7 @@ router.get('/:id', (req, res) => {
 
 // Create a new Drink
 router.post('/', withAuth, (req, res) => {
+    if (req.session) {
     Drink.create({
         name: req.body.name,
         externalId: req.body.externalId,
@@ -50,17 +62,19 @@ router.post('/', withAuth, (req, res) => {
         ingredients: req.body.ingredients,
         measurements: req.body.measurements,
         instructions: req.body.instructions,
-        user_id: req.body.user_id
+        user_id: req.session.user_id
     })
         .then(dbDrinksData => res.json(dbDrinksData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
+    }
 });
 
 // Update a drink
 router.put('/:id', withAuth, (req, res) => {
+    if (req.session) {
     Drink.update(
         {
             user_id: req.body.user_id,
@@ -83,6 +97,7 @@ router.put('/:id', withAuth, (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+    }
 });
 
 //DELETE an ingredient
