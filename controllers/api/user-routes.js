@@ -51,7 +51,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/users - ADDS a NEW user
-router.post('/', (req, res) => {
+router.post('/signup', (req, res) => {
     User.create({
         username: req.body.username,
         email: req.body.email,
@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
 });
 
 // route for users to LOGIN at (localhost:3003/api/users/login)
-router.post('/login', (req, res) => {
+router.post('/', (req, res) => {
     User.findOne({
         where: {
             email: req.body.email
@@ -104,6 +104,7 @@ router.post('/login', (req, res) => {
         res.status(500).json(err);
     });
 });
+
 
 //LOGOUT users
 router.post('/logout', (req, res) => {

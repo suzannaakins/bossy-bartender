@@ -41,7 +41,8 @@ router.get('/', (req, res) => {
                 filteredJuices,
                 others,
                 filteredOthers,
-                loggedIn: req.session.loggedIn
+                loggedIn: req.session.loggedIn,
+                signedUp: req.session.signedUp
             });
         })
         .catch(err => {

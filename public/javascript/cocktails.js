@@ -45,10 +45,10 @@ var printDrinkByCategory = function (response) {
         drinkCardContainer.append(card);
         cocktailsContainerEl.append(drinkCardContainer);
     }
-    // $(".drink-button").on("click", function (event) {
-    //     var newDrinkId = event.target.id
-    //     getRecipe(newDrinkId)
-    // });
+    $(".drink-button").on("click", function (event) {
+        var newDrinkId = event.target.id
+        getRecipe(newDrinkId)
+    });
 };
 
 
@@ -146,11 +146,6 @@ $("category-button").click(function (event) {
     $("#category-container").empty();
 });
 
-//   Random cocktail drink
-// document.addEventListener('prechange', function (event) {
-//     document.querySelector('#random-drink')
-// })
-
 function getRandomCocktail() {
 
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
@@ -162,21 +157,6 @@ function getRandomCocktail() {
             printDrinkByCategory(drinkResponse);
             // console.log(drinkResponse);
         });
-    // .then(
-    //     function (response) {
-    //         if (response.status !== 200) {
-    //             console.log('Looks like there was a problem. Status Code: ' +
-    //                 response.status);
-    //             return;
-    //         }
-    //         response.json().then(function (data) {
-    //             // console.log(data);
-    //             displayRandomCocktail(data);
-    //         });
-    //     }
-    // .catch(function (err) {
-    //     console.log('Fetch Error :-S', err);
-    // });
 }
 
 function displayRandomCocktail(cocktail) {
