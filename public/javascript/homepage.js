@@ -16,13 +16,19 @@ $(".dropdown-menu").on('click', '.dropdown-item', function () {
     bar.textContent = ""
     for (i = 0; i < userIngredients.length; i++) {
         const li = document.createElement("li")
-        li.innerHTML = userIngredients[i] + "    " + trashIcon;
+        li.innerHTML = userIngredients[i] + "  " + " " + " " + trashIcon;
+        $(li).attr("id", userIngredients[i])
         ul.append(li)
     }
     bar.append(ul);
 
     $('.bi-trash').on('click', function () {
-        console.log('hi')
+        //remove ingredient from array
+        const currId = $(this).parent().attr("id");
+        const index = userIngredients.indexOf(currId);
+        userIngredients.splice(index, 1);
+        //remove ingredient and trash icon from page 
+        $(this).parent().remove();
     })
 
     // On Search 
