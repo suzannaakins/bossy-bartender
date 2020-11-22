@@ -16,13 +16,28 @@ $(".dropdown-menu").on('click', '.dropdown-item', function () {
     bar.textContent = ""
     for (i = 0; i < userIngredients.length; i++) {
         const li = document.createElement("li")
-        li.innerHTML = userIngredients[i] + "    " + trashIcon;
+        li.innerHTML = userIngredients[i] + "  " + " " + " " + trashIcon;
         ul.append(li)
     }
     bar.append(ul);
 
     $('.bi-trash').on('click', function () {
-        console.log('hi')
+        //remove ingredient and trash icon from page 
+        $(this).parent().remove();
+
+        //remove ingredient from array
+        //     const currentIngredient = $(this).parent()[0].innerHTML;
+        //     var ingredientText = currentIngredient.split(" ")
+        //     for (i=0; i<ingredientText.length; i++) {
+        //        const getIngredient = []
+        //        if (ingredientText[i] = "  ") {
+        //            return;
+        //        }
+        //        else {
+        //            getIngredient.push(ingredientText[i])
+        //        }
+        //        console.log(getIngredient);
+        //    }
     })
 
     // On Search 
