@@ -243,26 +243,61 @@ async function saveRecipeInDB (response) {
 
     if (externalId) {
         const response = await fetch('/api/drink', {
-            method: 'POST',
-            body: JSON.stringify({
-                name,
-                externalId,
-                image,
-                glass,
-                instructions,
-                measurements,
-                ingredients
-            }),
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
         if (response.ok) {
-            $("#recipeModal").modal('hide')
-            alert(name + " was saved to your account!")
+            if(object.getAttribute("externalId") != externalId) {
+                const response = await fetch('/api/drink', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name,
+                        externalId,
+                        image,
+                        glass,
+                        instructions,
+                        measurements,
+                        ingredients
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    $("#recipeModal").modal('hide')
+                    alert(name + " was saved to your account!")
+                } else {
+                    alert(response.statusText);
+                }
+            }
         } else {
-            alert(response.statusText);
+            const response = await fetch('/api/drink/:id', {
+                method: 'PUT',
+                body: JSON.stringify({
+                    name,
+                    externalId,
+                    image,
+                    glass,
+                    instructions,
+                    measurements,
+                    ingredients
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response.ok) {
+                $("#recipeModal").modal('hide')
+                alert(name + " was saved to your account!")
+            } else {
+                alert(response.statusText);
+            }
         }
+        }
+
+        
     }
 };
 
