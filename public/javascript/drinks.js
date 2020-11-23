@@ -18,7 +18,7 @@ var ingArr = function () {
 }
 
 // Get Drinks from Cocktails DB by each Ingredient
-async function getDrinksByIngList(ingredients) {
+function getDrinksByIngList(ingredients) {
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=' + ingredients)
     )
@@ -49,7 +49,7 @@ var printDrinkOptions = function (response) {
     var message = $("<h2>")
         .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
     
-        homepageContainerEl.append(message);
+    homepageContainerEl.append(message);
     
     var drinkCardContainer = $("<div>").addClass("row justify-content-center");
 
@@ -59,6 +59,7 @@ var printDrinkOptions = function (response) {
         var card = $("<div>").addClass("card col-3-md align-items-center");
         var image = $("<div>").addClass("card-image");
         var drinkId = response.drinks[i].idDrink
+        
         // Display each Drink
         var drinkImage = $("<img>")
             .attr("src", response.drinks[i].strDrinkThumb)
@@ -139,7 +140,7 @@ function printRecipe(response) {
 
     // Glass Icons
     var drinkGlass = response.drinks[0].strGlass
-    console.log(drinkGlass);
+    
     // Switch cases to render glasses
         if (drinkGlass == 'Balloon Glass') {
             drinkGlass = "./assets/images/balloon-glass.png";
@@ -192,9 +193,8 @@ function printRecipe(response) {
         } else {
             drinkGlass = "./assets/images/wine-glass.png"
         }
-        console.log(drinkGlass);
         
-    // Create the recipe
+    // Create the Recipe Modal
     var recipeModalEl = $("<div>")
         .addClass("modal-content")
         .html(`
@@ -210,7 +210,7 @@ function printRecipe(response) {
             <div class="row modal-rows">
                 <div class="col-10"><img src=${drinkGlass} height="50px">  Use a ${drinkGlassName}</div>
                 <div class="col-10"><p></ br></p><p></ br></p></div>
-                <div class="col-4">${convertedDrinkMeasurements}</div>
+                <div class="col-4 measure">${convertedDrinkMeasurements}</div>
                 <div class="col-6">${convertedDrinkIngredients}</div>
                 <div class="col-10"><p></ br></p><p></ br></p></div>
                 <div class="col-10">${drinkDirections}</div>    
@@ -222,6 +222,7 @@ function printRecipe(response) {
             </div>
           </div>`
         )
+
     // Append Data into the Modal
     recipeContainerEl.append(recipeModalEl)
 
@@ -229,13 +230,73 @@ function printRecipe(response) {
     $(".save-button").on("click", function (event) {
             var newDrinkId = event.target.id
             saveRecipe(newDrinkId)
+            
+            destroyModal()
+            var recipeModalFooter = $("<div>")
+            .addClass("modal-replace")
+            .html(`
+                <p></p>
+                <p>Your Drink has been saved to <a href="/userpage">your account</a></p>
+                <p></p>`
+            )
+        // Append Data to Footer
+        recipeModalEl.append(recipeModalFooter)
     });
 
-    // Send Text Form
-    // <form>
-    //             <input type="tel" class="phone" />
-    // </form>
+    // Show Text Form on click
+    $("#smsText").on("click", function (event) {
+        var drinkName = event.target.drinkName
+        showPhoneInput(drinkName)
+    });
+    
+    // Destroy the Modal Contents
+    var recipeModalFooter = $(".modal-footer")
+    var destroyModal = function () {
+        recipeModalFooter.html(null);
+    };
+
+    // Show Text Form Options
+    function showPhoneInput(data) {
+        // Destroy Footer
+        destroyModal()
+        
+        // Rebuild Footer
+        var recipeModalFooter = $("<div>")
+        .addClass("modal-replace")
+        .html(`
+            <form><input type="text" class="name" placeholder="Enter Your Name"/></form>
+            <p></p>
+            <form><input type="tel" class="phone" placeholder="Enter Digits Only"/></form>
+            <p></p>
+            <button class="send-text">Send Now</button>
+            <p></p>`
+        )
+        // Append Data to Footer
+        recipeModalEl.append(recipeModalFooter)
+        
+        // Send Text
+        $(".send-text").on("click", function (event) {
+            const phone_number = document.querySelector('.phone').value;
+            const name = document.querySelector('.name').value
+            const recipe = "Hey there! Bossy Bartender here, your friend  " + name +  " found this exciting new drink, " + drinkTitle + ", and thought you might want to explore new drinks too! Check us out at http://bossy-bartender.herokuapp.com/";
+
+            if (phone_number) {
+                response =  fetch('/api/twilio', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        phone_number,
+                        recipe,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+            }
+            destroyModal()
+        })
+    };
 }
+
 
 // Get Recipe the user wants to Save
 function saveRecipe (id) {
@@ -264,18 +325,17 @@ function checkId(recipeResponse) {
         return drinkResponse.json();
     })
     .then(function (drinkResponse) {
-        console.log(drinkResponse)
         if(drinkResponse.length >= 1) {
-            console.log("Alredy in DB")
-            updateDrink(externalId)
+            saveRecipeInDB(recipeResponse)
         } else {
             saveRecipeInDB(recipeResponse)
         }
     });
 }
 
-// Save Recipe - Working on de-duplication
+// Save Recipe if it does not exist
 function saveRecipeInDB (response) {
+    // Single Drink Variables
     var name = response.drinks[0].strDrink
     var externalId = response.drinks[0].idDrink
     var image = response.drinks[0].strDrinkThumb
@@ -286,30 +346,29 @@ function saveRecipeInDB (response) {
     var drinkIngredients = [];
     drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
     
-    // Remove Nulls
+    // Remove Nulls from Ingredients
     var ingredientsArray = drinkIngredients.filter(function (el) {
         return el != null;
     });
 
-    // Convert to String
+    // Convert Ingredients to String
     var ingredients = ingredientsArray.toString();
 
     // Drink Measurements
     var drinkMeasurements = [];
     drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
 
-    // Remove Nulls
+    // Remove Nulls from Measurements
     var measurementsArray = drinkMeasurements.filter(function (el) {
         return el != null;
     });
 
-    // Convert to String
+    // Convert Measurements to String
     var measurements = measurementsArray.toString();
     postDrink();
 
     // Post Drink to the DB
     function postDrink() {
-        console.log(externalId)
         externalResponse = fetch('/api/drink', {
             method: 'POST',
             body: JSON.stringify({
@@ -329,38 +388,36 @@ function saveRecipeInDB (response) {
             return externalResponse.json();
         })
         .then(function (externalResponse) {
-            console.log("saved")
+            return;
         })
     }
 }
 
-// Update Drink to include User
-function updateDrink(externalId) {
-    console.log(externalId)
-    externalResponse = fetch('/api/drink/:id', {
-        method: 'PUT',
-        // body: JSON.stringify({
-        //     name,
-        //     externalId,
-        //     image,
-        //     glass,
-        //     instructions,
-        //     measurements,
-        //     ingredients
-        // }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (response) {
-        console.log(response)
-        console.log("maybe saved")
-    })
-}
+// Update Drink to include User - Future Development
+// function updateDrink(externalId) {
+//     console.log(externalId)
+//     externalResponse = fetch('/api/drink/:id', {
+//         method: 'PUT',
+//         body: JSON.stringify({
+//             name,
+//             externalId,
+//             image,
+//             glass,
+//             instructions,
+//             measurements,
+//             ingredients
+//         }),
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     })
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (response) {
 
+//     })
+// }
 
 // Get Ingredients from Local Storage on Page load
 ingArr();

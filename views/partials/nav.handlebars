@@ -10,14 +10,20 @@
         </div>
         
         {{#if loggedIn}}
-        <div>
-            <button id="myaccount" class="btn">My Account</button>
-            <button id="logout" class="btn">logout</button>
+        <div class="account-nav">
+            <li class="my-account">
+                <button id="my_account" class="btn btn-link"><a href="/userpage">My Account</a></button>
+            </li>
+            <li class="logout">
+                <button id="logout" class="btn">Logout</button>
+            </li>
             {{else}}
-            <button id="login" class="btn"><a href="/login">Login</a></button>
+            <li class="login">
+                <a href="/login">Login</a>
+            </li>
         </div>
-        {{/if}}    
+        {{/if}}
     </ul>
 
 </nav>
-<script src="/javascript/logout.js"></script>
+{{!-- <script src="/javascript/logout.js"></script> --}}
