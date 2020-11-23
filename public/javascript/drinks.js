@@ -56,7 +56,7 @@ var printDrinkOptions = function (response) {
     // Loop through the drinks
     for (let i = 0; i < response.drinks.length; i++) {
         // Container for Each Drink
-        var card = $("<div>").addClass("card col-3 align-items-center");
+        var card = $("<div>").addClass("card col-3-md align-items-center");
         var image = $("<div>").addClass("card-image");
         var drinkId = response.drinks[i].idDrink
         // Display each Drink
@@ -217,8 +217,8 @@ function printRecipe(response) {
                 </div>
             </div>
             <div class="modal-footer">
-            <button class="btn" type="button" id="smsText">Send to a Friend</button>
-              <button type="button" id=${drinkId} class="btn save-button">Save Recipe</button>
+                <button class="btn" type="button" id="smsText">Send to a Friend</button>
+                <button type="button" id=${drinkId} class="btn save-button">Save Recipe</button>
             </div>
           </div>`
         )
@@ -227,8 +227,8 @@ function printRecipe(response) {
 
     // Send to Save function on click
     $(".save-button").on("click", function (event) {
-        var newDrinkId = event.target.id
-        saveRecipe(newDrinkId)
+            var newDrinkId = event.target.id
+            saveRecipe(newDrinkId)
     });
 
     // Send Text Form
@@ -237,9 +237,8 @@ function printRecipe(response) {
     // </form>
 }
 
-// Get Recipe to Save
-async function saveRecipe (id) {
-
+// Get Recipe the user wants to Save
+function saveRecipe (id) {
     fetch(
         ('https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=' + id)
     )
@@ -247,24 +246,46 @@ async function saveRecipe (id) {
             return recipeResponse.json();
         })
         .then(function (recipeResponse) {
-            saveRecipeInDB(recipeResponse)
+            checkId(recipeResponse)
         });
-
 }
 
-// Save Recipe
-async function saveRecipeInDB (response) {
+// Check to see if the drink exists in the DB
+function checkId(recipeResponse) {
+    var externalId = recipeResponse.drinks[0].idDrink
+
+    drinkResponse = fetch('/api/drink/byExternalId/' + externalId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(function (drinkResponse) {
+        return drinkResponse.json();
+    })
+    .then(function (drinkResponse) {
+        console.log(drinkResponse)
+        if(drinkResponse.length >= 1) {
+            console.log("Alredy in DB")
+            updateDrink(externalId)
+        } else {
+            saveRecipeInDB(recipeResponse)
+        }
+    });
+}
+
+// Save Recipe - Working on de-duplication
+function saveRecipeInDB (response) {
     var name = response.drinks[0].strDrink
     var externalId = response.drinks[0].idDrink
     var image = response.drinks[0].strDrinkThumb
     var glass = response.drinks[0].strGlass
     var instructions = response.drinks[0].strInstructions
-    // Need Measurements & Ingredients
 
     // Drink Ingredients
     var drinkIngredients = [];
     drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
-
+    
     // Remove Nulls
     var ingredientsArray = drinkIngredients.filter(function (el) {
         return el != null;
@@ -284,10 +305,12 @@ async function saveRecipeInDB (response) {
 
     // Convert to String
     var measurements = measurementsArray.toString();
+    postDrink();
 
-
-    if (externalId) {
-        const response = await fetch('/api/drink', {
+    // Post Drink to the DB
+    function postDrink() {
+        console.log(externalId)
+        externalResponse = fetch('/api/drink', {
             method: 'POST',
             body: JSON.stringify({
                 name,
@@ -301,120 +324,42 @@ async function saveRecipeInDB (response) {
             headers: {
                 'Content-Type': 'application/json'
             }
-        });
-        if (response.ok) {
-            $("#recipeModal").modal('hide')
-            alert(name + " was saved to your account!")
-        } else {
-            alert(response.statusText);
-        }
+        })
+        .then(function (externalResponse) {
+            return externalResponse.json();
+        })
+        .then(function (externalResponse) {
+            console.log("saved")
+        })
     }
-};
+}
 
-
-// Save Recipe - Working on de-duplication
-// async function saveRecipeInDB (response) {
-//     var name = response.drinks[0].strDrink
-//     var externalId = response.drinks[0].idDrink
-//     var image = response.drinks[0].strDrinkThumb
-//     var glass = response.drinks[0].strGlass
-//     var instructions = response.drinks[0].strInstructions
-//     // Need Measurements & Ingredients
-
-//     // Drink Ingredients
-//     var drinkIngredients = [];
-//     drinkIngredients.push(response.drinks[0].strIngredient1, response.drinks[0].strIngredient2, response.drinks[0].strIngredient3, response.drinks[0].strIngredient4, response.drinks[0].strIngredient5, response.drinks[0].strIngredient6, response.drinks[0].strIngredient7, response.drinks[0].strIngredient8, response.drinks[0].strIngredient9, response.drinks[0].strIngredient10, response.drinks[0].strIngredient11, response.drinks[0].strIngredient12, response.drinks[0].strIngredient13, response.drinks[0].strIngredient14, response.drinks[0].strIngredient15)
-
-//     // Remove Nulls
-//     var ingredientsArray = drinkIngredients.filter(function (el) {
-//         return el != null;
-//     });
-
-//     // Convert to String
-//     var ingredients = ingredientsArray.toString();
-
-//     // Drink Measurements
-//     var drinkMeasurements = [];
-//     drinkMeasurements.push(response.drinks[0].strMeasure1, response.drinks[0].strMeasure2, response.drinks[0].strMeasure3, response.drinks[0].strMeasure4, response.drinks[0].strMeasure5, response.drinks[0].strMeasure6, response.drinks[0].strMeasure7, response.drinks[0].strMeasure8, response.drinks[0].strMeasure9, response.drinks[0].strMeasure10, response.drinks[0].strMeasure11, response.drinks[0].strMeasure12, response.drinks[0].strMeasure13, response.drinks[0].strMeasure14, response.drinks[0].strMeasure15)
-
-//     // Remove Nulls
-//     var measurementsArray = drinkMeasurements.filter(function (el) {
-//         return el != null;
-//     });
-
-//     // Convert to String
-//     var measurements = measurementsArray.toString();
-
-
-//     if (externalId) {
-//         const drinkResponse = await fetch('/api/drink', {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//         .then(function (drinkResponse) {
-//             return drinkResponse.json();
-//         })
-//         .then(function (drinkResponse) {
-//             checkExternalId(drinkResponse)
-//         });
-//     }
-//     async function checkExternalId(drinkResponse) {
-//         console.log(drinkResponse)
-//         for (let i = 0; i < drinkResponse.length; i++) {
-//             if(drinkResponse[i].externalId != externalId) {
-//                 console.log(drinkResponse[i].externalId)
-//                 postDrink(externalId);
-//             }
-//     async function postDrink(externalId) {
-//         console.log(externalId)
-//         const externalResponse = await fetch('/api/drink', {
-//             method: 'POST',
-//             body: JSON.stringify({
-//                 name,
-//                 externalId,
-//                 image,
-//                 glass,
-//                 instructions,
-//                 measurements,
-//                 ingredients
-//             }),
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//         .then(function (externalResponse) {
-//             return JSON.parse();
-//         })
-//         .then(function (externalResponse) {
-//             console.log("saved")
-//         })
-//     }
-//     }
-// }
-    
-//                 // if (response.ok) {
-//                 //     $("#recipeModal").modal('hide')
-//                 //     alert(name + " was saved to your account!")
-//                 // } else {
-//                 //     alert(response.statusText);
-//                 // }
-//         // } else {
-//         //     const response = await fetch('/api/drink/:id', {
-//         //         method: 'PUT',
-//         //         headers: {
-//         //             'Content-Type': 'application/json'
-//         //         }
-//         //     });
-//         //     if (response.ok) {
-//         //         $("#recipeModal").modal('hide')
-//         //         alert(name + " was saved to your account!")
-//         //     } else {
-//         //         alert(response.statusText);
-//         //     }
-//         // }
-// };
+// Update Drink to include User
+function updateDrink(externalId) {
+    console.log(externalId)
+    externalResponse = fetch('/api/drink/:id', {
+        method: 'PUT',
+        // body: JSON.stringify({
+        //     name,
+        //     externalId,
+        //     image,
+        //     glass,
+        //     instructions,
+        //     measurements,
+        //     ingredients
+        // }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (response) {
+        console.log(response)
+        console.log("maybe saved")
+    })
+}
 
 
 // Get Ingredients from Local Storage on Page load

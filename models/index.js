@@ -23,6 +23,10 @@ User.hasMany(Comment, {
     foreignKey: 'user_id'
 });
 
+Drink.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+
 User.hasMany(Drink, {
     foreignKey: 'user_id'
 });
