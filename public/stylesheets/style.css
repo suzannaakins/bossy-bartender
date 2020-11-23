@@ -86,6 +86,13 @@ header nav ul li a:hover {
   list-style: none;
 }
 
+.account-nav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  list-style: none;
+}
+
 .login {
   display: flex;
   justify-content: right;
@@ -96,6 +103,10 @@ header nav ul li a:hover {
   border-radius: 25%;
 }
 
+li {
+  list-style: none;
+}
+ 
 .logout {
   display: flex;
   justify-content: right;
@@ -105,13 +116,12 @@ header nav ul li a:hover {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
-
-.my_account {
+.myaccount {
   display: flex;
   justify-content: right;
 }
 
-.my_account:hover {
+.myaccount:hover {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
