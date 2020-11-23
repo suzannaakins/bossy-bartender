@@ -326,7 +326,7 @@ function checkId(recipeResponse) {
     })
     .then(function (drinkResponse) {
         if(drinkResponse.length >= 1) {
-            updateDrink(externalId)
+            saveRecipeInDB(recipeResponse)
         } else {
             saveRecipeInDB(recipeResponse)
         }
@@ -393,32 +393,31 @@ function saveRecipeInDB (response) {
     }
 }
 
-// Update Drink to include User
-function updateDrink(externalId) {
-    console.log(externalId)
-    externalResponse = fetch('/api/drink/:id', {
-        method: 'PUT',
-        // body: JSON.stringify({
-        //     name,
-        //     externalId,
-        //     image,
-        //     glass,
-        //     instructions,
-        //     measurements,
-        //     ingredients
-        // }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (response) {
-        console.log(response)
-        console.log("maybe saved")
-    })
-}
+// Update Drink to include User - Future Development
+// function updateDrink(externalId) {
+//     console.log(externalId)
+//     externalResponse = fetch('/api/drink/:id', {
+//         method: 'PUT',
+//         body: JSON.stringify({
+//             name,
+//             externalId,
+//             image,
+//             glass,
+//             instructions,
+//             measurements,
+//             ingredients
+//         }),
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     })
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (response) {
+
+//     })
+// }
 
 // Get Ingredients from Local Storage on Page load
 ingArr();
