@@ -30,6 +30,7 @@ button {
   background-color: var(--secondary-color);
   color: var(--secondary-text-color);
 }
+
 /* Global Styles End */
 
 /* Header Styles Start */
@@ -143,13 +144,14 @@ p {
 }
 /* Body Styles End */
 
-/* Results Page Styles */
+/* Results Page Styles Start */
 .card {
   margin: 10px;
   padding: 5px;
   border-color: var(--primary-text-color);
   border-width: 2px;
 }
+/* Results Page Styles End */
 
 /* Saved Drink Styles */
 .card-title {
@@ -179,6 +181,7 @@ p {
 .drinks-rows {
   border-bottom: 20px
 }
+/* Saved Drink Styles End */
 
 /* Modal Styles Start */
 .modal-header {
@@ -192,13 +195,16 @@ p {
   background-color: var(--tertiary-color);
   color: var(--primary-text-color);
 }
+
+.measure {
+  text-align: right;
+}
 /* Modal Styles End */
 
 /* Footer Styles Start */
 footer {
   background: var(--primary-color);
   display: flex;
-  padding-right: 10px;
   margin-top: 20px;
   text-align: right;
   color: var(--primary-text-color);
@@ -206,7 +212,6 @@ footer {
   font-weight: lighter;
   font-size: 110%;
   bottom: 0;
-  /* position: fixed; */
   width: 100%;
   height: 2.5rem;  
 }
@@ -217,7 +222,6 @@ footer {
 @media screen and (max-width: 980px) {
   header {
       position: unset;
-      padding: 0 0 10px 0;
       justify-content: center;
       text-align: center;
   }
@@ -243,7 +247,6 @@ footer {
   footer {
     background: var(--primary-color);
     display: flex;
-    padding-right: 10px;
     margin-top: 20px;
     text-align: right;
     color: var(--primary-text-color);

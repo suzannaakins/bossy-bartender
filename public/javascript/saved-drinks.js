@@ -23,7 +23,7 @@ function printSavedDrinks(response) {
 
     // Loop through saved drinks
     for (let i = 0; i < response.length; i++) {
-        var cardRow = $("<div>").addClass("col-sm-4 drink-rows");
+        var cardRow = $("<div>").addClass("col-sm-6 drink-rows");
         var card = $("<div>").addClass("card");
         var cardBody = $("<div>").addClass("card-body");
         
@@ -33,7 +33,7 @@ function printSavedDrinks(response) {
             .text(response[i].name);
         var drinkImage = $("<img>")
             .attr("src", response[i].image)
-            .attr("width", "200px")
+            .attr("width", "150px")
 
         
         var glass = response[i].glass
