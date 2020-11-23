@@ -146,13 +146,14 @@ p {
 }
 /* Body Styles End */
 
-/* Results Page Styles */
+/* Results Page Styles Start */
 .card {
   margin: 10px;
   padding: 5px;
   border-color: var(--primary-text-color);
   border-width: 2px;
 }
+/* Results Page Styles End */
 
 /* Saved Drink Styles */
 .card-title {
@@ -182,6 +183,7 @@ p {
 .drinks-rows {
   border-bottom: 20px
 }
+/* Saved Drink Styles End */
 
 /* Modal Styles Start */
 .modal-header {
