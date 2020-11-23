@@ -5,11 +5,12 @@ const client = require('twilio')(accountSid, authToken);
 
 const router = require('express').Router();
 
+// Send the text via Twilio
 router.post('/', (req,res) => {
     client.messages.create({
         to: req.body.phone_number,
         body: req.body.recipe,
-        from: '+13157549675' // From a valid Twilio number
+        from: '+13157549675' 
     })
     .then((message) => console.log(message.sid));
 })

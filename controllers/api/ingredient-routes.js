@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Ingredient, Category } = require('../../models');
 
-//post all
+// Bulk Create Ingredients - Seeds didn't work
 router.post('/all', (req, res) => {
     Ingredient.bulkCreate(
         req.body
