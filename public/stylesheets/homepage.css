@@ -1,5 +1,7 @@
 #bar {
     display: block;
+    border-color: black;
+    border-width: 5px;
 }
 
 #page-title, h4 {
@@ -16,24 +18,20 @@ p {
     text-align: left;
 }
 
-#bar {
-    border-color: black;
-    border-width: 5px;
-}
-
 /* Media Queries */
 /* MQ for screens smaller than 1024px */
 @media screen and (max-width: 1024px) {
-.btn-group {
-    display: block
-  }
+    .btn-group {
+        display: block
+    }
 
-  #dropdownMenuButton, #searchButton {
-    margin-top: 10px;
-}
+    #dropdownMenuButton, #searchButton {
+        margin-top: 10px;
+    }
 
-p {
-    margin: 10px 15px;
-    text-align: left;
-}
+    p {
+        margin: 10px 15px;
+        text-align: left;
+    }
+
 }

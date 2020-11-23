@@ -25,7 +25,7 @@ async function sendText(event) {
 }
 
 // Query Selector & Fetch
-// document.querySelector('#smsText').addEventListener('click', sendText);
+document.querySelector('#smsText').addEventListener('click', sendText);
 
 
 
