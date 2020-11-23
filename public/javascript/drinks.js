@@ -232,10 +232,73 @@ function printRecipe(response) {
     });
 
     // Send Text Form
-    // <form>
-    //             <input type="tel" class="phone" />
-    // </form>
+    $("#smsText").on("click", function (event) {
+        var drinkName = event.target.drinkName
+        sendText(drinkName)
+    });
+    
+    // Destroy the Modal Contents
+    var destroyModal = function () {
+        recipeModalEl.html(null);
+    };
+
+    // Send Text
+    function sendText(data) {
+        destroyModal()
+        console.log("Here")
+        var recipeModalEl = $("<div>")
+        .addClass("modal-content")
+        .html(`
+            <div class="modal-header">
+              <h5 class="modal-title">
+              ${drinkTitle}
+              </h5>
+              <form><input type="tel" class="phone" placeholder="Enter Digits Only""/></form>
+              <button class="send-text>Send Now</button>
+            </div>
+            <div class="modal-body">
+            <div class="row modal-rows">
+                <div class="col-10"><img src=${drinkGlass} height="50px">  Use a ${drinkGlassName}</div>
+                <div class="col-10"><p></ br></p><p></ br></p></div>
+                <div class="col-4">${convertedDrinkMeasurements}</div>
+                <div class="col-6">${convertedDrinkIngredients}</div>
+                <div class="col-10"><p></ br></p><p></ br></p></div>
+                <div class="col-10">${drinkDirections}</div>    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" type="button" id="smsText">Send to a Friend</button>
+                <button type="button" id=${drinkId} class="btn save-button">Save Recipe</button>
+            </div>
+          </div>`
+        )
+    // Append Data into the Modal
+    recipeContainerEl.append(recipeModalEl)
+        const phone_number = document.querySelector('.phone').value;
+        console.log(phone_number)
+        const recipe = "Recipe";
+    
+        if (phone_number) {
+            response =  fetch('/api/twilio', {
+            method: 'POST',
+            body: JSON.stringify({
+                phone_number,
+                recipe,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            if (response.ok) {
+                document.location.reload();
+                
+            } else {
+                alert(response.statusText);
+            }
+        }
+    }
 }
+
 
 // Get Recipe the user wants to Save
 function saveRecipe (id) {
@@ -360,6 +423,7 @@ function updateDrink(externalId) {
         console.log("maybe saved")
     })
 }
+
 
 
 // Get Ingredients from Local Storage on Page load
