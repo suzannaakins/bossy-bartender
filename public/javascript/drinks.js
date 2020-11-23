@@ -238,31 +238,27 @@ function printRecipe(response) {
     });
     
     // Destroy the Modal Contents
+    var recipeModalFooter = $(".modal-footer")
     var destroyModal = function () {
-        recipeModalEl.html(null);
+        recipeModalFooter.html(null);
     };
 
     // Send Text
     function showPhoneInput(data) {
         destroyModal()
         console.log("Here")
-        var recipeModalEl = $("<div>")
-        .addClass("modal-content")
+        var recipeModalFooter = $("<div>")
+        .addClass("modal-replace")
         .html(`
-            <div class="modal-header">
-              <h5 class="modal-title">
-              ${drinkTitle}
-              </h5>
-            </div>
-            <div class="modal-body">
             <form><input type="text" class="name" placeholder="Enter Your Name"/></form>
+            <p></p>
             <form><input type="tel" class="phone" placeholder="Enter Digits Only"/></form>
-              <button class="send-text">Send Now</button>
-            </div>
-          </div>`
+            <p></p>
+            <button class="send-text">Send Now</button>
+            <p></p>`
         )
     // Append Data into the Modal
-    recipeContainerEl.append(recipeModalEl)
+    recipeModalEl.append(recipeModalFooter)
         
         // Send Text
         $(".send-text").on("click", function (event) {

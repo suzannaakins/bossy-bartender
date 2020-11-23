@@ -197,6 +197,15 @@ p {
   background-color: var(--tertiary-color);
   color: var(--primary-text-color);
 }
+
+.name, .phone, .send-text {
+  border: 10px, 10px, 10px, 10px
+}
+
+/* .modal-replace {
+  display: flex;
+  flex-wrap: nowrap;
+} */
 /* Modal Styles End */
 
 /* Footer Styles Start */
