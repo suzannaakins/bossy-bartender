@@ -145,16 +145,41 @@ p {
   border-width: 2px;
 }
 
+/* Saved Drink Styles */
+.card-title {
+  color: var(--primary-color);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.drink-measurements {
+  text-align: right;
+}
+
+.drink-ingredients {
+  text-align: left;
+}
+
+.drink-directions {
+  text-align: left;
+  padding-top: 2px;
+  padding-bottom: 5px;
+}
+
+.make-it {
+  text-decoration: underline;
+  padding-top: 15px;
+}
+
+.drinks-rows {
+  border-bottom: 20px
+}
+
 /* Modal Styles Start */
 .modal-header {
   background-color: var(--primary-color);
 }
 .col-6, .col-10 {
   text-align: left;
-}
-
-.col-4 {
-  text-align: right;
 }
 
 .save-button {
