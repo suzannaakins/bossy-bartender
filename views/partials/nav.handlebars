@@ -11,12 +11,18 @@
         
         {{#if loggedIn}}
         <div>
-            <button id="myaccount" class="btn">My Account</button>
-            <button id="logout" class="btn">logout</button>
-            {{else}}
-            <button id="login" class="btn"><a href="/login">Login</a></button>
+        <li class="logout">
+            <button id="logout" class="btn btn-link">Logout</button>
+        </li>
+        <li class="my-account">
+            <button id="my_account" class="btn btn-link">My Account</button>
+        </li>
+        {{else}}
+        <li class="login">
+            <a href="/login">Login</a>
+        </li>
         </div>
-        {{/if}}    
+        {{/if}}
     </ul>
 
 </nav>

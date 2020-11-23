@@ -95,10 +95,6 @@ header nav ul li a:hover {
   border-radius: 25%;
 }
 
-li {
-  list-style: none;
-}
- 
 .logout {
   display: flex;
   justify-content: right;
@@ -108,12 +104,13 @@ li {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
-.myaccount {
+
+.my_account {
   display: flex;
   justify-content: right;
 }
 
-.myaccount:hover {
+.my_account:hover {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
