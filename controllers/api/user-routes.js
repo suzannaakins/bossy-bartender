@@ -2,6 +2,17 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.post('/all', (req, res) => {
+    User.bulkCreate(
+        req.body
+    )
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+})
+
 // GET /api/users
 router.get('/', (req, res) => {
     User.findAll({
@@ -22,18 +33,18 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         include: [
-            // {
-            //     model: Vote,
-            //     attributes: ['id', 'title', 'content', 'created_at']
-            // },
+            {
+                model: Vote,
+                attributes: ['id', 'title', 'content', 'created_at']
+            },
             // include the Comment model here:
             {
                 model: Comment,
                 attributes: ['id', 'comment_text', 'created_at'],
-                // include: {
-                //     model: Post,
-                //     attributes: ['title']
-                // }
+                include: {
+                    model: Post,
+                    attributes: ['title']
+                }
             }
         ]
     })
@@ -76,17 +87,17 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
-            username: req.body.username
+            email: req.body.email
         }
     }).then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that username. Oopsies.' });
+            res.status(400).json({ message: 'No user with that email. Oopsies.' });
             return;
         }
 
         //verify user
         const validPassword = dbUserData.checkPassword(req.body.password);
-        
+
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password, please drink responsibly!' });
             return;
@@ -97,8 +108,11 @@ router.post('/login', (req, res) => {
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
 
-            res.json({ user: dbUserData, message: 'You are now logged in. Make those drinks' });
+            res.json({ user: dbUserData, message: 'You are now logged in. Make those drinks', loggedIn: true });
         });
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
     });
 });
 
