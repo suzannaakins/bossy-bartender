@@ -10,17 +10,17 @@
         </div>
         
         {{#if loggedIn}}
-        <div>
-        <li class="logout">
-            <button id="logout" class="btn btn-link">Logout</button>
-        </li>
-        <li class="my-account">
-            <button id="my_account" class="btn btn-link">My Account</button>
-        </li>
-        {{else}}
-        <li class="login">
-            <a href="/login">Login</a>
-        </li>
+        <div class="account-nav">
+            <li class="my-account">
+                <button id="my_account" class="btn btn-link"><a href="/userpage">My Account</a></button>
+            </li>
+            <li class="logout">
+                <button id="logout" class="btn">Logout</button>
+            </li>
+            {{else}}
+            <li class="login">
+                <a href="/login">Login</a>
+            </li>
         </div>
         {{/if}}
     </ul>
