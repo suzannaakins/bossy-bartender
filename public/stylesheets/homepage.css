@@ -1,0 +1,39 @@
+#bar {
+    display: block;
+}
+
+#page-title, h4 {
+    color: white;
+}
+
+#barequip {
+    display: flex;
+    margin: auto;
+}
+
+p {
+    margin: 5px 150px;
+    text-align: left;
+}
+
+#bar {
+    border-color: black;
+    border-width: 5px;
+}
+
+/* Media Queries */
+/* MQ for screens smaller than 1024px */
+@media screen and (max-width: 1024px) {
+.btn-group {
+    display: block
+  }
+
+  #dropdownMenuButton, #searchButton {
+    margin-top: 10px;
+}
+
+p {
+    margin: 10px 15px;
+    text-align: left;
+}
+}

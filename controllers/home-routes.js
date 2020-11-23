@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Ingredient } = require('../models');
+const { Ingredient, User } = require('../models');
 
 router.get('/', (req, res) => {
     Ingredient.findAll({
@@ -23,8 +23,8 @@ router.get('/', (req, res) => {
             const juices = data.filter(juice => juice.category_id === 6);
             const filteredJuices = juices.map(filteredJuice => filteredJuice.get({ plain: true }));
             const others = data.filter(other => other.category_id === 7);
-            const filteredOthers = juices.map(filteredOther => filteredOther.get({ plain: true }));
-            
+            const filteredOthers = others.map(filteredOther => filteredOther.get({ plain: true }));
+
             // pass a single post object into the homepage template
             res.render('homepage', {
                 spirits,
@@ -56,17 +56,27 @@ router.get('/cocktails', (req, res) => {
 });
 
 router.get('/results', (req, res) => {
-    res.render('search', {loggedIn: req.session.loggedIn})
+    res.render('results', {loggedIn: req.session.loggedIn})
 });
 
 // Login Route
 router.get('/login', (req, res) => {
-    // if (req.session.loggedIn) {
-    //     console.log('hello');
-    //   res.redirect('/');
-    //   return;
-    // }
+    if (req.session.loggedIn) {
+        // console.log('hello');
+      res.redirect('/');
+      return;
+    }
     res.render('login');
+});
+
+// signup Route
+router.get('/signup', (req, res) => {
+    res.render('signup', {loggedIn: req.session.loggedIn})
+});
+
+// Userpage Route
+router.get('/userpage', (req, res) => {
+    res.render('userpage', {loggedIn: req.session.loggedIn})
 });
 
 module.exports = router;
