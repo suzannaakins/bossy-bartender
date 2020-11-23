@@ -10,23 +10,14 @@
         </div>
         
         {{#if loggedIn}}
-<<<<<<< HEAD
         <div>
             <button id="myaccount" class="btn">My Account</button>
             <button id="logout" class="btn">logout</button>
-            <script src="/javascript/logout.js"></script>
             {{else}}
-            <button id="logout" class="btn"><a href="/login">login</a></button>
+            <button id="login" class="btn"><a href="/login">Login</a></button>
         </div>
-        {{/if}}
-=======
-        <button id="logout" class="btn">logout</button>
-        {{else}}
-        <button id="logout" class="btn"><a href="/login">login</a></button>
-      
-        {{/if}}
-        
->>>>>>> 219975030f2fc663cdd5986b9a0bc2e9bb963c65
+        {{/if}}    
     </ul>
 
 </nav>
+<script src="/javascript/logout.js"></script>
