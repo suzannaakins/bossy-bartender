@@ -30,6 +30,7 @@ function getDrinksByIngList(ingredients) {
         });
 };
 
+
 // Header Text to Display if Results were found or not
 function resultsFound(response) {
     if (response.drinks === "None Found") {
@@ -46,10 +47,12 @@ function resultsFound(response) {
 
 // Print the drink results to the user
 var printDrinkOptions = function (response) {
-    var message = $("<h2>")
-        .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
-    
-    homepageContainerEl.append(message);
+    if (response.drinks.length > 1) {
+        var message = $("<h2>")
+            .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
+        
+        homepageContainerEl.append(message);
+    }
     
     var drinkCardContainer = $("<div>").addClass("row justify-content-center");
 
@@ -228,17 +231,17 @@ function printRecipe(response) {
 
     // Send to Save function on click
     $(".save-button").on("click", function (event) {
-            var newDrinkId = event.target.id
-            saveRecipe(newDrinkId)
-            
-            destroyModal()
-            var recipeModalFooter = $("<div>")
-            .addClass("modal-replace")
-            .html(`
-                <p></p>
-                <p>Your Drink has been saved to <a href="/userpage">your account</a></p>
-                <p></p>`
-            )
+        var newDrinkId = event.target.id
+        saveRecipe(newDrinkId)
+        
+        destroyModal()
+        var recipeModalFooter = $("<div>")
+        .addClass("modal-replace")
+        .html(`
+            <p></p>
+            <p>Your Drink has been saved to <a href="/userpage">your account</a></p>
+            <p></p>`
+        )
         // Append Data to Footer
         recipeModalEl.append(recipeModalFooter)
     });
@@ -249,7 +252,7 @@ function printRecipe(response) {
         showPhoneInput(drinkName)
     });
     
-    // Destroy the Modal Contents
+    // Destroy the Modal Footer Contents
     var recipeModalFooter = $(".modal-footer")
     var destroyModal = function () {
         recipeModalFooter.html(null);
@@ -422,3 +425,76 @@ function saveRecipeInDB (response) {
 // Get Ingredients from Local Storage on Page load
 ingArr();
 
+// ---- Browse Cocktails Page ----
+
+// Clear category-button on click
+$(".category-button").on("click", function (event) {
+    $("#homepage-container").empty();
+
+    var category = $(this).attr("data-category")
+    if (category === "random") {
+        var message = $("<h2>")
+            .text("Good News - Here is your random drink!")
+        homepageContainerEl.append(message);
+        getRandomCocktail()
+    }
+    else {
+        getDrinksByCategory(category)
+    }
+});
+
+// Get drinks by Category
+async function getDrinksByCategory(category) {
+    fetch(
+        ('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?c=' + category)
+    )
+        .then(function (drinkResponse) {
+            return drinkResponse.json();
+        })
+        .then(function (drinkResponse) {
+            console.log("Here")
+            printDrinkOptions(drinkResponse);
+            console.log(drinkResponse)
+
+        });
+};
+
+// Get Random Cocktail
+function getRandomCocktail() {
+
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+
+        .then(function (drinkResponse) {
+            return drinkResponse.json();
+        })
+        .then(function (drinkResponse) {
+            printDrinkOptions(drinkResponse);
+            // console.log(drinkResponse);
+        });
+}
+
+// Display Random Cocktail
+function displayRandomCocktail(cocktail) {
+
+    // Container for Each Drink
+    var drinkCardContainer = $("<div>").addClass("card-columns");
+    var card = $("<div>").addClass("card");
+    var image = $("<div>").addClass("card-image-cap");
+    var drinkId = response.drinks[i].idDrink
+    // Display each Drink
+    var drinkImage = $("<img>")
+        .attr("src", response.drinks[i].strDrinkThumb)
+        .attr("height", "200px")
+    var drinkTitle = $("<h5>")
+        .addClass("card-title")
+        .text(response.drinks[i].strDrink);
+    var drinkButton = $("<button>")
+        .addClass("btn-sm drink-button")
+        .attr("id", drinkId)
+        .text("View Recipe");
+
+    // Append Display to Container
+    card.append(drinkImage, drinkTitle, drinkButton);
+    drinkCardContainer.append(card);
+    homepageContainerEl.append(drinkCardContainer);
+}
