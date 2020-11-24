@@ -49,7 +49,7 @@ function resultsFound(response) {
 var printDrinkOptions = function (response) {
     if (response.drinks.length > 1) {
         var message = $("<h2>")
-            .text("Good News - We found " + response.drinks.length + " drinks that match your search!")
+            .text("Good News - Here are " + response.drinks.length + " drinks suggested for you!")
         
         homepageContainerEl.append(message);
     }
