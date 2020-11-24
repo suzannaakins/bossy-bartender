@@ -25,6 +25,10 @@ Pull from Github, and make sure to install all the dependencies.
 To run tests, run the following command: 
 npm test
 
+## Contributing
+
+
+
 ## Questions
 If you have any questions about the repo, open an issue or contact us directly on LinkedIn.
 You can find more of our work at github.com/suzannaakins, (enter your links)

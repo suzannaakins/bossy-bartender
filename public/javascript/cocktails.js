@@ -18,15 +18,15 @@ async function getDrinksByCategory(category) {
 
 // Print the drink results to the user
 var printDrinkByCategory = function (response) {
-
+    if (response.drinks === "")
     var message = $("<h2>")
         .text("Good News - We found " + response.drinks.category + " drinks that match your search!")
     cocktailsContainerEl.append(message);
     // Loop through the drinks
     for (let i = 0; i < response.drinks.length; i++) {
         // Container for Each Drink
-        var drinkCardContainer = $("<div>").addClass("card-columns");
-        var card = $("<div>").addClass("card");
+        var drinkCardContainer = $("<div>").addClass("row justify-content-center");
+        var card = $("<div>").addClass("card col-3-md align-items-center");
         var image = $("<div>").addClass("card-image-cap");
         var drinkId = response.drinks[i].idDrink
         // Display each Drink
