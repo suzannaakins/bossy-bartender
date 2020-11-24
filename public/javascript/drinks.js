@@ -3,11 +3,17 @@ var ingredients = JSON.parse(window.localStorage.getItem("ingredients")) || [];
 var drinkContainerEl = $("#drink-container");
 var homepageContainerEl = $("#homepage-container");
 var recipeContainerEl = $("#recipeModalInner")
+var cocktailsPageEl = $("#cocktails-page")
 
 // Destroy the Recipe Modal Contents
 var destroyElement = function () {
     recipeContainerEl.html(null);
 };
+
+var destroyCocktails = function () {
+    cocktailsPageEl.html(null);
+}
+
 
 // Get Ingredients from Local Storage
 var ingArr = function () {
@@ -422,8 +428,11 @@ function saveRecipeInDB (response) {
 //     })
 // }
 
-// Get Ingredients from Local Storage on Page load
-ingArr();
+// Get Ingredients from Local Storage on Results Page load
+if(document.location.pathname === "/results"){
+    ingArr();
+}
+
 
 // ---- Browse Cocktails Page ----
 
