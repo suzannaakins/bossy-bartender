@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Drink, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
+// Bulk Create Drinks - Seeds didn't work
 router.post('/all', (req, res) => {
     Drink.bulkCreate(
         req.body

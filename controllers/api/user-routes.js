@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// Bulk Create Users - Seeds didn't work
 router.post('/all', (req, res) => {
     User.bulkCreate(
         req.body
@@ -37,7 +38,7 @@ router.get('/:id', (req, res) => {
                 model: Vote,
                 attributes: ['id', 'title', 'content', 'created_at']
             },
-            // include the Comment model here:
+            // include the Comment model here - For future development
             {
                 model: Comment,
                 attributes: ['id', 'comment_text', 'created_at'],
@@ -83,7 +84,7 @@ router.post('/', (req, res) => {
         });
 });
 
-// route for users to LOGIN at (localhost:3003/api/users/login)
+// route for users to LOGIN
 router.post('/login', (req, res) => {
     User.findOne({
         where: {

@@ -4,7 +4,7 @@ const sequelize = require('../config/connection');
 // create our INGREDIENT model
 class Ingredient extends Model { }
 
-// define table columns and configuration
+
 Ingredient.init(
     {
         id: {

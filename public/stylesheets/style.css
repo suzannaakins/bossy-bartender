@@ -17,7 +17,6 @@
 }
 
 body {
-  background-color: var(--secondary-color);
   font-family: "Comic Sans MS", sans-serif, 'Times New Roman', Times, serif;
   margin: 0;
   padding: 0;
@@ -189,7 +188,7 @@ p {
 }
 
 .drinks-rows {
-  border-bottom: 20px
+  border-bottom: 20px;
 }
 /* Saved Drink Styles End */
 

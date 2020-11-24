@@ -2,6 +2,7 @@
 var savedDrinksContainerEl = $("#saved-drinks")
 var userPageContainerEl = $("#user-page")
 
+// Get the User's saved drinks
 function getSavedDrinks() {
     fetch('/api/drink/byUser/:user_id', {
             method: 'GET',
@@ -18,6 +19,7 @@ function getSavedDrinks() {
     })
 };
 
+// Print the Drinks
 function printSavedDrinks(response) {
     var savedDrinksContainerEl = $("<div>").addClass("row justify-content-center");
 
@@ -27,18 +29,35 @@ function printSavedDrinks(response) {
         var card = $("<div>").addClass("card");
         var cardBody = $("<div>").addClass("card-body");
         
-        // Display each Drink
+        // Drink Variables
         var drinkTitle = $("<h3>")
             .addClass("card-title")
             .text(response[i].name);
         var drinkImage = $("<img>")
             .attr("src", response[i].image)
             .attr("width", "150px")
-
-        
         var glass = response[i].glass
+        var drinkGlassDescription = response[i].glass
+        var drinkDirections = response[i].instructions
 
+        // Drink Ingredients
+        var drinkIngredients = response[i].ingredients
+            
+        let convertedDrinkIngredients = replaceCommaLine(drinkIngredients);
+        function replaceCommaLine(data) { 
+            var drinkToArray = data.split(',').map(item => item.trim());
+            return drinkToArray.join("<br />");
+        }
 
+        // Drink Measurements
+        var drinkMeasurements = response[i].measurements;
+        
+        let convertedDrinkMeasurements = replaceCommaLine(drinkMeasurements);
+        function replaceCommaLine(data) { 
+            var drinkToArray = data.split(',').map(item => item.trim());
+            return drinkToArray.join("<br />");
+        }
+            
         // Switch cases to render glasses
             if (glass == 'Balloon Glass') {
                 glass = "./assets/images/balloon-glass.png";
@@ -91,27 +110,8 @@ function printSavedDrinks(response) {
             } else {
                 glass = "./assets/images/wine-glass.png"
             }
-   
-            
-            var drinkGlassDescription = response[i].glass
-            var drinkIngredients = response[i].ingredients
-            
-            let convertedDrinkIngredients = replaceCommaLine(drinkIngredients);
-            function replaceCommaLine(data) { 
-                var drinkToArray = data.split(',').map(item => item.trim());
-                return drinkToArray.join("<br />");
-            }
 
-            var drinkMeasurements = response[i].measurements;
-            
-            let convertedDrinkMeasurements = replaceCommaLine(drinkMeasurements);
-            function replaceCommaLine(data) { 
-                var drinkToArray = data.split(',').map(item => item.trim());
-                return drinkToArray.join("<br />");
-            }
-            
-            var drinkDirections = response[i].instructions
-
+            // Display Drink Recipe
             var recipe = $("<div>")
                 .html(`
                 <div class="row">
@@ -133,4 +133,5 @@ function printSavedDrinks(response) {
     }
 }
 
+// Call Saved Drinks on Page Load
 getSavedDrinks();
