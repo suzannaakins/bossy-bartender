@@ -6,6 +6,20 @@ const trashIcon = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi b
 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 </svg>`
 
+function loadusername() {
+    $.get("/api/users/getusername", function(data){
+        console.log(data)
+    
+        $("#username").html("Hi <b>" + data + "</b>")
+    })
+ 
+}
+
+loadusername()
+$(".menu").on("click", function() {
+    loadusername()
+})
+
 //const userIngredients = ['water'];  USE THIS if we get fancier api search working, 
 //to ensure that users get cocktails that require water since everyone has water at home (hopefully)
 

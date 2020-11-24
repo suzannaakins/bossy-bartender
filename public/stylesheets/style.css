@@ -115,9 +115,10 @@ li {
   background-color: var(--secondary-color);
   border-radius: 25%;
 }
-.myaccount {
+#my_account {
   display: flex;
   justify-content: right;
+ 
 }
 
 .myaccount:hover {

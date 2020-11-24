@@ -52,6 +52,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cocktails', (req, res) => {
+    console.log(req.session.loggedIn)
     res.render('cocktails', {loggedIn: req.session.loggedIn})
 });
 

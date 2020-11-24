@@ -2,19 +2,25 @@
     <ul>
         <div class="main-nav">
             <li>
-                <a href="/">Home</a>
+                <a href="/" class="menu">Home</a>
             </li>
             <li>
-                <a href="/cocktails">Browse Cocktails</a>
+                <a href="/cocktails" class="menu">Browse Cocktails</a>
+                
             </li>
         </div>
         
         {{#if loggedIn}}
         <div class="account-nav">
             <li class="my-account">
-                <button id="my_account" class="btn btn-link"><a href="/userpage">My Account</a></button>
+               
+                <button id="my_account" class="btn btn-link"><a href="/userpage"  class="menu">My Account</a></button>
             </li>
+            <li>  
+                    <a href="#">   <p  id="username"></p></a>
+               </li>
             <li class="logout">
+               
                 <button id="logout" class="btn">Logout</button>
             </li>
             {{else}}
@@ -26,4 +32,6 @@
     </ul>
 
 </nav>
+
+ 
 {{!-- <script src="/javascript/logout.js"></script> --}}
