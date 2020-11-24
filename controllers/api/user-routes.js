@@ -15,10 +15,6 @@ router.post('/all', (req, res) => {
         });
 })
 
-// GET /api/users
-
-
- 
 // POST /api/users - ADDS a NEW user
 router.post('/', (req, res) => {
     User.create({
@@ -133,6 +129,7 @@ router.delete('/:id', withAuth, (req, res) => {
         });
 });
 
+// GET /api/users
 router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['password'] }

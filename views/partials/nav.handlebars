@@ -6,21 +6,22 @@
             </li>
             <li>
                 <a href="/cocktails" class="menu">Browse Cocktails</a>
-                
+
             </li>
         </div>
-        
+
         {{#if loggedIn}}
         <div class="account-nav">
             <li class="my-account">
-               
-                <button id="my_account" class="btn btn-link"><a href="/userpage"  class="menu">My Account</a></button>
+
+                <button id="my_account" class="btn btn-link"><a href="/userpage" class="menu">My Account</a></button>
             </li>
-            <li>  
-                    <a href="#">   <p  id="username"></p></a>
-               </li>
+            <li>
+                <a href="#">
+                    <p id="username"></p>
+                </a>
+            </li>
             <li class="logout">
-               
                 <button id="logout" class="btn">Logout</button>
             </li>
             {{else}}
@@ -33,5 +34,5 @@
 
 </nav>
 
- 
+
 {{!-- <script src="/javascript/logout.js"></script> --}}
