@@ -167,7 +167,7 @@ function printRecipe(response) {
             drinkGlass = "./assets/images/cocktail-glass.png";
         } else if (drinkGlass == 'Coffee mug'){
             drinkGlass = "./assets/images/coffee-mug.png";
-        } else if (drinkGlass == 'Collins glass'){
+        } else if (drinkGlass == 'Collins glass' || drinkGlass == 'Collins Glass'){
             drinkGlass = "./assets/images/collins-glass.png";
         } else if (drinkGlass == 'Copper Mug'){
             drinkGlass = "./assets/images/copper-mug.png";
@@ -197,8 +197,8 @@ function printRecipe(response) {
              drinkGlass = "./assets/images/punch-bowl.png";
         } else if (drinkGlass == 'Shot glass'){
             drinkGlass = "./assets/images/shot-glass.png";
-        } else if (drinkGlass == 'Whiskey sour glass'){
-            drinkGlass = "./assets/images/whiskey-glass";
+        } else if (drinkGlass == 'Whiskey sour glass' || drinkGlass == 'Whiskey glass' || drinkGlass == 'Whiskey sour glass'){
+            drinkGlass = "./assets/images/whiskey-glass.png";
         } else {
             drinkGlass = "./assets/images/wine-glass.png"
         }
