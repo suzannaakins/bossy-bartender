@@ -61,6 +61,6 @@ Copyright (c) 2020
 If you have any questions about the repo, open an issue.
 
 You can find more of our work at 
-https://github.com/suzannaakins
-https://github.com/yalitzab
-https://github.com/AmandaGuerriero
+* https://github.com/suzannaakins
+* https://github.com/yalitzab
+* https://github.com/AmandaGuerriero
