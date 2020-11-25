@@ -11,7 +11,7 @@ We developed the app using a few different libraries and is a fullstack website 
 http://bossy-bartender.herokuapp.com/
 
 ## Demo Video
-![Bossy Bartender] (public/assets/images/demo.gif)
+<img src="public/assets/images/demo.gif" alt="Gif of Bossy Bartender"/>
 
 ## Table of Contents
 * [Installation](#installation)
